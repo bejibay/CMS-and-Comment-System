@@ -1,0 +1,38 @@
+// comment codes
+
+
+<?php 
+
+$url=$_GET['url'};
+if(isset ($url)){
+$sql="SELECT pageurl FROM pages Where pageurl=$url";
+mysqli_query($con, $sql);
+if(mysqli_num_rows==1){
+
+}
+return:
+
+$sql="SELECT posturl FROM posts Where posturl=$url";
+mysqli_query($con, $sql);
+if(mysqli_num_rows==1){
+
+}
+return:
+
+else{include "notfound.php";}
+
+else{include "homepage.php";}
+
+}
+
+
+?>
+
+
+
+
+
+
+
+
+

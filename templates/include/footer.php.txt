@@ -1,0 +1,1 @@
+﻿copyrighgt soowec.com  
