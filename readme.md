@@ -16,6 +16,7 @@
  header taemplate for header 
  footer template for footer
 
+
 ## The following scripts are created
 ```
  index.php for users access to view pages and posts
