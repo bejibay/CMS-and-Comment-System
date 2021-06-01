@@ -16,7 +16,7 @@
  header taemplate for header 
  footer template for footer
 
-## the following scripts are created
+## The following scripts are created
 ```
  index.php for users access to view pages and posts
  admin.php for login, register and password reset fuctions
