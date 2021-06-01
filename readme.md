@@ -7,6 +7,7 @@
  post table
  comments table
 
+
 ## The following templates are created
 ```
  index template for home page
