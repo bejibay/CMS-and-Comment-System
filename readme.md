@@ -10,12 +10,11 @@
 ## The following templates are created
 ```
 index template for home page
- pages template for pages
- posts template for each post under each keyword
- notfound temoate for not found url  
- header taemplate for header 
- footer template for footer
-
+pages template for pages
+posts template for each post under each keyword
+notfound temoate for not found url  
+header taemplate for header 
+footer template for footer
 
 ## The following scripts are created
 ```
