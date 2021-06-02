@@ -7,6 +7,13 @@
  post table
  comments table
 
+## The following scripts are created
+```
+ index.php for users access to view pages and posts
+ admin.php for login, register and password reset fuctions
+ dashboard.php for all administration functions
+ comments.php for users comments to blog posts
+
 ## The following templates are created
 ```
 index template for home page
@@ -15,14 +22,6 @@ posts template for each post under each keyword
 notfound temoate for not found url  
 header taemplate for header 
 footer template for footer
-
-## The following scripts are created
-```
- index.php for users access to view pages and posts
- admin.php for login, register and password reset fuctions
- dashboard.php for all administration functions
- comments.php for users comments to blog posts
-
 
 
 
