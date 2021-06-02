@@ -7,10 +7,9 @@
  post table
  comments table
 
-
 ## The following templates are created
 ```
- index template for home page
+index template for home page
  pages template for pages
  posts template for each post under each keyword
  notfound temoate for not found url  
