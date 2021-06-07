@@ -16,7 +16,7 @@ require(functions.php);
 function handle_execption($exception){
 echo "there is an error, try again";
 error_log($exeption->getMessage);
-set_exception_handler(handle_exception;
+set_exception_handler(handle_exception);
 }
 
 ?>
