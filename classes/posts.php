@@ -30,7 +30,18 @@ if(isset($data['ip']))$this->ip=int($data['ip']);
 
 }
 
+public function storeFormValues($params)
+{$this->__construct($params);
+if(isset($params'[pubdate']){
+$pubdate=explode('-', $params['pubdate']);
+if(count($pubdate==3)){
+list($pubdate=($x,$y,$z);
+$pubdate=mktime(0,0,0,$x,$y,$z);
+}
+}
 
+
+}
 
 }
 
