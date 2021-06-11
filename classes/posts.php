@@ -39,8 +39,13 @@ list($pubdate)=($y,$m,$d);
 $pubdate=mktime(0,0,0,$d,$m,$y);
 }
 }
-
-
+}
+public static function getById(){
+$conn= new PDO(DB_DSN,DB_USERNAME,DB_PASSWORD);
+$sql="SELECT*, UNIX_TIMESTAMP(pubdate) AS pubdate where
+ url=:url";
+$stmt=$conn->prepare($sql);
+$stmt->execute;
 }
 
 }
