@@ -93,6 +93,10 @@ $conn=null;
 }
 public function delete(){
 $conn= new PDO(DB_DSN,DB_USERNAME,DB_PASSWORD);
+$sql="DELETE FROM posts where url=:url LIMIT 1";
+$stmt=$conn->prepare($sql);
+$stmt->bindValue(":url",$this->url, PDO::PARAM_STR);
+$conn=null;
 
 
 
