@@ -45,8 +45,36 @@ $conn= new PDO(DB_DSN,DB_USERNAME,DB_PASSWORD);
 $sql="SELECT*, UNIX_TIMESTAMP(pubdate) AS pubdate where
  url=:url";
 $stmt=$conn->prepare($sql);
+$stmt->bindValue(":url",$this->url, PDO::PARAM_STR);
 $stmt->execute;
+$row = stmt->fetch();
+$conn = null;
+if($row) $Post = new Post($row);
+
 }
+public function insert(){
+$conn= new PDO(DB_DSN,DB_USERNAME,DB_PASSWORD);
+$sql = "INSERT INTO posts(title,description,summary,content,url,imageurl,image_extension,categoryID,pubdate,ip)
+VALUES(:title,:description,:summary,:content,:url,:imageurl,:image_extension,:categoryID,:pubdate,:ip)";
+$stmt=conn->prepare($sql);
+$stmt->bindValue(":title",$this->title, PDO::PARAM_STR);
+$stmt->bindValue(":description",$this->description, PDO::PARAM_STR);
+$stmt->bindValue(":summary",$this->summary, PDO::PARAM_STR);
+$stmt->bindValue(":content",$this->content, PDO::PARAM_STR);
+$stmt->bindValue(":url",$this->url, PDO::PARAM_STR);
+$stmt->bindValue(":imageurl",$this->imageurl, PDO::PARAM_STR);
+$stmt->bindValue(":image_extension",$this->image_extension, PDO::PARAM_STR);
+$stmt->bindValue(":categoryID",$this->categoryID, PDO::PARAM_STR);
+$stmt->bindValue(":Pindar's",$this->pundits, PDO::PARAM_STR);
+$stmt->bindValue(":ip",$this->ip, PDO::PARAM_STR);
+
+}
+public function update(){
+$conn= new PDO(DB_DSN,DB_USERNAME,DB_PASSWORD);
+
+}
+public function delete(){
+$conn= new PDO(DB_DSN,DB_USERNAME,DB_PASSWORD);$
 
 }
 
