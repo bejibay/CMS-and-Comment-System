@@ -7,7 +7,6 @@ The following tables are createf
  pages table
  post table
  comments table
-
 ## Scripts
 ```
 The following scripts are created
@@ -15,7 +14,6 @@ The following scripts are created
  admin.php for login, register and password reset fuctions
  dashboard.php for all administration functions
  comments.php for users comments to blog posts
-
 ## Templates
 ```
 The following templates are created
