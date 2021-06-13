@@ -14,23 +14,22 @@ $action=isset($_GET['action'])? $_GET['action'] : "";
 <?php 
 
 if($action){
-$sql="SELECT pageurl FROM pages Where pageurl=$action";
-mysqli_query($con, $sql);
-if(mysqli_num_rows==1){include "templates/page.php";
+$results=array();
+$results['article']=Page::getById($action);
+require(TEMPLATES_PATH."/pages.php");
+return;
+}
+
+$results=array();
+$results['article']=Post::getById($action);
+require(TEMPLATES_PATH."/posts.php");
 return;
 }
 
 
-$sql="SELECT posturl FROM posts Where posturl=$url";
-mysqli_query($con, $sql);
-if(mysqli_num_rows==1){ include "template/posts.php";
-return;
-}
+else{require (TEMPLATES_PATH."/notfound.php");}
 
-
-else{include "templates/notfound.php";}
-
-else{include "templates/homepage.php";}
+else{require(TEMPLATES_PATH."/homepage.php");}
 
 }
 
