@@ -5,9 +5,9 @@ $action=isset($_GET['action'])? $_GET['action'] : "";
 <!DOCTYPE html>
 <html>
 <head>
-<meta  name="description" content="<?php echo $description;?>">
+<meta  name="description" content="<?php echo $results['article']->description;?>">
 <meta  name="viewport" content="width=device-width, initial-scale=1.0">
-<title><?php echo $title;?></title>
+<title><?php echo $results['article']->title;?></title>
 </head>
 <body>
 <div class="header"><?php include "templates/header.php";?><div>
