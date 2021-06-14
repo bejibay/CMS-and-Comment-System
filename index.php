@@ -27,7 +27,11 @@ return;
 }
 
 
-else{require (TEMPLATES_PATH."/notfound.php");}
+else{
+$results=array();
+$results['title']=" Page Not Found";
+$results['description']="This Page Does Not Exist";
+require (TEMPLATES_PATH."/notfound.php");}
 
 else{require(TEMPLATES_PATH."/homepage.php");}
 
