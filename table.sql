@@ -66,6 +66,14 @@ date TIMESTAMP,
 ipaddress VARCHAR()
 );
 
+CREATE TABLE user IF NOT EXIST C
+id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+name  VARCHAR() NOT NULL,
+email  VARCHAR() NOT NULL,
+reseturl VARCHAR() NOT NULl
+date TIMESTAMP,
+ipaddress VARCHAR()
+);
 
 
 
