@@ -45,8 +45,7 @@ default();
 
 ?>
 </div>
-<div class="footer">copyright </div>
-
+<div class="footer"><?php include "templates/include/footer.php";?></div>
 </body>
 
 </html>
