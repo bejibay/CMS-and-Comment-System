@@ -27,7 +27,7 @@ $results['description']="put home page description here";
 require(TEMPLATES_PATH."/homepage.php");}
 }
 ?>
-<div class="footer"><?php include "templates/footer.php";?></div>
+<div class="footer"><?php include "templates/include/footer.php";?></div>
 
 </body>
 
