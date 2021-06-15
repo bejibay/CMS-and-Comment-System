@@ -5,7 +5,7 @@
 <title><?php echo $results['title'];?></title>
 </head>
 <body>
-<div class="header"><?php include "templates/header.php";?></div>
+<div class="header"><?php include "templates/include/header.php";?></div>
 <div class="row">
 <div class="column leftside">
  This page does not exist</div>
