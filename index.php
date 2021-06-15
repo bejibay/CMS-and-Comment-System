@@ -20,7 +20,11 @@ $results['title']=" Page Not Found";
 $results['description']="This Page Does Not Exist";
 require (TEMPLATES_PATH."/notfound.php");}
 
-else{require(TEMPLATES_PATH."/homepage.php");}
+else{
+$results=array();
+$results['title']="put home page title here";
+$results['description']="put home page description here";
+require(TEMPLATES_PATH."/homepage.php");}
 }
 ?>
 <div class="footer"><?php include "templates/footer.php";?></div>
