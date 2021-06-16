@@ -7,25 +7,19 @@
  Class Post{
 // define the class properties
 public $id = null;
-public $title = null;
-public $summary =null;
-public $content = null;
-public $url = null; 
-public $imageurl = null;
-public $image_extension = null;
-public $categoryID = null;
+public $name = null;
+public $username =null;
+public $password = null;
+public $reseturl =null;
 public $pubdate =null;
 public $ip = null;
 
 public function __construct($data=array){
 if(isset($data['id']))$this->id=int($data['id']);
-if(isset($data['pubdate']))$this-pubdate=int($databases['pubdate']);
-if(isset($data['title']))$this->title=preg_replace("/[^\,\.\"\'\:\;\@\$\()a-Z0-9]/","",$data['id']);
-if(isset($data['summary']))$this->summary=preg_replace("/[^\,\.\"\'\:\;\@\$\()a-Z0-9]/","",$data['id']);
-if(isset($data['categoryID']))$this->categoryID=int($data['categoryID']);
-if(isset($data['url']))$this->url=$data['url'];
-if(isset($data['imageurl']))$this->imageurl=$data['imageurl'];
-if(isset($data['image_extension']))$this->image_extension=$data['image_extension'];
+if(isset($data['name']))$this->name=$data['name'];
+if(isset($data['email']))$this->email=$data['email'];
+if(isset($data['username']))$this->username=$data['username'];
+if(isset($data['pubdate']))$this->pubdate=$data['pubdate']:
 if(isset($data['ip']))$this->ip=int($data['ip']);
 
 }
@@ -40,7 +34,7 @@ $pubdate=mktime(0,0,0,$d,$m,$y);
 }
 }
 }
-public static function getById(){
+public static function getUser($username,$password){
 $conn= new PDO(DB_DSN,DB_USERNAME,DB_PASSWORD);
 $sql="SELECT*, UNIX_TIMESTAMP(pubdate) AS pubdate where
  url=:url";
