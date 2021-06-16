@@ -11,17 +11,21 @@ $result=array();
 $result["title"]="Admin Login Form";
 $result["pageheading"]="Fill in the Login Form";
 if(isset($_POST['login'])){
+//user has clicked the login form, login successful
+$login = new User;
+$login->store form($_POST);
+User::get user();
 $username= $_POST['username'];
-$password=encrypted($password);
-//user has posted the login form attempt to login
-$SQL="SELECT username, password FRom Admin where username=$username AND password=$password";
-if(mysql_num_rows==1) { $_SESSION['username']== $username; header ("templates/dashboard");}
-else{}//login failed display errot message
-$results['error message']="incorrect admin username or passworsd, Login failded, try again";
-include "forms/loginform.php";
+$_SESSION['username'];
+header('location:"/dashboard");
+}
+else{//login failed display error message
+$result['errormessage']="Incorrect Username or Password, Try Again";
+require(TEMPLATE_PATH."/loginfurm.php");
+}
 }
 else{// no attempt already made to login
-include "forms/loginform.php";
+require (TEMPLATE_PATH."/loginform.php";
 
 }
 }
