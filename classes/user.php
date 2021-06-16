@@ -64,20 +64,12 @@ $stmt->execute;
 $this->id =$conn->lastInsertId();
 $conn = null;
 }
-public function update(){
+public function update($reseturl){
 $conn= new PDO(DB_DSN,DB_USERNAME,DB_PASSWORD);
-$sql = " UPDATE posts SET title = :title,description=:description,
-summary=:summary,content=:content,url=:url,imageurl=:imageurl,
-image_extension=:image_extension,categoryID=:categoryID,pubdate=:pubdate,ip=:ip";
+$sql = " UPDATE user SET password=:password,pubdate=:pubdate,ip=:ip where reseturl=:reseturl";
 $stmt=$conn->prepare($sql):
-$stmt->bindValue(":title", $this->title, PDO::PARAM_STR);
-$stmt->bindValue(":description", $this->description, PDO:PARAM_STR);
-$stmt->bindValue(":summary",$this->summary, PDO::PARAM_STR);
-$stmt->bindValue(":content",$this->content, PDO::PARAM_STR);
-$stmt->bindValue(":url",$this->url, PDO::PARAM_STR);
-$stmt->bindValue(":imageurl",$this->imageurl, PDO::PARAM_STR);
-$stmt->bindValue(":image_extension",$this->image_extension, PDO::PARAM_STR);
-$stmt->bindValue(":categoryID",$this->categoryID, PDO::PARAM_STR);
+$stmt->bindValue(":password", $this->password, PDO::PARAM_STR);
+$stmt->bindValue(":reseturl", $this->reseturl, PDO:PARAM_STR);
 $stmt->bindValue(":pubdate",$this->pubdate, PDO::PARAM_STR);
 $stmt->bindValue(":ip",$this->ip, PDO::PARAM_STR);
 $stmt->execute;
@@ -86,9 +78,9 @@ $conn=null;
 }
 public function delete(){
 $conn= new PDO(DB_DSN,DB_USERNAME,DB_PASSWORD);
-$sql="DELETE FROM posts where url=:url LIMIT 1";
+$sql="DELETE FROM user where email=:email LIMIT 1";
 $stmt=$conn->prepare($sql);
-$stmt->bindValue(":url",$this->url, PDO::PARAM_STR);
+$stmt->bindValue(":email",$this->email, PDO::PARAM_STR);
 $conn=null;
 
 
