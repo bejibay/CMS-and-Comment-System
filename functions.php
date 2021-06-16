@@ -30,28 +30,23 @@ require (TEMPLATE_PATH."/loginform.php";
 }
 }
 
-
 function register(){
 $result=array();
 $result["title"]="Account Creation Form";
-$result["heading"]="Fill in the Form to create your account";
+$result["pageheading"]="Fill in the Form to create your account";
 if(isset($_POST['register'])){
-$firstname= $_POST['firstname'];
-$lastname= $_POST['lastname'];
-$username= $_POST['username'];
-$email= $_POST['email'];
-$password=encrypted($password);
-
 //user has posted the register form attempt to register
-$SQL="INSERT into admin ("fisrtsname", "lastname", "username", "email", "password") VALUES 
-($firstname, $lastname,$username, $email)";
-if(mysql_las_id) {$result["SuccessRegister"]="Thanks For Registering, You can now Login In";header(/login);}
+$register=new User;
+$register->storeForm($_POST);
+register->insert();
+header("location:admin.php);
+
 else{//Form not filled properly
-$results['error message']="Forms not filled properly";
-include "forms/registerform.php";
+$results['errormessage']="Forms not filled properly";
+require(TEMPLATE_PATH. "/forms/registerform.php");
 }
 else{// no attempt already made to register
-include "forms/register.php";
+require(TEMPLATE_PATH./forms/register.php";
 }
 
 function resetpassword(){
