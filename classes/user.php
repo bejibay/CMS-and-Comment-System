@@ -47,6 +47,16 @@ $row = stmt->fetch();
 $conn = null;
 if($row) $user = new User($row);
 
+public static function getResetId($username){
+$conn= new PDO(DB_DSN,DB_USERNAME,DB_PASSWORD);
+$sql="SELECT* FROM user where (username=:username OR email=:username";
+$stmt=$conn->prepare($sql);
+$stmt->bindValue(":username",$_POST['username'], PDO::PARAM_STR);
+$stmt->bindValue(":email",$_POST['username'], PDO::PARAM_STR);
+$row = stmt->fetch();
+$conn = null;
+if($row) $resetid = new User($row);
+
 }
 public function insert(){
 $conn= new PDO(DB_DSN,DB_USERNAME,DB_PASSWORD);
