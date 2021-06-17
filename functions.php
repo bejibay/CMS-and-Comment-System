@@ -65,30 +65,39 @@ include forms/resetform.php;
 function logout(){
 
 unset($_SESSION['username']);
+header(location:"/login");
 }
-
-function homepage(){
-
-header ("/login");
-}
-
 function dashboard(){
 $results['content']="Dashboard area, carry out your transactions";
 
 }
 
 function createpage(){
-
+$result= array;
+$result['formAction']=newPage;
+$result['pageheading']="Create A Page";
+$createpage =new Page
 if(isset($_POST['createpage'])){
-$sql="INSERT into pages("firstname","lastname","username","password")VALUES($firstname,$lastname,$username,$password)";
-mysqli_query($conn,$sql);
-if(mysqli_lasT_id){function updatepage();}
+$createpage->storeForm($_POST);
+$createpage->insert();
+require(TEMPLATE_PATH."/editpage.php");
+}
 
 }
 }
 
 function createpost()
-{if(isset($_POST['createpost'])){
+{$result= array;
+$result['formAction']=newPost;
+$result['pageheading']="Create A Postm";
+$createpost8 =new Paost 
+if(isset($_POST['createpage'])){
+$createpage-m>storeForm($_POST);
+$createpage->insert();
+require(TEMPLATE_PATH."/editpost.php");
+}
+
+if(isset($_POST['createpost'])){
 $sql="INSERT into pages("content","category","date","remoteaddress")VALUES($content,$category,$date,$remoteaddress)";
 mysqli_query($conn,$sql);
 if(mysqli_lasT_id){function updatepage();}
