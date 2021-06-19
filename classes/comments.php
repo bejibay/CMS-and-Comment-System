@@ -49,7 +49,18 @@ $conn = null;
 if($row) $Post = new Post($row);
 
 }
-public function insert(){
+
+public static function getComments($url){
+$sql="SELECT*, UNIX_TIMESTAMP(pubdate) AS pubdate FROM post where url=:url ORDER BY pubdate DESC";
+$stmt=$conn->prepare($sql);
+$stmt->bindValue(":url", $url, PDO:: PARAM_STR);
+$stmt->execute;
+$row = stmt->fetchAll(PDO:FETCH_ASSOC);
+$comment = new Comment($row);
+$conn = null;
+}
+
+}ublic function insert(){
 $conn= new PDO(DB_DSN,DB_USERNAME,DB_PASSWORD);
 $sql = "INSERT INTO posts(title,description,summary,content,url,imageurl,image_extension,categoryID,pubdate,ip)
 VALUES(:title,:description,:summary,:content,:url,:imageurl,:image_extension,:categoryID,:pubdate,:ip)";
