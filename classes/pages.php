@@ -34,8 +34,7 @@ $pubdate=mktime(0,0,0,$d,$m,$y);
 }
 }
 public static function getById(){
-$conn= new PDO(DB_DSN,DB_USERNAME,DB_PASSWORD);
-$sql="SELECT*, UNIX_TIMESTAMP(pubdate) AS pubdate FROM pages where
+SELECT*, UNIX_TIMESTAMP(pubdate) AS pubdate FROM pages where
  url=:url";
 $stmt=$conn->prepare($sql);
 $stmt->bindValue(":url",$this->url, PDO::PARAM_STR);
@@ -45,7 +44,16 @@ $conn = null;
 if($row) $Post = new Post($row);
 
 }
-public function insert(){
+public static function getlist(){
+$sql="SELECT*, UNIX_TIMESTAMP(pubdate) AS pubdate FROM post ORDER BY pubdate DESC";
+$stmt=$conn->prepare($sql);
+$stmt->execute;
+$row = stmt->fetchAll(PDO:FETCH_ASSOC);
+$post = new Post($row);
+$conn = null;
+}
+
+}ublic function insert(){
 $conn= new PDO(DB_DSN,DB_USERNAME,DB_PASSWORD);
 $sql = "INSERT INTO posts(title,description,summary,content,url,imageurl,image_extension,categoryID,pubdate,ip)
 VALUES(:title,:description,:summary,:content,:url,:imageurl,:image_extension,:categoryID,:pubdate,:ip)";
