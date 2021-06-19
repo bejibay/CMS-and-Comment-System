@@ -52,6 +52,15 @@ $conn = null;
 if($row) $Post = new Post($row);
 
 }
+public static function getlist(){
+$sql="SELECT*, UNIX_TIMESTAMP(pubdate) AS pubdate FROM post ORDER BY pubdate DESC";
+$stmt=$conn->prepare($sql);
+$stmt->execute;
+$row = stmt->fetchAll(PDO:FETCH_ASSOC);
+$post = new Post($row);
+$conn = null;
+}
+
 public function insert(){
 $conn= new PDO(DB_DSN,DB_USERNAME,DB_PASSWORD);
 $sql = "INSERT INTO posts(title,description,summary,content,url,imageurl,image_extension,categoryID,pubdate,ip)
