@@ -32,9 +32,11 @@ switch($action){
 case "login":
 login();
 break;
-
 case "register":
 register();
+break;
+case "logout":
+logout();
 break;
 case "resetpassword"."/".$reseturl:
 resetpassword();
