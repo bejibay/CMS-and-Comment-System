@@ -26,10 +26,8 @@ require(TEMPLATE_PATH."/loginfurm.php");
 }
 else{// no attempt already made to login
 require (TEMPLATE_PATH."/loginform.php";
-
 }
 }
-
 function register(){
 $result=array();
 $result["title"]="Account Creation Form";
@@ -48,7 +46,6 @@ require(TEMPLATE_PATH. "/forms/registerform.php");
 else{// no attempt already made to register
 require(TEMPLATE_PATH./forms/register.php";
 }
-
 function resetpassword(){
 $SQL="SELECT reseturl FRom Admin where reseturl=$url";
 if(mysql_num_rows==1) { 
@@ -60,7 +57,6 @@ include forms/resetform.php;
 else{//Attempt not yet made to reset password
 include forms/resetform.php;
 }
-
 }
 function logout(){
 
@@ -69,7 +65,6 @@ header(location:"/login");
 }
 function dashboard(){
 $results['content']="Dashboard area, carry out your transactions";
-
 }
 
 function createpage(){
@@ -82,9 +77,7 @@ $createpage->storeForm($_POST);
 $createpage->insert();
 require(TEMPLATE_PATH."/editpage.php");
 }
-
 }
-
 function editpage(){
 $result= array;
 $result['formAction']=editPage;
@@ -117,8 +110,6 @@ $editpost->storeForm($_POST);
 $editpost->ipdate();
 require(TEMPLATE_PATH."/editpost.php");
 
-
-
 }
 
 functionviewpages(){
@@ -133,28 +124,6 @@ function viewposts(){
 $sql="SELECT everything FROM posts";
 mysqli_query($conn,$sql);
 if(mysqli_lasT_id){function updatepage();}
-}
-}
-
-function editpage(){
-//get data out of database on load of url
-$sql="SELECT everything FROM pages";
-mysqli_query($conn,$sql);
-if(mysqli_lasT_id){
-
-// ajax refresj on submit of changes
-function editpage();}
-}
-}
-
-function editpost(){
-//get data out of database on load of url
-$sql="SELECT everything FROM posts";
-mysqli_query($conn,$sql);
-if(mysqli_lasT_id){
-
-// ajax refresj on submit of changes
-function editpost();}
 }
 }
 
