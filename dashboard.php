@@ -33,48 +33,31 @@ a href="/template">templates</a>
 <div class="column middle">
 <?php
 switch($action){
-case "login":
-case "login"."/":
-login();
-break;
-
-case "logut":
-case "logout"."/":
-logout();
-break;
-
 case "dashboard":
-case "dashboard"."/":
 dashboard();
 break;
 
-case "dashboard"."/"."viewpages":
-case "dashboard"."/"."viewpages"."/":
+case "viewpages":
 viewpages();
 break;
 
-case "dashboard"."/"."viewposts":
-case "dashboard"."/"."viewposts"."/":
+case "viewposts":
 viewposts();
 break;
 
-case "dashboard"."/"."updatepage":
-case "dashboard"."/"."updatepage"."/":
+case "updatepage":
 updatepage();
 break;
 
-case "dashboard"."/"."updatepost":
-case "dashboard"."/"."updatepost"."/":
+case "updatepost":
 updatepost();
 break;
 
-case "dashboard"."/"."deletepage":
-case "dashboard"."/"."deletepage"."/":
+case "deletepage":
 deletepage();
 break;
 
-case "dashboard"."/"."deletepost":
-case "dashboard"."/"."deletepost"."/":
+case "deletepost":
 deletepost();
 break;
 
