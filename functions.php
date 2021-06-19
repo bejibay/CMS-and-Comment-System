@@ -77,13 +77,23 @@ $result= array;
 $result['formAction']=newPage;
 $result['pageheading']="Create A Page";
 $createpage =new Page
-if(isset($_POST['createpage'])){
+if(isset($_POST['editpage'])){
 $createpage->storeForm($_POST);
 $createpage->insert();
 require(TEMPLATE_PATH."/editpage.php");
 }
 
 }
+
+function editpage(){
+$result= array;
+$result['formAction']=editPage;
+$result['pageheading']="Edit this Page";
+$editpage =new Page;
+if(isset($_POST['editpage'])){
+$editpage->storeForm($_POST);
+$editpage->update();
+require(TEMPLATE_PATH."/editpage.php");
 }
 
 function createpost()
@@ -97,10 +107,16 @@ $createpage->insert();
 require(TEMPLATE_PATH."/editpost.php");
 }
 
-if(isset($_POST['createpost'])){
-$sql="INSERT into pages("content","category","date","remoteaddress")VALUES($content,$category,$date,$remoteaddress)";
-mysqli_query($conn,$sql);
-if(mysqli_lasT_id){function updatepage();}
+function editpost(){
+$result= array;
+$result['formAction']=newPost;
+$result['pageheading']="Edit This Post";
+$editpost =new Post
+if(isset($_POST['editpost'])){
+$editpost->storeForm($_POST);
+$editpost->ipdate();
+require(TEMPLATE_PATH."/editpost.php");
+
 
 
 }
