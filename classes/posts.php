@@ -49,7 +49,7 @@ $stmt->bindValue(":url",$this->url, PDO::PARAM_STR);
 $stmt->execute;
 $row = stmt->fetch();
 $conn = null;
-if($row) $Post = new Post($row);
+if($row) $post = new Post($row);
 
 }
 public static function getlist(){
@@ -57,7 +57,7 @@ $sql="SELECT*, UNIX_TIMESTAMP(pubdate) AS pubdate FROM post ORDER BY pubdate DES
 $stmt=$conn->prepare($sql);
 $stmt->execute;
 $row = stmt->fetchAll(PDO:FETCH_ASSOC);
-$post = new Post($row);
+if($row) $post = new Post($row);
 $conn = null;
 }
 
