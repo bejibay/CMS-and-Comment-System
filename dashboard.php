@@ -20,6 +20,7 @@ $username=isset($username)? $_SESSION['username'] : "";
 <div class="header"><a href="/logout">logout</a></div>
 <div class="row">
 <div class="column left">
+<a href=/dashboard"
 <a href="/createpage">create page</a>
 <a href="/createpost">create post</a>
 <a href="/viewpages">view pages</a>
@@ -36,36 +37,35 @@ switch($action){
 case "dashboard":
 dashboard();
 break;
-
+case " createpage":
+new page();
+break;
+case "createpost":
+new post();
+break;
 case "viewpages":
 viewpages();
 break;
-
 case "viewposts":
 viewposts();
 break;
-
 case "updatepage":
 updatepage();
 break;
-
 case "updatepost":
 updatepost();
 break;
-
 case "deletepage":
 deletepage();
 break;
-
 case "deletepost":
 deletepost();
 break;
-
 }
 
 ?></div><div class="column right">
 </div>
-<div>copyright </div>
+<div>&copy;copyright example.com</div>
 
 </body>
 
