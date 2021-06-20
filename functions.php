@@ -16,7 +16,7 @@ header('location:"/dashboard");
 }
 else{//login failed display error message
 $result['errormessage']="Incorrect Username or Password, Try Again";
-require(TEMPLATE_PATH."/loginfurm.php");
+require(TEMPLATE_PATH."/loginform.php");
 }
 }
 else{// no attempt already made to login
@@ -31,15 +31,15 @@ if(isset($_POST['register'])){
 //user has posted the register form attempt to register
 $register=new User;
 $register->storeForm($_POST);
-register->insert();
-header("location:admin.php);
+$register->insert();
+header("location:"/login");
 
 else{//Form not filled properly
 $results['errormessage']="Forms not filled properly";
-require(TEMPLATE_PATH. "/forms/registerform.php");
+require(TEMPLATE_PATH. "/registerform.php");
 }
 else{// no attempt already made to register
-require(TEMPLATE_PATH./forms/register.php";
+require(TEMPLATE_PATH."/registerform.php");
 }
 function resetpassword(){
 $SQL="SELECT reseturl FRom Admin where reseturl=$url";
@@ -63,7 +63,7 @@ $results['content']="Dashboard area, carry out your transactions";
 
 function createpage(){
 $result= array;
-$result['formAction']=newPage;
+$result['formAction']="newPage";
 $result['pageheading']="Create A Page";
 $createpage =new Page
 if(isset($_POST['editpage'])){
@@ -74,7 +74,7 @@ require(TEMPLATE_PATH."/editpage.php");
 }
 function editpage(){
 $result= array;
-$result['formAction']=editPage;
+$result['formAction']="editPage";
 $result['pageheading']="Edit this Page";
 $editpage =new Page;
 if(isset($_POST['editpage'])){
@@ -85,7 +85,7 @@ require(TEMPLATE_PATH."/editpage.php");
 
 function createpost()
 {$result= array;
-$result['formAction']=newPost;
+$result['formAction']="newPost";
 $result['pageheading']="Create A Postm";
 $createpost8 =new Paost 
 if(isset($_POST['createpage'])){
@@ -96,7 +96,7 @@ require(TEMPLATE_PATH."/editpost.php");
 
 function editpost(){
 $result= array;
-$result['formAction']=newPost;
+$result['formAction']="newPost";
 $result['pageheading']="Edit This Post";
 $editpost =new Post
 if(isset($_POST['editpost'])){
