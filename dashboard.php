@@ -38,10 +38,10 @@ case "dashboard":
 dashboard();
 break;
 case " createpage":
-new page();
+createpage();
 break;
 case "createpost":
-new post();
+createpost();
 break;
 case "viewpages":
 viewpages();
