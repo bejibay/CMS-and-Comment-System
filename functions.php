@@ -1,11 +1,6 @@
 
 <?php 
-
-// function codes
-
-
-
-<?php 
+//function codes to be called in admin.php, index.php, dashboard.pho
 function login(){
 $result=array();
 $result["title"]="Admin Login Form";
@@ -13,8 +8,8 @@ $result["pageheading"]="Fill in the Login Form";
 if(isset($_POST['login'])){
 //user has clicked the login form, login successful
 $login = new User;
-$login->store form($_POST);
-User::get user();
+$login->storeForm($_POST);
+User::getUser();
 $username= $_POST['username'];
 $_SESSION['username'];
 header('location:"/dashboard");
@@ -59,7 +54,6 @@ include forms/resetform.php;
 }
 }
 function logout(){
-
 unset($_SESSION['username']);
 header(location:"/login");
 }
