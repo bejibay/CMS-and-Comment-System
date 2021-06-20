@@ -1,6 +1,7 @@
 
 <?php 
 //Admin codes for login, register, reset password
+require("config.php");
 $action=isset($_GET['action'])? $_GET['action'] : "";
 ?>
 <!DOCTYPE html>
