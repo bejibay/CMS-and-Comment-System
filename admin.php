@@ -1,5 +1,4 @@
 
-// admin script allows you to carry out adminnistrative fuctions: modify, create, delete
 <?php 
 //Admin codes for login, register, reset password
 $action=isset($_GET['action'])? $_GET['action'] : "";
