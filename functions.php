@@ -103,39 +103,45 @@ if(isset($_POST['editpost'])){
 $editpost->storeForm($_POST);
 $editpost->ipdate();
 require(TEMPLATE_PATH."/editpost.php");
-
 }
 
-functionviewpages(){
-
-$sql="SELECT everything FROM pages";
-mysqli_query($conn,$sql);
-if(mysqli_lasT_id){function updatepage();}
+function viewpages(){
+Page::getList();
+foreach($row as $row){
+<ul>
+echo "<li><a href=".$row['url'].">".$row['title']."</a></li>";
+</ul>
+}
+}
 }
 
 function viewposts(){
+Post::getList();
+foreach($row as $row){
+<ul>
+echo "<li><a href=".$row['URL'].">".$row['title']."</a></li>":
+</ul>
 
-$sql="SELECT everything FROM posts";
-mysqli_query($conn,$sql);
-if(mysqli_lasT_id){function updatepage();}
+
 }
 }
 
-function deletepage()
+function deletepage(){
+
+}
 <script>
+function delPage(){
 var deletePage;
 deletePage=confirm("Are you sure you Want to delete this page");
-if (deletePage=="ok"){fuction delPage;}
-else{cancel;}
-</script?
+if (deletePage=="ok"){<?php function deletepage();?>}
+else{cancel;}}
 
-include "deletepost.php";
-<script>
+function delPost(){
 var deletePost;
 deletePost=confirm("Are you sure you Want to delete this post");
-if (deletePost=="ok"){fuction delPost;}
-else{cancel;}
-</script?
+if (deletePost=="ok"){<?php function deletepost();?}
+else{cancel;}}
+</script>
 }
 
 ?>
