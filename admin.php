@@ -1,12 +1,8 @@
 
 // admin script allows you to carry out adminnistrative fuctions: modify, create, delete
-
-// Admin codes
-
 <?php 
-$session_start();
+//Admin codes for login, register, reset password
 $action=isset($_GET['action'])? $_GET['action'] : "";
-$username=isset($username)? $_SESSION['username'] : "";
 ?>
 <!DOCTYPE html>
 <html>
@@ -38,18 +34,16 @@ break;
 case "logout":
 logout();
 break;
-case "resetpassword"."/".$reseturl:
-resetpassword();
+case "reset
+reset();
 break;
 default:
-default();
+login();
 }
-
 ?>
 </div>
 <div class="footer"><?php include "templates/include/footer.php";?></div>
 </body>
-
 </html>
 
 
