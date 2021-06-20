@@ -20,7 +20,7 @@ $username=isset($username)? $_SESSION['username'] : "";
 <div class="header"><a href="/logout">logout</a></div>
 <div class="row">
 <div class="column left">
-<a href=/dashboard"
+<a href="/dashboard">dashboard</a>
 <a href="/createpage">create page</a>
 <a href="/createpost">create post</a>
 <a href="/viewpages">view pages</a>
