@@ -1,31 +1,17 @@
-// comment codes
-
-
+?php 
+$action=isset($ction)?$_GET['action']:"";
+?>
 <?php 
-
-$url=$_GET['url'};
-if(isset ($url)){
-$sql="SELECT pageurl FROM pages Where pageurl=$url";
-mysqli_query($con, $sql);
-if(mysqli_num_rows==1){
-
+if($action)){
+Comments::getComments($action);
+foreach($row as $row){}
+if($_POST['savecomments']){
+$comments=new Comments();
+$comments->insertComments($action);
+Comments::getComments($action);
+foreach($row as $row){}
 }
-return:
-
-$sql="SELECT posturl FROM posts Where posturl=$url";
-mysqli_query($con, $sql);
-if(mysqli_num_rows==1){
-
 }
-return:
-
-else{include "notfound.php";}
-
-else{include "homepage.php";}
-
-}
-
-
 ?>
 
 
