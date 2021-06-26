@@ -10,7 +10,9 @@ $comments=new Comments();
 $comments->storeForm($_POST);
 $comments->insertComments($action);
 Comments::getComments($action);
-foreach($row as $row){}
+foreach($row as $row){
+echo "<ul>";
+}
 }
 }
 ?>
