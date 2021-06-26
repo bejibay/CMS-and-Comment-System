@@ -13,7 +13,7 @@
 </div>
 <div><script src="loadcomments.js">
 </script>
-<div><?php include "postcommentsform.php";?></div>
+<div><?php include "/templates/include/postcommentsform.php";?></div>
 </div>
 </div class="column rightside">put this column content here</div>
 </div>
