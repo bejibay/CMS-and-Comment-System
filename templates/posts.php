@@ -4,7 +4,7 @@
 <meta  name="viewport" content="width=device-width, initial-scale=1.0">
 <title><?php echo $results['article']->title;?></title>
 </head>
-<body>
+<body onload="loadComments()">
 <div class="header"><?php include "templates/include/header.php";?></div>
 <div class="row">
 <div class="column leftside">
