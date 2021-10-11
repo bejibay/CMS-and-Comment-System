@@ -1,12 +1,11 @@
 ## Technologies Used
 
-*HTML, CSS and JavaScript for frontend
-*PHP for backend
+*PHP, HTML, CSS and JavaScript
 
 ## Objectives of the project
 
 * To demonstrate the use of PHP Object 
-* Oriented Programming Concept
+  Oriented Programming Concept
 
 ## Frontend Application
 * UI for Users
@@ -17,11 +16,15 @@
 * footer.php template for footer
 
 * UI for Backend Application 
-* admin.php for login or register or password reset
-* dashboard.php for administrative functions
+* admin.php template for login or register or 
+  password reset
+* dashboard.php template for administrative 
+  functions
 
 ## Back end Applicatiion
-* admin.php for login, register and password reset fuctions
+* config.php for mysql database setup
+* classes folder for classes
+* functions.php for all functions
 * dashboard.php for all administration functions
 
 
