@@ -34,9 +34,6 @@ a href="/template">templates</a>
 <div class="column middle">
 <?php
 switch($action){
-case "dashboard":
-dashboard();
-break;
 case " createpage":
 createpage();
 break;
@@ -61,6 +58,8 @@ break;
 case "deletepost":
 deletepost();
 break;
+default:
+dashboard();
 }
 
 ?></div><div class="column right">
