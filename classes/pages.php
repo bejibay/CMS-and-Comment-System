@@ -37,6 +37,7 @@ $pubdate=mktime(0,0,0,$d,$m,$y);
 }
 
 public static function getById(){
+$conn= new PDO(DB_DSN,DB_USERNAME,DB_PASSWORD);
 SELECT*, UNIX_TIMESTAMP(pubdate) AS pubdate FROM page where
  id=:id";
 $stmt=$conn->prepare($sql);
@@ -48,6 +49,7 @@ if($row) $page = new Page($row);
 }
 
 public static function getlist(){
+$conn= new PDO(DB_DSN,DB_USERNAME,DB_PASSWORD);
 $sql="SELECT*, UNIX_TIMESTAMP(pubdate) AS pubdate FROM page ORDER BY pubdate DESC";
 $stmt=$conn->prepare($sql);
 $stmt->execute;
