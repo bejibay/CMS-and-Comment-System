@@ -56,7 +56,7 @@ $page = new Page($row);
 $conn = null;
 }
 
-}ublic function insert(){
+public function insert(){
 $conn= new PDO(DB_DSN,DB_USERNAME,DB_PASSWORD);
 $sql = "INSERT INTO page(title,description,summary,content,url,pubdate,ip)
 VALUES(:title,:description,:summary,:content,:url,:pubdate,:ip)";
