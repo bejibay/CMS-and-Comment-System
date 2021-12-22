@@ -10,7 +10,7 @@ public $ip = null;
 
 public function __construct($data=array()){
 if(isset($data['id']))$this->id=int($data['id']);
-if(isset($data['name']))$this-name=trim(stripslashes(htmlspecialchars($data['name'])));
+if(isset($data['name']))$this->name=trim(stripslashes(htmlspecialchars($data['name'])));
 if(isset($data['description']))$this->description=trim(stripslashes(htmlspecialchars($data['description'])));
 if(isset($data['pubdate']))$this->pubdate=int($data['pubdate']);
 if(isset($data['ip']))$this->ip=int($data['ip']);
@@ -18,7 +18,7 @@ if(isset($data['ip']))$this->ip=int($data['ip']);
 
 public function storeFormValues($params)
 {$this->__construct($params);
-if(isset($params['pubdate']){
+if(isset($params['pubdate'])){
 $pubdate=explode('-', $params['pubdate']);
 if(count($pubdate)==3){
 list($y,$m,$d) = $pubdate;
@@ -40,7 +40,7 @@ public function insert(){
 $conn= new PDO(DB_DSN,DB_USERNAME,DB_PASSWORD);
 $sql = "INSERT INTO category(name,description,pubdate,ip)
 VALUES(:name,:description,:pubdate,:ip)";
-$stmt=conn->prepare($sql);
+$stmt=$conn->prepare($sql);
 $stmt->bindValue(": name", $this->name, PDO::PARAM_STR);
 $stmt->bindValue(":description",$this->description, PDO::PARAM_STR);
 $stmt->bindValue(":pubdate",$this->pubdate, PDO::PARAM_INT);
@@ -52,9 +52,9 @@ $conn = null;
 public function update(){
 $conn= new PDO(DB_DSN,DB_USERNAME,DB_PASSWORD);
 $sql = " UPDATE category SET name= :name,description=:description,pubdate=:pubdate,ip=:ip";
-$stmt=$conn->prepare($sql):
+$stmt=$conn->prepare($sql);
 $stmt->bindValue(":name", $this->name, PDO::PARAM_STR);
-$stmt->bindValue(":description", $this->description, PDO:PARAM_STR);
+$stmt->bindValue(":description", $this->description, PDO::PARAM_STR);
 $stmt->bindValue(":pubdate",$this->pubdate, PDO::PARAM_INT);
 $stmt->bindValue(":ip",$this->ip, PDO::PARAM_INT);
 $stmt->execute;
