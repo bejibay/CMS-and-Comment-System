@@ -1,6 +1,6 @@
 
 <?php 
- Class Category{
+ class Category{
 // define the class properties
 public $id = null;
 public $name = null;
