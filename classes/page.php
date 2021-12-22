@@ -11,7 +11,7 @@ public $url = null;
 public $pubdate =null;
 public $ip = null;
 
-public function __construct($data=array){
+public function __construct($data=array()){
 if(isset($data['id']))$this->id=int($data['id']);
 if(isset($data['title']))$this->title=preg_replace("/[^\,\.\"\'\:\;\@\$\()a-Z0-9]/","",$data['title']);
 if(isset($data['description']))$this->description=preg_replace("/[^\,\.\"\'\:\;\@\$\()a-Z0-9]/","",$data['description']);
@@ -27,7 +27,7 @@ public function storeFormValues($params)
 if(isset($params['pubdate']){
 $pubdate=explode('-', $params['pubdate']);
 if(count($pubdate)==3){
-list($pubdate)=($y,$m,$d);
+list($y,$m,$d) = $pubdate;
 $pubdate=mktime(0,0,0,$d,$m,$y);
 }
 }
@@ -35,12 +35,11 @@ $pubdate=mktime(0,0,0,$d,$m,$y);
 
 public static function getById($id){
 $conn= new PDO(DB_DSN,DB_USERNAME,DB_PASSWORD);
-SELECT*, UNIX_TIMESTAMP(pubdate) AS pubdate FROM page where
- id=:id";
+SELECT*, UNIX_TIMESTAMP(pubdate) AS pubdate FROM page where id=:id";
 $stmt=$conn->prepare($sql);
 $stmt->bindValue(":id",$this->id, PDO::PARAM_INT);
 $stmt->execute;
-$row = stmt->fetch();
+$row = $stmt->fetch();
 $conn = null;
 if($row) $page = new Page($row);
 }
@@ -50,7 +49,7 @@ $conn= new PDO(DB_DSN,DB_USERNAME,DB_PASSWORD);
 $sql="SELECT*, UNIX_TIMESTAMP(pubdate) AS pubdate FROM page ORDER BY pubdate DESC";
 $stmt=$conn->prepare($sql);
 $stmt->execute;
-$row = stmt->fetchAll(PDO:FETCH_ASSOC);
+$row = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $page = new Page($row);
 $conn = null;
 }
@@ -59,7 +58,7 @@ public function insert(){
 $conn= new PDO(DB_DSN,DB_USERNAME,DB_PASSWORD);
 $sql = "INSERT INTO page(title,description,summary,content,url,pubdate,ip)
 VALUES(:title,:description,:summary,:content,:url,:pubdate,:ip)";
-$stmt=conn->prepare($sql);
+$stmt=$conn->prepare($sql);
 $stmt->bindValue(":title",$this->title,PDO::PARAM_STR);
 $stmt->bindValue(":description",$this->description, PDO::PARAM_STR);
 $stmt->bindValue(":summary",$this->summary, PDO::PARAM_STR);
@@ -78,7 +77,7 @@ $sql = " UPDATE page SET title = :title,description=:description,
 summary=:summary,content=:content,url=:url,pubdate=:pubdate,ip=:ip where id=:id";
 $stmt=$conn->prepare($sql):
 $stmt->bindValue(":title", $this->title, PDO::PARAM_STR);
-$stmt->bindValue(":description", $this->description, PDO:PARAM_STR);
+$stmt->bindValue(":description", $this->description, PDO::PARAM_STR);
 $stmt->bindValue(":summary",$this->summary, PDO::PARAM_STR);
 $stmt->bindValue(":content",$this->content, PDO::PARAM_STR);
 $stmt->bindValue(":url",$this->url, PDO::PARAM_STR);
@@ -95,6 +94,7 @@ $sql="DELETE FROM page where id=:id LIMIT 1";
 $stmt=$conn->prepare($sql);
 $stmt->bindValue(":id",$this->id, PDO::PARAM_INT);
 $conn=null;
+}
 }
 ?>
 
