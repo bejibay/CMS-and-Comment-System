@@ -50,7 +50,7 @@ $stmt->execute;
 $this->id =$conn->lastInsertId();
 $conn = null;
 }
-public function update($id){
+public function update(){
 $conn= new PDO(DB_DSN,DB_USERNAME,DB_PASSWORD);
 $sql = " UPDATE category SET name= :name,description=:description,pubdate=:pubdate,ip=:ip";
 $stmt=$conn->prepare($sql):
@@ -62,7 +62,7 @@ $stmt->execute;
 $conn=null;
 
 }
-public function delete($id){
+public function delete(){
 $conn= new PDO(DB_DSN,DB_USERNAME,DB_PASSWORD);
 $sql="DELETE FROM category where id=:id LIMIT 1";
 $stmt=$conn->prepare($sql);
