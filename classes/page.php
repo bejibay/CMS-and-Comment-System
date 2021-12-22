@@ -18,13 +18,13 @@ if(isset($data['description']))$this->description=preg_replace("/[^\,\.\"\'\:\;\
 if(isset($data['summary']))$this->summary=preg_replace("/[^\,\.\"\'\:\;\@\$\()a-Z0-9]/","",$data['summary']);
 if(isset($data['content']))$this->content=trim(stripslashes(htmlspecialchars($data['content'])));
 if(isset($data['url']))$this->url=$data['url'];
-if(isset($data['pubdate']))$this-pubdate=int($data['pubdate']);
+if(isset($data['pubdate']))$this->pubdate=int($data['pubdate']);
 if(isset($data['ip']))$this->ip=int($data['ip']);
 }
 
 public function storeFormValues($params)
 {$this->__construct($params);
-if(isset($params['pubdate']){
+if(isset($params['pubdate'])){
 $pubdate=explode('-', $params['pubdate']);
 if(count($pubdate)==3){
 list($y,$m,$d) = $pubdate;
@@ -35,11 +35,11 @@ $pubdate=mktime(0,0,0,$d,$m,$y);
 
 public static function getById($id){
 $conn= new PDO(DB_DSN,DB_USERNAME,DB_PASSWORD);
-SELECT*, UNIX_TIMESTAMP(pubdate) AS pubdate FROM page where id=:id";
+$sql="SELECT*,UNIX_TIMESTAMP(pubdate) AS pubdate FROM page where id=:id";
 $stmt=$conn->prepare($sql);
 $stmt->bindValue(":id",$this->id, PDO::PARAM_INT);
 $stmt->execute;
-$row = $stmt->fetch();
+$row = $stmt->fetch(PDO::FETCH_ASSOC);
 $conn = null;
 if($row) $page = new Page($row);
 }
@@ -75,7 +75,7 @@ public function update(){
 $conn= new PDO(DB_DSN,DB_USERNAME,DB_PASSWORD);
 $sql = " UPDATE page SET title = :title,description=:description,
 summary=:summary,content=:content,url=:url,pubdate=:pubdate,ip=:ip where id=:id";
-$stmt=$conn->prepare($sql):
+$stmt=$conn->prepare($sql);
 $stmt->bindValue(":title", $this->title, PDO::PARAM_STR);
 $stmt->bindValue(":description", $this->description, PDO::PARAM_STR);
 $stmt->bindValue(":summary",$this->summary, PDO::PARAM_STR);
