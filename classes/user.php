@@ -1,6 +1,6 @@
 
 <?php 
- Class User{
+ class User{
 // define the class properties
 public $id = null;
 public $firstname = null;
