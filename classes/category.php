@@ -8,7 +8,7 @@ public $description = null;
 public $pubdate =null;
 public $ip = null;
 
-public function __construct($data=array){
+public function __construct($data=array()){
 if(isset($data['id']))$this->id=int($data['id']);
 if(isset($data['name']))$this-name=trim(stripslashes(htmlspecialchars($data['name'])));
 if(isset($data['description']))$this->description=trim(stripslashes(htmlspecialchars($data['description'])));
@@ -21,7 +21,7 @@ public function storeFormValues($params)
 if(isset($params['pubdate']){
 $pubdate=explode('-', $params['pubdate']);
 if(count($pubdate)==3){
-list($pubdate)=($y,$m,$d);
+list($y,$m,$d) = $pubdate;
 $pubdate=mktime(0,0,0,$d,$m,$y);
 }
 }
@@ -32,10 +32,9 @@ $sql="SELECT*, UNIX_TIMESTAMP(pubdate) AS pubdate FROM category where id=:id";
 $stmt=$conn->prepare($sql);
 $stmt->bindValue(":id",$this->id, PDO::PARAM_INT);
 $stmt->execute;
-$row = stmt->fetch();
+$row = $stmt->fetch();
 $conn = null;
 if($row) $category = new Category($row);
-
 }
 public function insert(){
 $conn= new PDO(DB_DSN,DB_USERNAME,DB_PASSWORD);
