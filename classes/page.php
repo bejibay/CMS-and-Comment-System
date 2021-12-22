@@ -1,8 +1,6 @@
 
-// config codes
 
 <?php 
-
  Class Page{
 // define the class properties
 public $id = null;
@@ -36,7 +34,7 @@ $pubdate=mktime(0,0,0,$d,$m,$y);
 }
 }
 
-public static function getById(){
+public static function getById($id){
 $conn= new PDO(DB_DSN,DB_USERNAME,DB_PASSWORD);
 SELECT*, UNIX_TIMESTAMP(pubdate) AS pubdate FROM page where
  id=:id";
@@ -78,7 +76,7 @@ $conn = null;
 public function update(){
 $conn= new PDO(DB_DSN,DB_USERNAME,DB_PASSWORD);
 $sql = " UPDATE page SET title = :title,description=:description,
-summary=:summary,content=:content,url=:url,pubdate=:pubdate,ip=:ip";
+summary=:summary,content=:content,url=:url,pubdate=:pubdate,ip=:ip where id=:id";
 $stmt=$conn->prepare($sql):
 $stmt->bindValue(":title", $this->title, PDO::PARAM_STR);
 $stmt->bindValue(":description", $this->description, PDO:PARAM_STR);
@@ -87,11 +85,12 @@ $stmt->bindValue(":content",$this->content, PDO::PARAM_STR);
 $stmt->bindValue(":url",$this->url, PDO::PARAM_STR);
 $stmt->bindValue(":pubdate",$this->pubdate, PDO::PARAM_INT);
 $stmt->bindValue(":ip",$this->ip, PDO::PARAM_INT);
+$stmt->bindValue(":id",$this->id, PDO::PARAM_INT);
 $stmt->execute;
 $conn=null;
 }
 
-public function delete($id){
+public function delete(){
 $conn= new PDO(DB_DSN,DB_USERNAME,DB_PASSWORD);
 $sql="DELETE FROM page where id=:id LIMIT 1";
 $stmt=$conn->prepare($sql);
