@@ -8,13 +8,11 @@
 <div class="header"><?php include "templates/include/header.php";?></div>
 <div class="row">
 <div class="column leftside">
-<div>
- <?php echo $result['article']->content;?>
+<?php echo $result['article']->content;?>
 </div>
-<div><script src="loadcomments.js">
-</script>
-<div><?php include "/templates/include/postcommentsform.php";?></div>
+<div class="column rightside">put this column content here</div>
 </div>
-</div class="column rightside">put this column content here</div>
-</div>
-
+<script src="loadcomments.js"></script>
+<div class="footer"><?php include "templates/include/footer.php";?></div>
+</body>
+</html>
