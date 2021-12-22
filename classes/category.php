@@ -68,6 +68,7 @@ $stmt=$conn->prepare($sql);
 $stmt->bindValue(":id",$this->id, PDO::PARAM_INT);
 $conn=null;
 }
+}
 ?>
 
 
