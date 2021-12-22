@@ -1,8 +1,8 @@
 <html>
 <head>
+<title><?php echo $results['title'];?></title>
 <meta  name="description" content="<?php echo $results['description'];?>">
 <meta  name="viewport" content="width=device-width, initial-scale=1.0">
-<title><?php echo $results['title'];?></title>
 </head>
 <body>
 <div class="header"><?php include "templates/include/header.php";?></div>
