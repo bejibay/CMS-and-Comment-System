@@ -13,9 +13,8 @@ public $pubdate =null;
 public $ip = null;
 public $pattern = "/[A-Za-z]+{5,}[A-Za-z0-9]+{3,}/";
 
-public function __construct($data=array){
+public function __construct($data=(array)){
 $userpattern =$this->pattern;
-$uservalidate = $this->validate($data);
 if(isset($data['id']))$this->id=int($data['id']);
 if(isset($data['firstname']))$this->firstname=trim(stripslashes(htmlspecialchars($data['firstname'])));
 if(isset($data['lastname']))$this->lastname=trim(stripslashes(htmlspecialchars($data['lastname'])));
@@ -32,7 +31,7 @@ public function storeFormValues($params)
 if(isset($params['pubdate']){
 $pubdate=explode('-', $params['pubdate']);
 if(count($pubdate)==3){
-list($pubdate)=($y,$m,$d);
+list($y,$m,$d) = $pubdate;
 $pubdate=mktime(0,0,0,$d,$m,$y);
 }
 }
@@ -43,14 +42,14 @@ $sql="SELECT* FROM user where (username=:login AND password=:password";
 $stmt=$conn->prepare($sql);
 $stmt->bindValue(":login",$_POST['login'], PDO::PARAM_STR);
 $stmt->bindValue(":password",hash(256,$_POST['password']), PDO::PARAM_STR);
-$row = stmt->fetch();
+$row = $stmt->fetch(PDO::FETCH_ASOC);
 $conn = null;
 if($row) $user = new User($row); return;
 $sql="SELECT* FROM user where (email=:login AND password=:password";
 $stmt=$conn->prepare($sql);
 $stmt->bindValue(":login",$_POST['login'], PDO::PARAM_STR);
 $stmt->bindValue(":password",hash(256,$_POST['password']), PDO::PARAM_STR);
-$row = stmt->fetch();
+$row = $stmt->fetch(PDO::FETCH_ASSOC);
 $conn = null;
 if($row) $user = new User($row);
 }
@@ -103,6 +102,7 @@ $sql="DELETE FROM user where id=:id LIMIT 1";
 $stmt=$conn->prepare($sql);
 $stmt->bindValue(":id",$this->id, PDO::PARAM_STR);
 $conn=null;
+}
 }
 ?>
 
