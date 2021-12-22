@@ -1,5 +1,4 @@
 
-
 <?php 
  Class Page{
 // define the class properties
@@ -14,10 +13,10 @@ public $ip = null;
 
 public function __construct($data=array){
 if(isset($data['id']))$this->id=int($data['id']);
-if(isset($data['title']))$this->title=preg_replace("/[^\,\.\"\'\:\;\@\$\()a-Z0-9]/","",$data['title'])
-if(isset($data['description']))$this->description=preg_replace("/[^\,\.\"\'\:\;\@\$\()a-Z0-9]/","",$data['description'])
-if(isset($data['summary']))$this->summary=preg_replace("/[^\,\.\"\'\:\;\@\$\()a-Z0-9]/","",$data['summary'])
-if(isset($data['content']))$this->content=trim(stripslashes(htmlspecialchars($data['content'])))
+if(isset($data['title']))$this->title=preg_replace("/[^\,\.\"\'\:\;\@\$\()a-Z0-9]/","",$data['title']);
+if(isset($data['description']))$this->description=preg_replace("/[^\,\.\"\'\:\;\@\$\()a-Z0-9]/","",$data['description']);
+if(isset($data['summary']))$this->summary=preg_replace("/[^\,\.\"\'\:\;\@\$\()a-Z0-9]/","",$data['summary']);
+if(isset($data['content']))$this->content=trim(stripslashes(htmlspecialchars($data['content'])));
 if(isset($data['url']))$this->url=$data['url'];
 if(isset($data['pubdate']))$this-pubdate=int($data['pubdate']);
 if(isset($data['ip']))$this->ip=int($data['ip']);
