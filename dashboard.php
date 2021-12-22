@@ -1,15 +1,11 @@
-﻿
-// admin script allows you to carry out adminnistrative fuctions: modify, create, delete
-
-// Admin codes
-
 <?php 
 $session_start();
 $action=isset($_GET['action'])? $_GET['action'] : "";
 $username=isset($username)? $_SESSION['username'] : "";
+require("config.php);
+// admin s/cript allows you to carry out adminnistrative fuctions:create, read, update, delete
 ?>
 <!DOCTYPE html>
-
 <html>
 <head>
 <meta  name="description" content="<?php echo $description;?>">
