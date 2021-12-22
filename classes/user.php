@@ -13,7 +13,7 @@ public $pubdate =null;
 public $ip = null;
 public $pattern = "/[A-Za-z]+{5,}[A-Za-z0-9]+{3,}/";
 
-public function __construct($data=(array)){
+public function __construct($data=array()){
 $userpattern =$this->pattern;
 if(isset($data['id']))$this->id=int($data['id']);
 if(isset($data['firstname']))$this->firstname=trim(stripslashes(htmlspecialchars($data['firstname'])));
@@ -26,9 +26,9 @@ if(isset($data['pubdate']))$this->pubdate=int($data['pubdate']);
 if(isset($data['ip']))$this->ip=int($data['ip']);
 }
 
-public function storeFormValues($params)
-{$this->__construct($params);
-if(isset($params['pubdate']){
+public function storeFormValues($params){
+$this->__construct($params);
+if(isset($params['pubdate'])){
 $pubdate=explode('-', $params['pubdate']);
 if(count($pubdate)==3){
 list($y,$m,$d) = $pubdate;
@@ -58,7 +58,7 @@ public function insert(){
 $conn= new PDO(DB_DSN,DB_USERNAME,DB_PASSWORD);
 $sql = "INSERT INTO user(firstname,lastname,username,email,password,reseturl,pubdate,ip)
 VALUES(:firstname,:lastname,:username,:email,:password,:reseturl,:pubdate,:ip)";
-$stmt=conn->prepare($sql);
+$stmt=$conn->prepare($sql);
 $stmt->bindValue(":firstname",$this->firstname, PDO::PARAM_STR);
 $stmt->bindValue(":lastname",$this->lastname, PDO::PARAM_STR);
 $stmt->bindValue(":email",$this->email, PDO::PARAM_STR);
@@ -75,9 +75,9 @@ $conn = null;
 public function updateForReset(){
 $conn= new PDO(DB_DSN,DB_USERNAME,DB_PASSWORD);
 $sql = " UPDATE user SET reseturl=:reset,pubdate=:pubdate,ip=:ip where email=:email";
-$stmt=$conn->prepare($sql):
+$stmt=$conn->prepare($sql);
 $stmt->bindValue(":reseturl", $this->reseturl, PDO::PARAM_STR);
-$stmt->bindValue(":pubdate", $this->pubdate, PDO:PARAM_INT);
+$stmt->bindValue(":pubdate", $this->pubdate, PDO::PARAM_INT);
 $stmt->bindValue(":ip",$this->ip, PDO::PARAM_INT);
 $stmt->bindValue(":email",$this->email, PDO::PARAM_STR);
 $stmt->execute;
@@ -87,7 +87,7 @@ $conn=null;
 public function update($reseturl){
 $conn= new PDO(DB_DSN,DB_USERNAME,DB_PASSWORD);
 $sql = " UPDATE user SET password=:password,pubdate=:pubdate,ip=:ip where reseturl=:reseturl";
-$stmt=$conn->prepare($sql):
+$stmt=$conn->prepare($sql);
 $stmt->bindValue(":password", $this->password, PDO::PARAM_STR);
 $stmt->bindValue(":pubdate",$this->pubdate, PDO::PARAM_INT);
 $stmt->bindValue(":ip",$this->ip, PDO::PARAM_UNT);
