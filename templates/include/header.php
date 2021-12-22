@@ -5,5 +5,5 @@
 <a href="/privacy">Privacy</a>
 <a href="/register">Register</a>
 <a href="/login">login</a>
-<a href="javascript:void()"><i  class ="fa fa-bars" ></a>
+<a href="javascript:void();"><i  class ="fa fa-bars" ></i></a>
 </div>
