@@ -1,6 +1,6 @@
 
 <?php 
- Class Page{
+ class Page{
 // define the class properties
 public $id = null;
 public $title = null;
