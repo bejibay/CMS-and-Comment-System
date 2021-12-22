@@ -1,9 +1,5 @@
 
-
-// config codes
-
 <?php 
-
  Class User{
 // define the class properties
 public $id = null;
