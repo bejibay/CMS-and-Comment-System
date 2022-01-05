@@ -35,7 +35,7 @@ break;
 case "logout":
 logout();
 break;
-case "reset
+case "reset":
 reset();
 break;
 }
