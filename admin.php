@@ -1,6 +1,6 @@
 
 <?php 
-//Admin codes for login, register, reset password
+//Admin codes for login, register, and  password reset
 require("config.php");
 $action=isset($_GET['action'])? $_GET['action'] : "";
 ?>
@@ -37,6 +37,7 @@ logout();
 break;
 case "reset
 reset();
+break;
 }
 ?>
 </div>
