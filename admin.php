@@ -1,4 +1,3 @@
-
 <?php 
 //Admin codes for login, register, and  password reset
 require("config.php");
