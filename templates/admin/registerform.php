@@ -5,6 +5,8 @@
 <input type="text" name="firstname" placeholder="Type in your firstname" id="firstname">
 <label for ="lastname">Lastname:</label>
 <input type="text" name="lastname" placeholder ="Type in your Lastname" id="lastname">
+<label for =email">Email:</label>
+<input type="text" name="email" placeholder ="Type in your email" id="email">
 <label for ="password">Password:</label>
 <input type="text" name="password" placeholder ="Type in your password" id="password">
 <label for ="confirmpassword">Confirm Password:</label>
