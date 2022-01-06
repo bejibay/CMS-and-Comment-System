@@ -1,6 +1,8 @@
-﻿<form action="admin.php method="post">
-Login Info:<input type="text" name="logininfo" placeholder="Type In Your username or email">
-Password:<input type="text" name="password" placeholder ="Type in your password">
+﻿<form action="admin.php" method="post">
+<label for ="login">Login:</label>
+<input type="text" name="login" placeholder="Type In Your username or email" id="login">
+<label for ="password">Password:</label>
+<input type="text" name="password" placeholder ="Type in your password" id="password">
 <input type="submit" name="submit" value="login">
 </form>
-<p>Forgot Password: <a href="/resetpassword/">Reset Password</a> Not yet Registered: <a href="register/">Register</a></p>
+<p><a href="/reset">Forgot Password</a><a href="register/">Not Yet Register</a></p>
