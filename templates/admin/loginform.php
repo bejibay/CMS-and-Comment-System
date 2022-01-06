@@ -5,4 +5,4 @@
 <input type="text" name="password" placeholder ="Type in your password" id="password">
 <input type="submit" name="submit" value="login">
 </form>
-<p><a href="/reset">Forgot Password</a><a href="register/">Not Yet Register</a></p>
+<p><a href="/reset">Forgot Password</a><a href="/register">Not Yet Register</a></p>
