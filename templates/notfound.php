@@ -8,7 +8,7 @@
 <div class="header"><?php include "templates/include/header.php";?></div>
 <div class="row">
 <div class="column leftside">
- This page does not exist</div>
+ <p>This page does not exist</p></div>
 </div class="column rightside">put this column content here</div>
 </div>
 <div class="footet"><?php include "templates/include/footer.php";?></div>
