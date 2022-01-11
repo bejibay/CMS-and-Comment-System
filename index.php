@@ -3,13 +3,13 @@ $action=isset($_GET['action'])? $_GET['action'] : "";
 if($action){
 $results=array();
 $results['article']=Page::getById($action);
-require(TEMPLATES_PATH."/pages.php");
+require(TEMPLATES_PATH."/page.php");
 return;
 }
 
 $results=array();
 $results['article']=Post::getById($action);
-require(TEMPLATES_PATH."/posts.php");
+require(TEMPLATES_PATH."/post.php");
 return;
 }
 
@@ -27,11 +27,7 @@ $results['description']="put home page description here";
 require(TEMPLATES_PATH."/homepage.php");}
 }
 ?>
-<div class="footer"><?php include "templates/include/footer.php";?></div>
 
-</body>
-
-</html>
 
 
 
