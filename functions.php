@@ -83,6 +83,41 @@ $editpage->update();
 require(TEMPLATE_PATH."/editpage.php");
 }
 
+$results=array();
+$results['article']=Page::getById($action);
+require(TEMPLATES_PATH."/page.php");
+
+}
+
+function page(){
+$results=array();
+$results['article']=Page::getById($action);
+require(TEMPLATES_PATH."/page.php");
+return;
+}
+
+function post(){
+$results=array();
+$results['article']=Post::getById($action);
+require(TEMPLATES_PATH."/post.php");
+return;
+}
+
+
+function notfound{
+$results=array();
+$results['title']=" Page Not Found";
+$results['description']="This Page Does Not Exist";
+require (TEMPLATES_PATH."/notfound.php");}
+
+function homepage(){
+$results=array();
+$results['title']="put home page title here";
+$results['description']="put home page description here";
+require(TEMPLATES_PATH."/homepage.php");}
+}
+
+
 function createpost()
 {$result= array;
 $result['formAction']="newPost";
