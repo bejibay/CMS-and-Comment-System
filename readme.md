@@ -1,29 +1,25 @@
-## Technologies Used
 
-*PHP, HTML, CSS and JavaScript
+# A Content Management System (CMS)
+built witn PHP OOP concept and MYSQL
 
-## Objectives of the project
+## Technologies:
+PHP, HTML, CSS, JAVASCRIPT
 
-* To demonstrate the use of PHP Object 
-  Oriented Programming Concept
-
-## Frontend Application
-* UI for Users
+## User Interface
 * index.php template for home page
 * posts.php template for each post or article
 * 404.php template for not found url  
 * header.php template for header 
 * footer.php template for footer
-
-* UI for Backend Application 
 * admin.php template for login or register or 
   password reset
 * dashboard.php template for administrative 
   functions
 
-## Back end Applicatiion
+## Scripts
+*class folder for classes
 * config.php for mysql database setup
-* classes folder for classes
+* admin.php for register and login
 * functions.php for all functions
 * dashboard.php for all administration functions
 
