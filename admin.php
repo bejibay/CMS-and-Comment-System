@@ -8,7 +8,7 @@ $action=isset($_GET['action'])? $_GET['action'] : "";
 <head>
 <meta  name="description" content="<?php echo $result['description'];?>">
 <meta  name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="cmsstyle.CSS">
+<link rel="stylesheet" href="cmsstyle.css">
 <title><?php echo $result['title'];?></title>
 </head>
 <body>
@@ -22,7 +22,7 @@ $action=isset($_GET['action'])? $_GET['action'] : "";
 </div>
 </div>
 <div class="row">
-<div class="column">
+<div class="col-12">
 <?php
 switch($action){
 case "login":
