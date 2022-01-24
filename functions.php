@@ -4,7 +4,7 @@
 function login(){
 $result=array();
 $result["title"]="Admin Login Form";
-$result["pageheading"]="Fill in the Login Form";
+$result["pageheading"]="Account Login";
 if(isset($_POST['login'])){
 //user has clicked the login form, login successful
 $login = new User;
@@ -12,7 +12,7 @@ $login->storeForm($_POST);
 User::getUser();
 $username= $_POST['username'];
 $_SESSION['username'];
-header('location:"/dashboard");
+header('Location:"/dashboard");
 }
 else{//login failed display error message
 $result['errormessage']="Incorrect Username or Password, Try Again";
@@ -26,14 +26,14 @@ require (TEMPLATE_PATH."/loginform.php";
 function register(){
 $result=array();
 $result["title"]="Account Creation Form";
-$result["pageheading"]="Fill in the Form to create your account";
+$result["pageheading"]="Account Creation";
 if(isset($_POST['register'])){
 //user has posted the register form attempt to register
 $register=new User;
 $register->storeForm($_POST);
 $register->insert();
-header("location:"/login");
-
+$result['registerSuccess']= "check your email to complete your regusteration";
+}
 else{//Form not filled properly
 $results['errormessage']="Forms not filled properly";
 require(TEMPLATE_PATH. "/registerform.php");
@@ -41,7 +41,7 @@ require(TEMPLATE_PATH. "/registerform.php");
 else{// no attempt already made to register
 require(TEMPLATE_PATH."/registerform.php");
 }
-function resetpassword(){
+function reset(){
 $SQL="SELECT reseturl FRom Admin where reseturl=$url";
 if(mysql_num_rows==1) { 
 $results['successmessage']="password correctly changed you can login now";

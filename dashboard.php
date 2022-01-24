@@ -3,7 +3,7 @@ $session_start();
 $action=isset($_GET['action'])? $_GET['action'] : "";
 $username=isset($username)? $_SESSION['username'] : "";
 require("config.php);
-// admin s/cript allows you to carry out adminnistrative fuctions:create, read, update, delete
+// admin script allows you to carry out adminnistrative fuctions:create, read, update, delete
 ?>
 <!DOCTYPE html>
 <html>
@@ -15,32 +15,44 @@ require("config.php);
 <body>
 <div class="header"><a href="/logout">logout</a></div>
 <div class="row">
-<div class="column left">
+<div class="col-3">
 <a href="/dashboard">dashboard</a>
-<a href="/createpage">create page</a>
-<a href="/createpost">create post</a>
-<a href="/viewpages">view pages</a>
-<a href="/viewposts">view posts</a>
-a href="/udatepage">update page</a>
-a href="/updatepost">update post</a>
+<a href="/newpage">new page</a>
+<a href="/newpost">new post</a>
+<a href="/viewpages">all pages</a>
+<a href="/viewposts">all posts</a>
 a href="/media">media</a>
-a href="/template">templates</a>
-
+a href="/templates">templates</a>
 </div>
-<div class="column middle">
+<div class="col-9">
 <?php
 switch($action){
-case " createpage":
-createpage();
+case "newpage":
+newpage();
 break;
-case "createpost":
-createpost();
+case "newpost":
+newpost();
+break;
+case "newcategory":
+newcategory();
+break;
+case "editpage":
+editpage();
+break;
+case "editpost":
+editpost();
+break;
+case "editcategory":
+editcategory();
 break;
 case "viewpages":
 viewpages();
 break;
 case "viewposts":
 viewposts();
+break;
+case "viewcategories":
+viewcategories();
 break;
 case "updatepage":
 updatepage();
@@ -54,16 +66,17 @@ break;
 case "deletepost":
 deletepost();
 break;
+case "deletecategory":
+deletecategory();
+break;
 default:
 dashboard();
 }
-
-?></div><div class="column right">
+?>
+</div><div class="column right">
 </div>
 <div>&copy;copyright example.com</div>
-
 </body>
-
 </html>
 
 
