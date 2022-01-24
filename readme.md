@@ -17,7 +17,7 @@ PHP, HTML, CSS, JAVASCRIPT
   functions
 
 ## Scripts
-*class folder for classes
+* class folder for classes
 * config.php for mysql database setup
 * admin.php for register and login
 * functions.php for all functions
