@@ -9,9 +9,9 @@
 * The Contentgo can be used for publishing and building a blog and other related websites. 
 * It can be enhanced with more functionalities to suit one's purpose.
 
-##Scripts
-*config.php for configuration settings
-*classes folder for classes
+## Scripts
+* config.php for configuration settings
+* classes folder for classes
 * functions.php for all functions
 * admin.php for user registration and login
 * dashboard.php for all administration functions
