@@ -13,5 +13,6 @@
 * config.php for configuration settings
 * classes folder for classes
 * functions.php for all functions
+* index.php for page, posts, not found and homepage display
 * admin.php for user registration and login
 * dashboard.php for all administration functions
