@@ -87,7 +87,7 @@ function createpost()
 {$result= array;
 $result['formAction']="newPost";
 $result['pageheading']="Create A Postm";
-$createpost8 =new Paost 
+$createpost =new Paost 
 if(isset($_POST['createpage'])){
 $createpage-m>storeForm($_POST);
 $createpage->insert();
@@ -144,6 +144,36 @@ else{cancel;}}
 </script>
 }
 
+function page(){
+if(isset($_GET['page'])){
+$results = array();
+$results['page'] = $Page::getByUrl($url);
+require(TEMPLATE_PATH."/page.php");
+}
+}
+
+function post(){
+if(isset($_GET['post'])){
+$results = array();
+$results['post'] = $Post::getByUrl($url);
+require(TEMPLATE_PATH."/post.php");
+}
+}
+
+function notfound(){
+if(isset($_GET['notfound'])){
+$results = array();
+$results['notfound'] != $Notfound::getByUrl($url);
+require(TEMPLATE_PATH."/notfound.php");
+}
+}
+
+function homepage(){
+if(!isset($_GET['page'])||!isset($_GET['post']) 
+||!isset($_GET['notfound'])){
+require(TEMPLATE_PATH."/homepage.php");
+}
+}
 ?>
 
 
