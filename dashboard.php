@@ -2,7 +2,7 @@
 $session_start();
 $action=isset($_GET['action'])? $_GET['action'] : "";
 $username=isset($username)? $_SESSION['username'] : "";
-require("config.php);
+require("config.php");
 // admin script allows you to carry out adminnistrative fuctions:create, read, update, delete
 switch($action){
 case "newpage":
