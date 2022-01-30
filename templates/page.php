@@ -11,7 +11,7 @@
  <?php echo $result['article']->content;?></div>
 </div class="column rightside">put this column content here</div>
 </div>
-<div class="footet"><?php include "templates/include/footer.php";?></div>
+<div class="footer"><?php include "templates/include/footer.php";?></div>
 </body>
 </html>
 
