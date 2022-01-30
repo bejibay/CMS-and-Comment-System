@@ -1,47 +1,17 @@
+# Contentgo
+* With Contentgo(A CMS), a user can log into the admin centre and publish content into the internet. 
+* He can also upload images and video along with the content.
+* The index page is a template which retrieves and list all published contents.
+* A new page can be written and its content saved into database to be retrieved for publish
+* A new post can be written and its content saved into database to be retrieved for publish.
+* The development is built with PHP OOP, HTML, CSS and JavaScript
+## Applications
+* The Contentgo can be used for publishing and building a blog and other related websites. 
+* It can be enhanced with more functionalities to suit one's purpose.
 
-# A Content Management System (CMS)
-built witn PHP OOP concept and MYSQL
-
-## Technologies:
-PHP, HTML, CSS, JAVASCRIPT
-
-## User Interface
-* index.php template for home page
-* posts.php template for each post or article
-* 404.php template for not found url  
-* header.php template for header 
-* footer.php template for footer
-* admin.php template for login or register or 
-  password reset
-* dashboard.php template for administrative 
-  functions
-
-## Scripts
-* class folder for classes
-* config.php for mysql database setup
-* admin.php for register and login
+##Scripts
+*config.php for configuration settings
+*classes folder for classes
 * functions.php for all functions
+* admin.php for user registration and login
 * dashboard.php for all administration functions
-
-
-
-
-
-
-
-
-  
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
