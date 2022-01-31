@@ -18,11 +18,11 @@ else{//login failed display error message
 $result['errormessage']="Incorrect Username or Password, Try Again";
 require(TEMPLATE_PATH."/loginform.php");
 }
-}
 else{// no attempt already made to login
 require (TEMPLATE_PATH."/loginform.php";
 }
 }
+
 function register(){
 $result=array();
 $result["title"]="Account Creation Form";
@@ -41,6 +41,7 @@ require(TEMPLATE_PATH. "/registerform.php");
 else{// no attempt already made to register
 require(TEMPLATE_PATH."/registerform.php");
 }
+}
 function reset(){
 $SQL="SELECT reseturl FRom Admin where reseturl=$url";
 if(mysql_num_rows==1) { 
@@ -57,8 +58,13 @@ function logout(){
 unset($_SESSION['username']);
 header(location:"/login");
 }
+
 function dashboard(){
+$results = array();
+$results['title'] = "Administration Dashboard";
+$results[pageheading'] ="Dashboard Area";
 $results['content']="Dashboard area, carry out your transactions";
+require(TEMPLATE_PATH."/dashboarx.php");
 }
 
 function createpage(){
@@ -72,6 +78,7 @@ $createpage->insert();
 require(TEMPLATE_PATH."/editpage.php");
 }
 }
+
 function editpage(){
 $result= array;
 $result['formAction']="editPage";
@@ -82,16 +89,18 @@ $editpage->storeForm($_POST);
 $editpage->update();
 require(TEMPLATE_PATH."/editpage.php");
 }
+}
 
-function createpost()
+function createpost(){
 {$result= array;
 $result['formAction']="newPost";
-$result['pageheading']="Create A Postm";
+$result['pageheading']="Create A Post";
 $createpost =new Paost 
 if(isset($_POST['createpage'])){
 $createpage-m>storeForm($_POST);
 $createpage->insert();
 require(TEMPLATE_PATH."/editpost.php");
+}
 }
 
 function editpost(){
@@ -104,6 +113,7 @@ $editpost->storeForm($_POST);
 $editpost->ipdate();
 require(TEMPLATE_PATH."/editpost.php");
 }
+}
 
 function viewpages(){
 Page::getList();
@@ -113,7 +123,7 @@ echo "<li><a href=".$row['url'].">".$row['title']."</a></li>";
 </ul>
 }
 }
-}
+
 
 function viewposts(){
 Post::getList();
@@ -121,14 +131,11 @@ foreach($row as $row){
 <ul>
 echo "<li><a href=".$row['URL'].">".$row['title']."</a></li>":
 </ul>
-
-
 }
 }
 
-function deletepage(){
 
-}
+
 <script>
 function delPage(){
 var deletePage;
