@@ -2,9 +2,9 @@
 <?php 
 //function codes to be called in admin.php, index.php, dashboard.pho
 function login(){
-$result=array();
-$result["title"]="Admin Login Form";
-$result["pageheading"]="Account Login";
+$results=array();
+$results['title']="Admin Login Form";
+$results['pageheading']="Account Login";
 if(isset($_POST['login'])){
 //user has clicked the login form, login successful
 $login = new User;
@@ -15,7 +15,7 @@ $_SESSION['username'];
 header('Location:"/dashboard");
 }
 else{//login failed display error message
-$result['errormessage']="Incorrect Username or Password, Try Again";
+$results['errormessage']="Incorrect Username or Password, Try Again";
 require(TEMPLATE_PATH."/loginform.php");
 }
 else{// no attempt already made to login
@@ -24,15 +24,15 @@ require (TEMPLATE_PATH."/loginform.php";
 }
 
 function register(){
-$result=array();
-$result["title"]="Account Creation Form";
-$result["pageheading"]="Account Creation";
+$results=array();
+$results['title']="Account Creation Form";
+$results['pageheading']="Account Creation";
 if(isset($_POST['register'])){
 //user has posted the register form attempt to register
 $register=new User;
 $register->storeForm($_POST);
 $register->insert();
-$result['registerSuccess']= "check your email to complete your regusteration";
+$results['registerSuccess']= "check your email to complete your regusteration";
 }
 else{//Form not filled properly
 $results['errormessage']="Forms not filled properly";
@@ -68,9 +68,9 @@ require(TEMPLATE_PATH."/dashboarx.php");
 }
 
 function createpage(){
-$result= array;
-$result['formAction']="newPage";
-$result['pageheading']="Create A Page";
+$results= array;
+$results['formAction']="newPage";
+$results['pageheading']="Create A Page";
 $createpage =new Page
 if(isset($_POST['editpage'])){
 $createpage->storeForm($_POST);
@@ -80,8 +80,8 @@ require(TEMPLATE_PATH."/editpage.php");
 }
 
 function editpage(){
-$result= array;
-$result['formAction']="editPage";
+$results= array;
+$results['formAction']="editPage";
 $result['pageheading']="Edit this Page";
 $editpage =new Page;
 if(isset($_POST['editpage'])){
@@ -92,9 +92,9 @@ require(TEMPLATE_PATH."/editpage.php");
 }
 
 function createpost(){
-{$result= array;
-$result['formAction']="newPost";
-$result['pageheading']="Create A Post";
+{$results= array;
+$results['formAction']="newPost";
+$results['pageheading']="Create A Post";
 $createpost =new Paost 
 if(isset($_POST['createpage'])){
 $createpage-m>storeForm($_POST);
@@ -104,9 +104,9 @@ require(TEMPLATE_PATH."/editpost.php");
 }
 
 function editpost(){
-$result= array;
-$result['formAction']="newPost";
-$result['pageheading']="Edit This Post";
+$results= array;
+$results['formAction']="newPost";
+$results['pageheading']="Edit This Post";
 $editpost =new Post
 if(isset($_POST['editpost'])){
 $editpost->storeForm($_POST);
