@@ -1,6 +1,3 @@
-<?php
-	echo "Hello, world!!!!"
-?>
 
 <?php 
 //function codes to be called in admin.php, index.php, dashboard.pho
@@ -36,15 +33,6 @@ $results['registerSuccess']= "check your email to complete your regusteration";
 else{//Form not filled properly
 $results['errormessage']="Forms not filled properly";
 require(TEMPLATE_PATH. "/registerform.php");
-}
-
-function reset(){
-$SQL="SELECT reseturl FRom Admin where reseturl=$url";
-if(mysql_num_rows==1) { 
-$results['successmessage']="password correctly changed you can login now";
-header("Location:'/login'");}
-else{//Your login details not correect
-include "forms/resetform.php";
 }
 }
 
@@ -86,7 +74,7 @@ require(TEMPLATE_PATH."/editpage.php");
 }
 
 function createpost(){
-{$results= array();
+$results= array();
 $results['formAction']="newPost";
 $results['pageheading']="Create A Post";
 $createpost =new Post;
@@ -127,6 +115,13 @@ echo "</ul>";
 }
 }
 
+function homepage(){
+if(!$_GET['page']||!$_GET['post']
+||!$_GET['notfound']){
+require(TEMPLATE_PATH."/homepage.php");
+}
+}
+
 function page(){
 if(isset($_GET['page'])){
 $results = array();
@@ -150,22 +145,4 @@ $results['notfound'] != $Notfound::getByUrl($url);
 require(TEMPLATE_PATH."/notfound.php");
 }
 }
-
-function homepage(){
-if(!isset($_GET['page'])||!isset($_GET['post']) 
-||!isset($_GET['notfound'])){
-require(TEMPLATE_PATH."/homepage.php");
-}
-}
 ?>
-
-
-
-
-
-
-
-
-
-
-
