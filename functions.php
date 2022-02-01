@@ -1,3 +1,6 @@
+<?php
+	echo "Hello, world!!!!"
+?>
 
 <?php 
 //function codes to be called in admin.php, index.php, dashboard.pho
@@ -12,14 +15,10 @@ $login->storeForm($_POST);
 User::getUser();
 $username= $_POST['username'];
 $_SESSION['username'];
-header('Location:"/dashboard");
-}
-else{//login failed display error message
-$results['errormessage']="Incorrect Username or Password, Try Again";
+header("Location:'/dashboard'");
+}else{//login failed display error message
+$results['errormessage']="Incorrect Username or Password Try Again";
 require(TEMPLATE_PATH."/loginform.php");
-}
-else{// no attempt already made to login
-require (TEMPLATE_PATH."/loginform.php";
 }
 }
 
@@ -38,40 +37,35 @@ else{//Form not filled properly
 $results['errormessage']="Forms not filled properly";
 require(TEMPLATE_PATH. "/registerform.php");
 }
-else{// no attempt already made to register
-require(TEMPLATE_PATH."/registerform.php");
-}
-}
+
 function reset(){
 $SQL="SELECT reseturl FRom Admin where reseturl=$url";
 if(mysql_num_rows==1) { 
 $results['successmessage']="password correctly changed you can login now";
-header(/login);}
+header("Location:'/login'");}
 else{//Your login details not correect
-include forms/resetform.php;
-}
-else{//Attempt not yet made to reset password
-include forms/resetform.php;
+include "forms/resetform.php";
 }
 }
+
 function logout(){
 unset($_SESSION['username']);
-header(location:"/login");
+header("location:'/login'");
 }
 
 function dashboard(){
 $results = array();
 $results['title'] = "Administration Dashboard";
-$results[pageheading'] ="Dashboard Area";
+$results['pageheading'] ="Dashboard Area";
 $results['content']="Dashboard area, carry out your transactions";
-require(TEMPLATE_PATH."/dashboarx.php");
+require(TEMPLATE_PATH."/dashboard.php");
 }
 
 function createpage(){
-$results= array;
+$results= array();
 $results['formAction']="newPage";
 $results['pageheading']="Create A Page";
-$createpage =new Page
+$createpage =new Page;
 if(isset($_POST['editpage'])){
 $createpage->storeForm($_POST);
 $createpage->insert();
@@ -80,7 +74,7 @@ require(TEMPLATE_PATH."/editpage.php");
 }
 
 function editpage(){
-$results= array;
+$results= array();
 $results['formAction']="editPage";
 $result['pageheading']="Edit this Page";
 $editpage =new Page;
@@ -92,10 +86,10 @@ require(TEMPLATE_PATH."/editpage.php");
 }
 
 function createpost(){
-{$results= array;
+{$results= array();
 $results['formAction']="newPost";
 $results['pageheading']="Create A Post";
-$createpost =new Paost 
+$createpost =new Post;
 if(isset($_POST['createpage'])){
 $createpage-m>storeForm($_POST);
 $createpage->insert();
@@ -104,10 +98,10 @@ require(TEMPLATE_PATH."/editpost.php");
 }
 
 function editpost(){
-$results= array;
+$results= array();
 $results['formAction']="newPost";
 $results['pageheading']="Edit This Post";
-$editpost =new Post
+$editpost =new Post;
 if(isset($_POST['editpost'])){
 $editpost->storeForm($_POST);
 $editpost->ipdate();
@@ -118,37 +112,19 @@ require(TEMPLATE_PATH."/editpost.php");
 function viewpages(){
 Page::getList();
 foreach($row as $row){
-<ul>
+echo "<ul>";
 echo "<li><a href=".$row['url'].">".$row['title']."</a></li>";
-</ul>
+"</ul>";
 }
 }
-
 
 function viewposts(){
 Post::getList();
 foreach($row as $row){
-<ul>
-echo "<li><a href=".$row['URL'].">".$row['title']."</a></li>":
-</ul>
+echo "<ul>";
+echo "<li><a href=".$row['url'].">".$row['title']."</a></li>";
+echo "</ul>";
 }
-}
-
-
-
-<script>
-function delPage(){
-var deletePage;
-deletePage=confirm("Are you sure you Want to delete this page");
-if (deletePage=="ok"){<?php function deletepage();?>}
-else{cancel;}}
-
-function delPost(){
-var deletePost;
-deletePost=confirm("Are you sure you Want to delete this post");
-if (deletePost=="ok"){<?php function deletepost();?}
-else{cancel;}}
-</script>
 }
 
 function page(){
