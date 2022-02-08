@@ -9,8 +9,8 @@
 <div class="row">
 <div class="col-12">
 ﻿<form action="admin.php?action=login" method="post">
-<label for ="login">Login:</label>
-<input type="text" name="login" placeholder="Type In Your username or email" id="login">
+<label for ="email">Login:</label>
+<input type="text" name="email" placeholder="Type In Your email" id="email">
 <label for ="password">Password:</label>
 <input type="text" name="password" placeholder ="Type in your password" id="password">
 <input type="submit" name="submit" value="login">
