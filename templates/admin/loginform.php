@@ -7,8 +7,8 @@
 <body>
 <div class="header"><?php include "templates/include/header.php";?></div>
 <div class="row">
-<div class="column leftside">
-﻿<form action="admin.php" method="post">
+<div class="col-12">
+﻿<form action="admin.php?action=login" method="post">
 <label for ="login">Login:</label>
 <input type="text" name="login" placeholder="Type In Your username or email" id="login">
 <label for ="password">Password:</label>
