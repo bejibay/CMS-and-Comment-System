@@ -9,7 +9,9 @@
 <div class="row">
 <div class="col-12">
 ﻿<form action="admin.php?action=login" method="post">
-<label for ="email">Login:</label>
+<h2>Login</h2>
+<p><?php echo $results['errormessage'];?></p>
+<label for ="email">Email:</label>
 <input type="text" name="email" placeholder="Type In Your email" id="email">
 <label for ="password">Password:</label>
 <input type="text" name="password" placeholder ="Type in your password" id="password">
@@ -19,6 +21,6 @@
  </div>
 </div class="column rightside"></div>
 </div>
-<div class="footet"><?php include "templates/include/footer.php";?></div>
+<div class="footer"><?php include "templates/include/footer.php";?></div>
 </body>
 </html>
