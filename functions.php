@@ -145,4 +145,11 @@ $results['notfound'] != $Notfound::getByUrl($url);
 require(TEMPLATE_PATH."/notfound.php");
 }
 }
+function getSEOUrl($title){
+$title = explode(" ",$title);
+$title = array_slice($title,0,9);
+$title = implode("-" $title);
+return $title;
+}
+
 ?>
