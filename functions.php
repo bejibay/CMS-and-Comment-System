@@ -4,7 +4,7 @@
 function login(){
 $results=array();
 $results['title']="Admin Login Form";
-$results['pageheading']="Account Login";
+$results['description']="Admin Login Form";
 if(isset($_POST['login'])){
 //user has clicked the login form, login successful
 $login = new User;
