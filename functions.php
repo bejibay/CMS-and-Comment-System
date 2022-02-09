@@ -152,4 +152,17 @@ $title = implode("-" $title);
 return $title;
 }
 
+function sendMail(){
+//generate activation URL
+$activationurl =md5(rand(0,999).time());
+//send activation email
+$to = $_POST['email'];
+$subject = " Activate your account";
+$msg = 'Click on email below to activate <br>
+<a href="/activation.php?activationurl='.$activationurl.'">
+Click to activate</a >';
+$headers = "From:bejibay@gmail.com";
+mail($to,$subject,$msg,$headers);
+$accountSuccess = " check your email to activate your account";
+}
 ?>
