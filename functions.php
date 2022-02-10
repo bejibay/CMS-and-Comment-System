@@ -40,20 +40,23 @@ require(TEMPLATE_PATH. "/registerform.php");
 }
 
 function logout(){
-unset($_SESSION['username']);
+session_unset();
+session_destroy();
 header("location:'/login'");
 }
 
 function dashboard(){
 $results = array();
 $results['title'] = "Administration Dashboard";
-$results['pageheading'] ="Dashboard Area";
+$results['description'] = "Administration Dashboard";
 $results['content']="Dashboard area, carry out your transactions";
 require(TEMPLATE_PATH."/dashboard.php");
 }
 
 function createpage(){
 $results= array();
+$results['title'] = "Create A New Page";
+$results['description'] = "Create A new Page";
 $results['formAction']="newPage";
 $results['pageheading']="Create A Page";
 $createpage =new Page;
@@ -66,6 +69,8 @@ require(TEMPLATE_PATH."/editpage.php");
 
 function editpage(){
 $results= array();
+$results['title'] = "Edit A Page";
+$results['description'] = "Edit A Page";
 $results['formAction']="editPage";
 $result['pageheading']="Edit this Page";
 $editpage =new Page;
@@ -78,11 +83,13 @@ require(TEMPLATE_PATH."/editpage.php");
 
 function createpost(){
 $results= array();
+$results['title'] = "Create A New Post";
+$results['description'] = "Create A New Post";
 $results['formAction']="newPost";
 $results['pageheading']="Create A Post";
 $createpost =new Post;
 if(isset($_POST['createpage'])){
-$createpage-m>storeForm($_POST);
+$createpage->storeForm($_POST);
 $createpage->insert();
 require(TEMPLATE_PATH."/editpost.php");
 }
@@ -90,6 +97,8 @@ require(TEMPLATE_PATH."/editpost.php");
 
 function editpost(){
 $results= array();
+$results['title'] = "Edit A Post";
+$results['description'] = "Edit A Post";
 $results['formAction']="newPost";
 $results['pageheading']="Edit This Post";
 $editpost =new Post;
