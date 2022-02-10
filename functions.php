@@ -4,14 +4,15 @@
 function login(){
 $results=array();
 $results['title']="Admin Login Form";
-$results['pageheading']="Account Login";
+$results['description']="Admin Login Form";
 if(isset($_POST['login'])){
 //user has clicked the login form, login successful
 $login = new User;
 $login->storeForm($_POST);
-User::getUser();
-$username= $_POST['username'];
-$_SESSION['username'];
+$user = User::getUser();
+$_SESSION['firstname'] = $user->firstname;
+$_SESSION['lastname'] = $user->lastname;
+$_SESSION['email'] = $user->lastname;
 header("Location:'/dashboard'");
 }else{//login failed display error message
 $results['errormessage']="Incorrect Username or Password Try Again";
@@ -22,13 +23,15 @@ require(TEMPLATE_PATH."/loginform.php");
 function register(){
 $results=array();
 $results['title']="Account Creation Form";
-$results['pageheading']="Account Creation";
+$results['description']="Account Creation Form";
 if(isset($_POST['register'])){
 //user has posted the register form attempt to register
 $register=new User;
 $register->storeForm($_POST);
-$register->insert();
-$results['registerSuccess']= "check your email to complete your regusteration";
+$user = User::getEmail;
+if(!$user)$register->insert();
+sendEmail();
+$results['registerSuccess']= "check your email to complete your registeration";
 }
 else{//Form not filled properly
 $results['errormessage']="Forms not filled properly";
@@ -37,20 +40,48 @@ require(TEMPLATE_PATH. "/registerform.php");
 }
 
 function logout(){
-unset($_SESSION['username']);
+session_unset();
+session_destroy();
 header("location:'/login'");
 }
 
 function dashboard(){
 $results = array();
 $results['title'] = "Administration Dashboard";
-$results['pageheading'] ="Dashboard Area";
+$results['description'] = "Administration Dashboard";
 $results['content']="Dashboard area, carry out your transactions";
 require(TEMPLATE_PATH."/dashboard.php");
 }
 
+function reset{
+$results = array();
+$results['title'] =" Reset Login";
+$results['description'] = "Reset Login"; 
+if(isset($_POST['reset'])){
+$reset = new User;
+$reset->storeform($_POST);
+$reset->updateResetUrl();
+$reseter = User::getEmail();
+if(!$reseter) $emailError = "Email not found";
+sendEmailTo();
+$resetSuccess = "Check your email to reset account";
+require(TEMPLATE_PATH."/resetform.php");
+}
+if(isset($_POST['reseturl'])){
+if($_GET['reseturl']){
+$reset = new User;
+$reset->storeform($_POST);
+$reset->updatePassword();
+require(TEMPLATE_PATH."/reseturlform.php");
+}
+}
+}
+}
+
 function createpage(){
 $results= array();
+$results['title'] = "Create A New Page";
+$results['description'] = "Create A new Page";
 $results['formAction']="newPage";
 $results['pageheading']="Create A Page";
 $createpage =new Page;
@@ -63,6 +94,8 @@ require(TEMPLATE_PATH."/editpage.php");
 
 function editpage(){
 $results= array();
+$results['title'] = "Edit A Page";
+$results['description'] = "Edit A Page";
 $results['formAction']="editPage";
 $result['pageheading']="Edit this Page";
 $editpage =new Page;
@@ -75,11 +108,13 @@ require(TEMPLATE_PATH."/editpage.php");
 
 function createpost(){
 $results= array();
+$results['title'] = "Create A New Post";
+$results['description'] = "Create A New Post";
 $results['formAction']="newPost";
 $results['pageheading']="Create A Post";
 $createpost =new Post;
 if(isset($_POST['createpage'])){
-$createpage-m>storeForm($_POST);
+$createpage->storeForm($_POST);
 $createpage->insert();
 require(TEMPLATE_PATH."/editpost.php");
 }
@@ -87,6 +122,8 @@ require(TEMPLATE_PATH."/editpost.php");
 
 function editpost(){
 $results= array();
+$results['title'] = "Edit A Post";
+$results['description'] = "Edit A Post";
 $results['formAction']="newPost";
 $results['pageheading']="Edit This Post";
 $editpost =new Post;
@@ -145,4 +182,36 @@ $results['notfound'] != $Notfound::getByUrl($url);
 require(TEMPLATE_PATH."/notfound.php");
 }
 }
+function getSEOUrl($title){
+$title = explode(" ",$title);
+$title = array_slice($title,0,9);
+$title = implode("-" $title);
+return $title;
+}
+
+function sendEmail(){
+//generate activation URL
+$activationurl =md5(rand(0,999).time());
+//send activation email
+$to = $_POST['email'];
+$subject = " Activate your account";
+$msg = 'Click on email below to activate <br>
+<a href="/activation.php?activationurl='.$activationurl.'">
+Click to activate</a >';
+$headers = "From:bejibay@gmail.com";
+mail($to,$subject,$msg,$headers);
+}
+function sendEmailTo(){
+//generate reset URL
+$reseturl =md5(rand(0,999).time());
+//send reset email
+$to = $_POST['email'];
+$subject = " reset your account";
+$msg = 'Click on email below to reset <br>
+<a href="/reseturl.php?reseturl='.$reseturl.'">
+Click to reset</a >';
+$headers = "From:bejibay@gmail.com";
+mail($to,$subject,$msg,$headers);
+}
+
 ?>
