@@ -155,7 +155,7 @@ $title = implode("-" $title);
 return $title;
 }
 
-function sendMail(){
+function sendEmail(){
 //generate activation URL
 $activationurl =md5(rand(0,999).time());
 //send activation email
