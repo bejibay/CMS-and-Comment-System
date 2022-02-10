@@ -63,7 +63,7 @@ $stmt->execute();
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
 if(!$row) $passwordError = "Incorrect Password";
 $conn = null;
-if($row) $user = new User($row);
+if($row) return new User($row);
 }
 }
 
