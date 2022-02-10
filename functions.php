@@ -39,20 +39,6 @@ require(TEMPLATE_PATH. "/registerform.php");
 }
 }
 
-function logout(){
-session_unset();
-session_destroy();
-header("location:'/login'");
-}
-
-function dashboard(){
-$results = array();
-$results['title'] = "Administration Dashboard";
-$results['description'] = "Administration Dashboard";
-$results['content']="Dashboard area, carry out your transactions";
-require(TEMPLATE_PATH."/dashboard.php");
-}
-
 function reset{
 $results = array();
 $results['title'] =" Reset Login";
@@ -76,6 +62,20 @@ require(TEMPLATE_PATH."/reseturlform.php");
 }
 }
 }
+}
+
+function logout(){
+session_unset();
+session_destroy();
+header("location:'/login'");
+}
+
+function dashboard(){
+$results = array();
+$results['title'] = "Administration Dashboard";
+$results['description'] = "Administration Dashboard";
+$results['content']="Dashboard area, carry out your transactions";
+require(TEMPLATE_PATH."/dashboard.php");
 }
 
 function createpage(){
