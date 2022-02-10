@@ -23,13 +23,15 @@ require(TEMPLATE_PATH."/loginform.php");
 function register(){
 $results=array();
 $results['title']="Account Creation Form";
-$results['pageheading']="Account Creation";
+$results['description']="Account Creation Form";
 if(isset($_POST['register'])){
 //user has posted the register form attempt to register
 $register=new User;
 $register->storeForm($_POST);
-$register->insert();
-$results['registerSuccess']= "check your email to complete your regusteration";
+$user = User::getEmail;
+if(!$user)$register->insert();
+sendEmail();
+$results['registerSuccess']= "check your email to complete your registeration";
 }
 else{//Form not filled properly
 $results['errormessage']="Forms not filled properly";
@@ -164,6 +166,5 @@ $msg = 'Click on email below to activate <br>
 Click to activate</a >';
 $headers = "From:bejibay@gmail.com";
 mail($to,$subject,$msg,$headers);
-$accountSuccess = " check your email to activate your account";
 }
 ?>
