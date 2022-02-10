@@ -9,9 +9,10 @@ if(isset($_POST['login'])){
 //user has clicked the login form, login successful
 $login = new User;
 $login->storeForm($_POST);
-User::getUser();
-$username= $_POST['username'];
-$_SESSION['username'];
+$user = User::getUser();
+$_SESSION['firstname'] = $user->firstname;
+$_SESSION['lastname'] = $user->lastname;
+$_SESSION['email'] = $user->lastname;
 header("Location:'/dashboard'");
 }else{//login failed display error message
 $results['errormessage']="Incorrect Username or Password Try Again";
