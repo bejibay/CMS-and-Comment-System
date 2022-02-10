@@ -42,7 +42,7 @@ $stmt->bindValue(":email",$this->email, PDO::PARAM_STR);
 $stmt->bindValue(":password",$this->password, PDO::PARAM_STR);
 $stmt->execute();
 $row = $stmt->fetch();
-if(!$row) $accountError = "account does not exist";
+if($row) return true;
 }
 
 public static function getUser(){
