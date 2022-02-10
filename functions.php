@@ -53,6 +53,31 @@ $results['content']="Dashboard area, carry out your transactions";
 require(TEMPLATE_PATH."/dashboard.php");
 }
 
+function reset{
+$results = array();
+$results['title'] =" Reset Login";
+$results['description'] = "Reset Login"; 
+if(isset($_POST['reset'])){
+$reset = new User;
+$reset->storeform($_POST);
+$reset->updateResetUrl();
+$reseter = User::getEmail();
+if(!$reseter) $emailError = "Email not found";
+sendEmailTo();
+$resetSuccess = "Check your email to reset account";
+require(TEMPLATE_PATH."/resetform.php");
+}
+if(isset($_POST['reseturl'])){
+if($_GET['reseturl']){
+$reset = new User;
+$reset->storeform($_POST);
+$reset->updatePassword();
+require(TEMPLATE_PATH."/reseturlform.php");
+}
+}
+}
+}
+
 function createpage(){
 $results= array();
 $results['title'] = "Create A New Page";
@@ -176,4 +201,17 @@ Click to activate</a >';
 $headers = "From:bejibay@gmail.com";
 mail($to,$subject,$msg,$headers);
 }
+function sendEmailTo(){
+//generate reset URL
+$reseturl =md5(rand(0,999).time());
+//send reset email
+$to = $_POST['email'];
+$subject = " reset your account";
+$msg = 'Click on email below to reset <br>
+<a href="/reseturl.php?reseturl='.$reseturl.'">
+Click to reset</a >';
+$headers = "From:bejibay@gmail.com";
+mail($to,$subject,$msg,$headers);
+}
+
 ?>
