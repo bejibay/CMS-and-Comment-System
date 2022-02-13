@@ -78,7 +78,7 @@ $results['content']="Dashboard area, carry out your transactions";
 require(TEMPLATE_PATH."/dashboard.php");
 }
 
-function createpage(){
+function newpage(){
 $results= array();
 $results['title'] = "Create A New Page";
 $results['description'] = "Create A new Page";
@@ -106,7 +106,7 @@ require(TEMPLATE_PATH."/editpage.php");
 }
 }
 
-function createpost(){
+function newpost(){
 $results= array();
 $results['title'] = "Create A New Post";
 $results['description'] = "Create A New Post";
