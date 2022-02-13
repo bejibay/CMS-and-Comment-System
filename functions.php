@@ -162,7 +162,7 @@ require(TEMPLATE_PATH."/homepage.php");
 function page(){
 if(isset($_GET['page'])){
 $results = array();
-$results['page'] = $Page::getByUrl($url);
+$results['page'] = Page::getByUrl($url);
 require(TEMPLATE_PATH."/page.php");
 }
 }
@@ -170,7 +170,7 @@ require(TEMPLATE_PATH."/page.php");
 function post(){
 if(isset($_GET['post'])){
 $results = array();
-$results['post'] = $Post::getByUrl($url);
+$results['post'] = Post::getByUrl($url);
 require(TEMPLATE_PATH."/post.php");
 }
 }
