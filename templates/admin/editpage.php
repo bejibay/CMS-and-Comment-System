@@ -8,17 +8,18 @@
 <body>
 <div class="header"><?php include "templates/include/header.php";?></div>
 <div class="row">
-<div class="column leftside">
+<div class="col-3">
+</div>
+<div class =" col-89>
 ﻿<form action="admin.php method="post">
 title:<input type="text" name="title" >
 description:<input type="text" name="description">
 content: <textarea bname="content"></textarea>
 date :<input type="hidden" name="date">
 date :<input type="hidden" name="remote address">
-<input type="submit" name="submit" value="Click to submit">
+<input type="submit" name="editpage" value="Click to submit">
 </form>
 </div>
-</div class="column rightside"></div>
 </div>
 <div class="footet"><?php include "templates/include/footer.php";?></div>
 </body>
