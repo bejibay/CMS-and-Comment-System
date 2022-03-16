@@ -35,6 +35,9 @@ break;
 case "updatepage":
 updatepage();
 break;
+case "updatecategory":
+updatecategory();
+break;
 case "updatepost":
 updatepost();
 break;
