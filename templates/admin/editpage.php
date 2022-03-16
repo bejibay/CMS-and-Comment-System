@@ -21,10 +21,10 @@ a href="/templates">templates</a>
 ﻿<form action="dashboard.php?action=<?php echo $results['formAction];?>" method="post">
 title:<input type="text" name="title" value ="<?php echo $results['title'];?>">
 description:<input type="text" name="description" value ="<?php echo $results['description'];?>"  >
-content: <textarea bname="content"><?php echo $reults['content'];?></textarea>
-date :<input type="date" name="date"  >
-date :<input type="hidden" name="remote address">
-<input type="submit" name="editpage" value="Click to submit">
+content: <textarea bname="content"><?php echo $results['content'];?></textarea>
+date :<input type="date" name="date" value ="<?php echo $results['date'];?>"  >
+date :<input type="hidden" name="ip" value= "<?php echo $_SERVER['REMOTE_ADDR'];>">
+<input type="submit" name="editpage" value="Edit Page">
 </form>
 </div>
 </div>
