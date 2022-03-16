@@ -17,7 +17,7 @@
 a href="/media">media</a>
 a href="/templates">templates</a>
 </div>
-<div class =" col-9>
+<div class = "col-9">
 ﻿<form action="dashboard.php?action=<?php echo $results['formAction];?>" method="post">
 title:<input type="text" name="title" value ="<?php echo $results['title'];?>">
 description:<input type="text" name="description" value ="<?php echo $results['description'];?>"  >
