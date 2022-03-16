@@ -18,11 +18,11 @@ a href="/media">media</a>
 a href="/templates">templates</a>
 </div>
 <div class =" col-9>
-﻿<form action="dashboard.php?action="<?php echo $results['formAction];?>" method="post">
-title:<input type="text" name="title" >
-description:<input type="text" name="description">
-content: <textarea bname="content"></textarea>
-date :<input type="hidden" name="date">
+﻿<form action="dashboard.php?action=<?php echo $results['formAction];?>" method="post">
+title:<input type="text" name="title" value ="<?php echo $results['title'];?>">
+description:<input type="text" name="description" value ="<?php echo $results['description'];?>"  >
+content: <textarea bname="content"><?php echo $reults['content'];?></textarea>
+date :<input type="date" name="date"  >
 date :<input type="hidden" name="remote address">
 <input type="submit" name="editpage" value="Click to submit">
 </form>
