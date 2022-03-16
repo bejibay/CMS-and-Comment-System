@@ -152,6 +152,16 @@ echo "</ul>";
 }
 }
 
+function viewcategories(){
+Post::getList();
+foreach($row as $row){
+echo "<ul>";
+echo "<li><a href=".$row['url'].">".$row['title']."</a></li>";
+echo "</ul>";
+}
+}
+
+
 function homepage(){
 if(!$_GET['page']||!$_GET['post']
 ||!$_GET['notfound']){
