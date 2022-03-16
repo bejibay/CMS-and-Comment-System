@@ -17,7 +17,7 @@
 <input type="text" name="email" placeholder="Type In Your email" id="email">
 <label for ="password">Password:</label>
 <input type="text" name="password" placeholder ="Type in your password" id="password">
-<input type="submit" name="submit" value="login">
+<input type="submit" name="login" value="Login">
 </form>
 <p><a href="/reset">Forgot Password</a><a href="/register">Not Yet Registered</a></p>
  </div>

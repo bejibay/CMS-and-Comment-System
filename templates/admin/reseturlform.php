@@ -16,7 +16,7 @@
 <input type="text" name="password" placeholder ="Type in your new password">
 <label for="confirmpassworf">Confirm Password:</label>
 <input type="text" name="confirmpassword" placeholder ="Re type in your new password">
-<input type="submit" name="reset" value="Reset">
+<input type="submit" name="reseturl" value="Reset">
 </form>
 </div>
 </div class="column rightside"></div>
