@@ -18,7 +18,7 @@ a href="/media">media</a>
 a href="/templates">templates</a>
 </div>
 <div class =" col-9>
-﻿<form action="admin.php method="post">
+﻿<form action="dashboard.php?action="<?php echo $results['formAction];?>" method="post">
 title:<input type="text" name="title" >
 description:<input type="text" name="description">
 content: <textarea bname="content"></textarea>
