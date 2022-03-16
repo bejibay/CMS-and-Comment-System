@@ -9,7 +9,7 @@
 <div class="header"><?php include "templates/include/header.php";?></div>
 <div class="row">
 <div class="column leftside">
-﻿<form action="admin.php" method="post">
+﻿<form action="admin.php?action=reset" method="post">
 <label for="logininfo">Login Info:</label>
 <input type="text" name="logininfo" placeholder="Type in your username or email" id="logininfo">
 <label for="password">Password:</label>
