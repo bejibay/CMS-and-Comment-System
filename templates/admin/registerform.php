@@ -21,7 +21,7 @@
 <input type="text" name="password" placeholder ="Type in your password" id="password">
 <label for ="confirmpassword">Confirm Password:</label>
 <input type="text" name="confirmpassword" placeholder ="Re type in your password" id="confirmpassword">
-<input type="submit" name="submit" value="Register">
+<input type="submit" name="register" value="Register">
 </form>
 </div>
 </div class="column rightside"></div>
