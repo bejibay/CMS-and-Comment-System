@@ -134,6 +134,36 @@ require(TEMPLATE_PATH."/editpost.php");
 }
 }
 
+function createcategory(){
+$results= array();
+$results['title'] = "Create A New Category";
+$results['description'] = "Create A New Category";
+$results['formAction']="newCategory";
+$results['pageheading']="Create A Category";
+$createcategory =new Category;
+if(isset($_POST['createcategory'])){
+$createcategory->storeForm($_POST);
+$createcategory->insert();
+require(TEMPLATE_PATH."/editcategory.php");
+}
+}
+
+function editcategory(){
+$results= array();
+$results['title'] = "Edit A Category";
+$results['description'] = "Edit A Category";
+$results['formAction']="newCategory";
+$results['pageheading']="Edit This Category";
+$editcategory =new Category;
+if(isset($_POST['editcategory'])){
+$editcategory->storeForm($_POST);
+$editcategory->ipdate();
+require(TEMPLATE_PATH."/editcategory.php");
+}
+}
+
+
+
 function viewpages(){
 Page::getList();
 foreach($row as $row){
