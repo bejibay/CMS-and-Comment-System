@@ -8,7 +8,7 @@
 <body>
 <div class="header"><?php include "templates/include/header.php";?></div>
 <div class="row">
-<div class="col-3">
+<div class= "col-12">
 ﻿<form action="admin.php?action=reset" method="post">
 <label for="email">Login Info:</label>
 <input type="text" name="email" placeholder="Type in your email" id="logininfo">
@@ -19,7 +19,6 @@
 <input type="submit" name="reseturl" value="Reset">
 </form>
 </div>
-</div class="col-9"></div>
 </div>
 <div class="footer"><?php include "templates/include/footer.php";?></div>
 </body>
