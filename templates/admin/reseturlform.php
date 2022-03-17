@@ -19,8 +19,8 @@
 <input type="submit" name="reseturl" value="Reset">
 </form>
 </div>
-</div class="col-9></div>
+</div class="col-9"></div>
 </div>
-<div class="footet"><?php include "templates/include/footer.php";?></div>
+<div class="footer"><?php include "templates/include/footer.php";?></div>
 </body>
 </html>
