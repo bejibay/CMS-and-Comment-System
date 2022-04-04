@@ -78,7 +78,7 @@ require(TEMPLATE_PATH."/reseturlform.php");
 }
 }
 
-function createpage(){
+function newpage(){
 $results= array();
 $results['title'] = "Create A New Page";
 $results['description'] = "Create A new Page";
@@ -106,7 +106,7 @@ require(TEMPLATE_PATH."/editpage.php");
 }
 }
 
-function createpost(){
+function newpost(){
 $results= array();
 $results['title'] = "Create A New Post";
 $results['description'] = "Create A New Post";
@@ -124,7 +124,7 @@ function editpost(){
 $results= array();
 $results['title'] = "Edit A Post";
 $results['description'] = "Edit A Post";
-$results['formAction']="newPost";
+$results['formAction']="editPost";
 $results['pageheading']="Edit This Post";
 $editpost =new Post;
 if(isset($_POST['editpost'])){
@@ -134,7 +134,7 @@ require(TEMPLATE_PATH."/editpost.php");
 }
 }
 
-function createcategory(){
+function newcategory(){
 $results= array();
 $results['title'] = "Create A New Category";
 $results['description'] = "Create A New Category";
@@ -152,7 +152,7 @@ function editcategory(){
 $results= array();
 $results['title'] = "Edit A Category";
 $results['description'] = "Edit A Category";
-$results['formAction']="newCategory";
+$results['formAction']="editCategory";
 $results['pageheading']="Edit This Category";
 $editcategory =new Category;
 if(isset($_POST['editcategory'])){
