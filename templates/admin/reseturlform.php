@@ -8,19 +8,18 @@
 <body>
 <div class="header"><?php include "templates/include/header.php";?></div>
 <div class="row">
-<div class="column leftside">
+<div class= "col-12">
 ﻿<form action="admin.php?action=reset" method="post">
-<label for="logininfo">Login Info:</label>
-<input type="text" name="logininfo" placeholder="Type in your username or email" id="logininfo">
+<label for="email">Login Info:</label>
+<input type="text" name="email" placeholder="Type in your email" id="logininfo">
 <label for="password">Password:</label>
 <input type="text" name="password" placeholder ="Type in your new password">
-<label for="confirmpassworf">Confirm Password:</label>
+<label for="confirmpassword">Confirm Password:</label>
 <input type="text" name="confirmpassword" placeholder ="Re type in your new password">
 <input type="submit" name="reseturl" value="Reset">
 </form>
 </div>
-</div class="column rightside"></div>
 </div>
-<div class="footet"><?php include "templates/include/footer.php";?></div>
+<div class="footer"><?php include "templates/include/footer.php";?></div>
 </body>
 </html>
