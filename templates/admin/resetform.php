@@ -8,15 +8,14 @@
 <body>
 <div class="header"><?php include "templates/include/header.php";?></div>
 <div class="row">
-<div class="column leftside">
+<div class="col-12">
 ﻿<form action="admin.php" method="post">
 <label for="logininfo">Login Info:</label>
 <input type="text" name="logininfo" placeholder="Type in your username or email" id="logininfo">
 <input type="submit" name="reset" value="Reset">
 </form>
 </div>
-</div class="column rightside"></div>
 </div>
-<div class="footet"><?php include "templates/include/footer.php";?></div>
+<div class="footer"><?php "templates/include/footer.php";?></div>
 </body>
 </html>
