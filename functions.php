@@ -113,7 +113,7 @@ $results['description'] = "Create A New Post";
 $results['formAction']="newPost";
 $results['pageheading']="Create A Post";
 $createpost =new Post;
-if(isset($_POST['createpage'])){
+if(isset($_POST['editpage'])){
 $createpage->storeForm($_POST);
 $createpage->insert();
 require(TEMPLATE_PATH."/editpost.php");
@@ -141,7 +141,7 @@ $results['description'] = "Create A New Category";
 $results['formAction']="newCategory";
 $results['pageheading']="Create A Category";
 $createcategory =new Category;
-if(isset($_POST['createcategory'])){
+if(isset($_POST['editcategory'])){
 $createcategory->storeForm($_POST);
 $createcategory->insert();
 require(TEMPLATE_PATH."/editcategory.php");
