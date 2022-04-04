@@ -32,15 +32,6 @@ break;
 case "viewcategories":
 viewcategories();
 break;
-case "updatepage":
-updatepage();
-break;
-case "updatepost":
-updatepost();
-break;
-case "updatecategory":
-updatecategory();
-break;
 case "deletepage":
 deletepage();
 break;
