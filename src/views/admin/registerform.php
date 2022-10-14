@@ -1,14 +1,7 @@
-<html>
-<head>
-<title><?php echo $results['title'];?></title>
-<meta  name="description" content="<?php echo $results['description'];?>">
-<meta  name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-<div class="header"><?php include "templates/include/header.php";?></div>
+<?php include "templates/admin/header.php":?>
 <div class="row">
 <div class="column leftside">
-﻿<form action="admin.php" method="post">
+<form action="admin.php" method="post">
 <label for ="username">Username:</label>
 <input type="text" name="username" placeholder="should be minimum of five characters" id="username">
 <label for ="firstname">Firstname:</label>

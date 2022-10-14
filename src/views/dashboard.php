@@ -14,8 +14,8 @@
 <a href="/newpost">new post</a>
 <a href="/viewpages">all pages</a>
 <a href="/viewposts">all posts</a>
-a href="/media">media</a>
-a href="/templates">templates</a>
+<a href="/media">media</a>
+<a href="/templates">templates</a>
 </div>
 <div class="col-9">
 </div><div class="column right">

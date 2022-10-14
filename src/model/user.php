@@ -1,135 +1,76 @@
 
 <?php 
-global $accountError, $passwordError;
- class User{
-// define the class properties
+require ("model/crudmodel.php");
+class User extends Crudmodel{
+    // define the class properties
+
 public $id = null;
-public $firstname = null;
-public $lasttname = null;
-public $email = null;
-public $password = null;
-public $reseturl ="";
-public $pubdate =null;
-public $ip = null;
+public $firstname = "";
+public $lastname = "";
+public $username = "";
+public $email = "";
+public $password = "";
+public $status = null;
+public $reseturl = null;
+public $created = null;
+public $updated = null;
+public $ipaddress = null;
 
 public function __construct($data=array()){
-$userpattern =$this->pattern;
 if(isset($data['id']))$this->id=int($data['id']);
-if(isset($data['firstname']))$this->firstname=trim(stripslashes(htmlspecialchars($data['firstname'])));
-if(isset($data['lastname']))$this->lastname=trim(stripslashes(htmlspecialchars($data['lastname'])));
-if(isset($data['email']))$this->email=filter_var(FILTER_VALIDATE_EMAIL,$data['email']);
-if(isset($data['password']))$this->password=password_hash($data['password'], PASSWORD_BCRYPT);
-if(isset($data['reseturl']))$this->reseturl=$data['reseturl'];
-if(isset($data['pubdate']))$this->pubdate=int($data['pubdate']);
-if(isset($data['ip']))$this->ip=int($data['ip']);
+if(isset($data['firstname']))$this->firstname=preg_match("/[a-Z]{2}/",$data['firstname']);
+if(isset($data['lastname']))$this->lastname=preg_match("/[a-Z]{2}/",$data['lastname']);
+if(isset($data['username']))$this->username=preg_match("/[a-Z]{5}/");
+if(isset($data['email']))$this->email=filter_var($data['email'],FILTER_VALIDATE_EMAIL);
+if(isset($data['password']))$this->password=password_hash($data['password'],PASSWORD_BCRYPT);
+if(isset($data['status']))$this->status=int($data['status']);
+if(isset($data['reseturl']))$this->reseturl=$data['reseturl']);
+if(isset($data['created']))$this->created=date($data['created'],"Y-m-d");
+if(isset($data['updated']))$this->created=date($data['created'],"Y-m-d");
+if(isset($data['ipaddress']))$this->ipaddress=int($data['ipaddress']);
 }
 
-public function storeFormValues($params){
-$this->__construct($params);
-if(isset($params['pubdate'])){
-$pubdate=explode('-', $params['pubdate']);
-if(count($pubdate)==3){
-list($y,$m,$d) = $pubdate;
-$pubdate=mktime(0,0,0,$d,$m,$y);
-}
-}
-}
-public static function getEmail(){
-$conn= new PDO(DB_DSN,DB_USERNAME,DB_PASSWORD);
-$sql="SELECT* FROM user where email=:email";
-$stmt=$conn->prepare($sql);
-$stmt->bindValue(":email",$this->email, PDO::PARAM_STR);
-$stmt->bindValue(":password",$this->password, PDO::PARAM_STR);
-$stmt->execute();
-$row = $stmt->fetch();
-if($row) return true;
+// define the class properties
+public function createUser($data =[]){
+    foreach($data as $key =>$value){
+    $this->insert("INSERT INTO userd(id,firstname,lastname,username,email,password,status, created, updated,ipaddress)
+    VALUES(:id,:firstname,:lastname,:username,:email,:password,:status,:created, :updated,:ipaddress)",["id"=>$this->id,
+    "firstname"=>$this->firstname,"lastname"=>$this->lastname,"username"=>$this->username,"email"=>$this->email,
+    "pasword"=>$this->pasword,"status"=>$this->status,"created"=>$this->created,"updated"=>$this->updated,
+    "ipaddress"=>$this->ipaddress]);
+    
+        }
+    }
+   
+
+public function readUsers(){
+$this->select("SELECT * FROM userd");
 }
 
-public static function getUser(){
-$conn= new PDO(DB_DSN,DB_USERNAME,DB_PASSWORD);
-$sql="SELECT* FROM user where email=:email";
-$stmt=$conn->prepare($sql);
-$stmt->bindValue(":email",$this->email, PDO::PARAM_STR);
-$stmt->bindValue(":password",$this->password, PDO::PARAM_STR);
-$stmt->execute();
-$row = $stmt->fetch();
-if(!$row) $accountError = "account does not exist";
-if($row){
-$sql="SELECT* FROM user where email=:email AND password=:password";
-$stmt=$conn->prepare($sql);
-$stmt->bindValue(":email",$this->email, PDO::PARAM_STR);
-$stmt->bindValue(":password",$this->password, PDO::PARAM_STR);
-$stmt->execute();
-$row = $stmt->fetch(PDO::FETCH_ASSOC);
-if(!$row) $passwordError = "Incorrect Password";
-$conn = null;
-if($row) return new User($row);
+public function readAUser($email ,$password= null){
+$verifiedpasword = password_verify($password, $result['password']);
+$result1 = $this->select("SELECT* FROM userd WHERE email=:email",["email"=>$this->email]);
+if($result1)$result2 = $this->select("SELECT* FROM userd WHERE email=:email AND password=:password",
+["email"=>$this->email, "password"=>$verifiedpasword]);
+
+}
+
+
+public function updateUser($email = null,$reseturl=null,$data){
+    foreach($data as $key =>$value){
+$result = $this->update("UPDATE userid SET firstname=:firstname, lastname=:lastname,username=:username,email=:email,
+password = :password, status=:status,reseturl=:reseturl,created=:created,updated=:updated WHERE email=:email",["email"=>$this->email,
+"firstname"=>$this->firstname,"lastname"=>$this->lastname,"username"=>$this->username,"email"=>$this->email,
+"pasword"=>$this->pasword,"status"=>$this->status,"reseturl"=>$this->reseturl,"created"=>$this->created,"updated"=>$this->updated,
+"ipaddress"=>$this->ipaddress]);
+
 }
 }
 
-public function insert(){
-$conn= new PDO(DB_DSN,DB_USERNAME,DB_PASSWORD);
-$sql = "INSERT INTO user(firstname,lastname,email,password,reseturl,pubdate,ip)
-VALUES(:firstname,:lastname,:email,:password,:reseturl,:pubdate,:ip)";
-$stmt=$conn->prepare($sql);
-$stmt->bindValue(":firstname",$this->firstname, PDO::PARAM_STR);
-$stmt->bindValue(":lastname",$this->lastname, PDO::PARAM_STR);
-$stmt->bindValue(":email",$this->email, PDO::PARAM_STR);
-$stmt->bindValue(":password",$this->password, PDO::PARAM_STR);
-$stmt->bindValue(":reseturl",$this->reseturl, PDO::PARAM_STR);
-$stmt->bindValue(":pubdate",$this->pubdate, PDO::PARAM_STR);
-$stmt->bindValue(":ip",$this->ip, PDO::PARAM_INT);
-$stmt->execute();
-$this->id =$conn->lastInsertId();
-$conn = null;
+
+ public function deleteUser($id){
+ $this->delete("DELETE* FROM userid WHERE id=:id",["id"=>$this->id]);
 }
-
-public function Reset(){
-$conn= new PDO(DB_DSN,DB_USERNAME,DB_PASSWORD);
-$sql = "UPDATE user SET reseturl=:reseturl,pubdate=:pubdate,ip=:ip where email=:email";
-$stmt=$conn->prepare($sql);
-$stmt->bindValue(":reseturl", $this->reseturl, PDO::PARAM_STR);
-$stmt->bindValue(":pubdate", $this->pubdate, PDO::PARAM_INT);
-$stmt->bindValue(":ip",$this->ip, PDO::PARAM_INT);
-$stmt->bindValue(":email",$this->email, PDO::PARAM_STR);
-$stmt->execute();
-$conn=null;
-
-}
-public function resetUrl(){
-$conn= new PDO(DB_DSN,DB_USERNAME,DB_PASSWORD);
-$sql = " UPDATE user SET password=:password,pubdate=:pubdate,ip=:ip where reseturl=:reseturl";
-$stmt=$conn->prepare($sql);
-$stmt->bindValue(":password", $this->password, PDO::PARAM_STR);
-$stmt->bindValue(":pubdate",$this->pubdate, PDO::PARAM_INT);
-$stmt->bindValue(":ip",$this->ip, PDO::PARAM_UNT);
-$stmt->bindValue(":reseturl",$this->reseturl, PDO::PARAM_STR);
-$stmt->execute();
-$conn=null;
-}
-
-public function delete(){
-$conn= new PDO(DB_DSN,DB_USERNAME,DB_PASSWORD);
-$sql="DELETE FROM user where id=:id LIMIT 1";
-$stmt=$conn->prepare($sql);
-$stmt->bindValue(":id",$this->id, PDO::PARAM_STR);
-$stmt->execute();
-$conn=null;
-}
-}
-?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+       
+       
+        }

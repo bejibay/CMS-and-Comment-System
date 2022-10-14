@@ -1,116 +1,55 @@
 
 <?php 
- class Category{
-// define the class properties
+require ("model/crudmodel.php");
+class Category extends Crudmodel{
+    // define the class properties
+
 public $id = null;
-public $name = null;
-public $description = null;
-public $pubdate =null;
-public $ip = null;
+public $name = "";
+public $description = "";
+public $created = null;
+public $updated = null;
+public $ipaddress = null;
+
 
 public function __construct($data=array()){
 if(isset($data['id']))$this->id=int($data['id']);
-if(isset($data['name']))$this->name=trim(stripslashes(htmlspecialchars($data['name'])));
-if(isset($data['description']))$this->description=trim(stripslashes(htmlspecialchars($data['description'])));
-if(isset($data['pubdate']))$this->pubdate=int($data['pubdate']);
-if(isset($data['ip']))$this->ip=int($data['ip']);
+if(isset($data['name']))$this->name=preg_match("/[a-Z]{3}/",$data['name']);
+if(isset($data['description']))$this->description=preg_replace("/[^\,\.\"\'\:\;\@\$\()a-Z0-9]/","",$data['description']);
+if(isset($data['created']))$this->created=date($data['created'],"Y-m-d");
+if(isset($data['updated']))$this->updated=date($data['updated'],"Y-m-d");
+if(isset($data['ipaddress']))$this->ipaddress=int($data['ipaddress']);
+
+// define the class properties
+
+
+public function createcategory(){
+    $this->insert("INSERT INTO userd(id,name,description , created, updated,ipaddress)
+    VALUES(:id,:name,:description , :created, :updated,:ipaddress)",["id"=>$this->id,"name"=>$this->name,
+    "description"=>$this->description,"created"=>$this->created,"updated"=>$this->updated,"ipaddress"=>$this->ipaddress]),
+    
+        }
+   
+
+public function readCategories(){
+$this->select("SELECT * FROM category");
 }
 
-public function storeFormValues($params)
-{$this->__construct($params);
-if(isset($params['pubdate'])){
-$pubdate=explode('-', $params['pubdate']);
-if(count($pubdate)==3){
-list($y,$m,$d) = $pubdate;
-$pubdate=mktime(0,0,0,$d,$m,$y);
-}
-}
-}
-public static function getById($id){
-$conn= new PDO(DB_DSN,DB_USERNAME,DB_PASSWORD);
-$sql="SELECT*, UNIX_TIMESTAMP(pubdate) AS pubdate FROM category where id=:id";
-$stmt=$conn->prepare($sql);
-$stmt->bindValue(":id",$this->id, PDO::PARAM_INT);
-$stmt->execute;
-$row = $stmt->fetch();
-$conn = null;
-if($row) $category = new Category($row);
-}
-public function insert(){
-$conn= new PDO(DB_DSN,DB_USERNAME,DB_PASSWORD);
-$sql = "INSERT INTO category(name,description,pubdate,ip)
-VALUES(:name,:description,:pubdate,:ip)";
-$stmt=$conn->prepare($sql);
-$stmt->bindValue(": name", $this->name, PDO::PARAM_STR);
-$stmt->bindValue(":description",$this->description, PDO::PARAM_STR);
-$stmt->bindValue(":pubdate",$this->pubdate, PDO::PARAM_INT);
-$stmt->bindValue(":ip",$this->ip, PDO::PARAM_INT);
-$stmt->execute;
-$this->id =$conn->lastInsertId();
-$conn = null;
-}
-public function update(){
-$conn= new PDO(DB_DSN,DB_USERNAME,DB_PASSWORD);
-$sql = " UPDATE category SET name= :name,description=:description,pubdate=:pubdate,ip=:ip";
-$stmt=$conn->prepare($sql);
-$stmt->bindValue(":name", $this->name, PDO::PARAM_STR);
-$stmt->bindValue(":description", $this->description, PDO::PARAM_STR);
-$stmt->bindValue(":pubdate",$this->pubdate, PDO::PARAM_INT);
-$stmt->bindValue(":ip",$this->ip, PDO::PARAM_INT);
-$stmt->execute;
-$conn=null;
+public function readAcategory($id){
+$this->select("SELECT* FROM category WHERE id=:1d", ["id"=>$this->id,]);
 
 }
-public function delete(){
-$conn= new PDO(DB_DSN,DB_USERNAME,DB_PASSWORD);
-$sql="DELETE FROM category where id=:id LIMIT 1";
-$stmt=$conn->prepare($sql);
-$stmt->bindValue(":id",$this->id, PDO::PARAM_INT);
-$conn=null;
+
+
+
+public function updateCategory($id,$data = []){
+$result = $this->update("UPDATE category SET name=:name, description =:description, created =:created, updated :updated, 
+ipaddress=:ipadress WHERE id =:id" ["name"=>$this->name,"description"=>$this->description,"created"=>$this->created,
+"updated"=>$this->updated,"ipaddres"=>$this->ipaddres,"id"=>$this->id,]);
 }
-}
-?>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ public function deleteCategory($id){
+$this->delete("DELETE* FROM category WHERE id=:id",["id"=>$this->id]);
+       
+       }
+}        

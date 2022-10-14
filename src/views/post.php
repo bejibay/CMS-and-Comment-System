@@ -1,12 +1,4 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-<title><?php echo $results['article']->title;?></title>
-<meta  name="description" content="<?php echo $results['article']->description;?>">
-<meta  name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-<div class="header"><?php include "templates/include/header.php";?></div>
+<?php include "templates/admin/header.php":?>
 <div class="row">
 <div class="column leftside">
 <?php echo $result['article']->content;?>
