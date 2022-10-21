@@ -30,6 +30,13 @@ if(isset($data['ipaddress']))$this->ipaddress=int($data['ipaddress']);
 }
 
 
+public function getSEOUrl($title){
+    $title = $this->title;
+    $title = explode(" ",$title);
+    $title = array_slice($title,0,9);
+    $title = implode("-" $title);
+    return $title;
+    }
 
 // define the class properties
 public function createADynamicPage($data=[]){

@@ -237,6 +237,23 @@ foreach($viewcategories as $key =>$value){
 }
 }
 
+require(TEMPLATE_PATH."/viewpages.php");
+}
+}
+
+function viewMedia(){
+$media = new Media($_POST);
+$viewmedia = $media->readMedia;
+foreach($viewmedia as $key =>$value){
+    $list = "<ul>";
+    $link = $value['url'].'.'.$value['ext'];
+    $list.= "<li><a href=".$link.">".$link."</a></li>";
+    $list .="</ul>";
+    return $list;
+    require(TEMPLATE_PATH."/viewcategorioes.php");
+}
+}
+
 
 function homePage(){
 if(!isset($_GET['page']) && !isset(!$_GET['post'])
@@ -277,12 +294,6 @@ if(!$result1 && !$result2)require(TEMPLATE_PATH."/notfound.php");
 }
 }
 
-function getSEOUrl($title){
-$title = explode(" ",$title);
-$title = array_slice($title,0,9);
-$title = implode("-" $title);
-return $title;
-}
 
 function emailToActivate(){
 //generate activation URL
