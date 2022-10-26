@@ -1,6 +1,8 @@
 
 <?php 
-require ("model/crudmodel.php");
+require_once("config/bootstrap.php");
+require_once(WORKING_PATH."src/model/crudmode.php");
+
 class Author extends Crudmodel{
     // define the class properties
 
@@ -22,33 +24,56 @@ if(isset($data['ipaddress']))$this->ipaddress=int($data['ipaddress']);
 
 
 // define the class properties
-public function createAuthor(){
-$this->insert("INSERT INTO author(`biography`,`user_id`,`created`,`updated`,`ipaddress`)VALUES(:biography,:user_id,
+public function createAuthor($data= []){
+    $this->user_id =$_SESSION['user_id']
+    if(isset($data['biography']) && isset($data['created'])){
+$result = $this->insert("INSERT INTO author(`biography`,`user_id`,`created`,`updated`,`ipaddress`)VALUES(:biography,:user_id,
 :created, :updated,:ipaddress)",["biography"=>$this->biography,"user_id"=>$this->user_id,"created"=>$this->created,
 "updated"=>$this->updated,"ipaddress"=>$this->ipadrdess]);
+    }
+    if($result) return $result;
+    else{return false;}
     
 }
 
 public function readALLAuthors(){
- $this->select("SELECT* FROM author");
+ $result = $this->select("SELECT* FROM author");
+ if($result)return $result;
+ else(return false;)
 }
 
-public function readAnAuthor($id){
-    $this->select("SELECT* FROM author WHERE id=:id",["id"=>$this->id]);
+public function readAuthor($id){
+    $this->id= $id;
+
+   if(isset($id)){
+   $result = $this->select("SELECT* FROM author WHERE id=:id",["id"=>$this->id]);
    }
+   if($result) restun $result;
+   else{return false;}
+}
    
 
 
 
-public function updateauthor($id,$data=[]){
+public function updateAuthor($id,$data=[]){
+    $this->id = $id;
 
- $this->update("UPDATE author SET biography=:biography, updated=:updated WHERE id=:id*"[
-    "biography"=>$this->biography,"update"=>$this->upodated]);
+if(isset($id) $ isset($data['biography']) && isset($data['updated'])){
+ $result = $this->update("UPDATE author SET biography=:biography, updated=:updated WHERE id=:id*"[
+    "biography"=>$this->biography,"update"=>$this->updated, "id"=>$this->id]);
+ }
+ if($result)return $result;
+ else{return false;}
 }
 
     
-public function deleteauthor($id){
-
+public function deleteAuthor($id){
+    $this->id = $id;
+if(isset($id)){
 $result = $this->delete("DELETE* FROM author WHERE id =:id",["id"=>$this->id]);
+if($result)return $result;
+else return false;
+}
 }
 
+}

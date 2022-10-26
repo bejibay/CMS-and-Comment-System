@@ -1,6 +1,7 @@
 
 <?php 
-require ("model/crudmodel.php");
+require_once("config/bootstrap.php");
+require_once(WORKING_PATH."src/model/crudmode.php");
 class User extends Crudmodel{
     // define the class properties
 
@@ -32,44 +33,77 @@ if(isset($data['ipaddress']))$this->ipaddress=int($data['ipaddress']);
 
 // define the class properties
 public function createUser($data =[]){
-    foreach($data as $key =>$value){
-    $this->insert("INSERT INTO userd(id,firstname,lastname,username,email,password,status, created, updated,ipaddress)
+
+    if(isset($data['firstname']) && isset($data['lastname']) && isset($data['email']) && isset($data['password'])){
+    $result = $this->insert("INSERT INTO userd(id,firstname,lastname,username,email,password,status, created, updated,ipaddress)
     VALUES(:id,:firstname,:lastname,:username,:email,:password,:status,:created, :updated,:ipaddress)",["id"=>$this->id,
     "firstname"=>$this->firstname,"lastname"=>$this->lastname,"username"=>$this->username,"email"=>$this->email,
     "pasword"=>$this->pasword,"status"=>$this->status,"created"=>$this->created,"updated"=>$this->updated,
     "ipaddress"=>$this->ipaddress]);
     
-        }
+    } 
+    if($result)return $result;
+    else{return false;}
     }
    
 
 public function readUsers(){
-$this->select("SELECT * FROM userd");
+$result = $this->select("SELECT * FROM userd");
+if($result)return $result;
+else{return false;}
 }
 
-public function readAUser($email ,$password= null){
-$verifiedpasword = password_verify($password, $result['password']);
-$result1 = $this->select("SELECT* FROM userd WHERE email=:email",["email"=>$this->email]);
-if($result1)$result2 = $this->select("SELECT* FROM userd WHERE email=:email AND password=:password",
-["email"=>$this->email, "password"=>$verifiedpasword]);
+public function readAUser($data= []){
+if(isset($data['email'])){
+$result1 = $this->select("SELECT* FROM userd WHERE email=:email",["email"=>$this->email]);}
+if($result1){$verifiedpasword = password_verify($password, $result1['password']);
+$result2 = $this->select("SELECT* FROM userd WHERE email=:email AND password=:password",
+["email"=>$this->email, "password"=>$verifiedpasword]);}
+if($result2) return $result2;
+else{return false;}
 
 }
 
 
-public function updateUser($email = null,$reseturl=null,$data){
-    foreach($data as $key =>$value){
-$result = $this->update("UPDATE userid SET firstname=:firstname, lastname=:lastname,username=:username,email=:email,
-password = :password, status=:status,reseturl=:reseturl,created=:created,updated=:updated WHERE email=:email",["email"=>$this->email,
-"firstname"=>$this->firstname,"lastname"=>$this->lastname,"username"=>$this->username,"email"=>$this->email,
-"pasword"=>$this->pasword,"status"=>$this->status,"reseturl"=>$this->reseturl,"created"=>$this->created,"updated"=>$this->updated,
+public function modifyEmail($data=[]){
+$result1 = $this->select("SELECT* FROM userd WHERE email=:email",["email"=>$this->email]); 
+if($result1){
+$result2 = $this->update("UPDATE userid SET newemail=:newemail WHERE email=:email",["email"=>$this->email,
+"email"=>$this->email,"pasword"=>$this->pasword,"updated"=>$this->updated,"newemail"=>$this->email,
 "ipaddress"=>$this->ipaddress]);
-
+if($result2) return $result2;
+    else{return false;}
 }
 }
 
+public function modifyAccountStatus($reseturl ,  $data=[]){
+    $result1 = $this->select("SELECT* FROM userd WHERE email=:email",["email"=>$this->newemail]); 
+    if($result1){
+    $this->status =1;
+    $this->reseturl = $reseturl; 
+    $result2 = $this->update("UPDATE userid SET status=:status, reseturl: reseturl WHERE email=:email
+    AND reseturl =:reseturl",["email"=>$this->email,"email"=>$this->email,"updated"=>$this->updated,
+    "reseturl"=>$this->reseturl,"ipaddress"=>$this->ipaddress]);
+    if($result2) return $result2;
+    else{return false;}
+    }
+    }
 
+    public function modifyResetUrl($data=[]){
+        $result1 = $this->select("SELECT* FROM userd WHERE email=:email",["email"=>$this->newemail]); 
+        if($result1){$this->reseturl  =md5(rand(0,999).time());}
+        $result2 = $this->update("UPDATE userid SET reseturl  =: reseturl WHERE email=:email",
+        ["email"=>$this->email,"email"=>$this->email,"updated"=>$this->updated,
+        "reseturl"=>$this->reseturl,"ipaddress"=>$this->ipaddress]);
+        if($result2) return $result2;
+    else{return false;}
+        }
+        
  public function deleteUser($id){
- $this->delete("DELETE* FROM userid WHERE id=:id",["id"=>$this->id]);
+    $this->id = $id;
+$result = $this->delete("DELETE* FROM userid WHERE id=:id",["id"=>$this->id]);
+if($result)return $result;
+else{return false;}
 }
        
        

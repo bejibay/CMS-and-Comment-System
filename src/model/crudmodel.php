@@ -30,7 +30,7 @@ public function executestatement($query="",$params=[]){
 
 public function insert($query="",$params=[]){
  $this->executestatement($query,$params);
- $result = $this->con->$LastInsertId;
+ $result = $this->conn->$LastInsertId;
  return $result;
 }
 

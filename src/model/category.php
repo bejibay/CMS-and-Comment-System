@@ -1,6 +1,7 @@
 
 <?php 
-require ("model/crudmodel.php");
+require_once("config/bootstrap.php");
+require_once(WORKING_PATH."src/model/crudmode.php");
 class Category extends Crudmodel{
     // define the class properties
 
@@ -23,33 +24,49 @@ if(isset($data['ipaddress']))$this->ipaddress=int($data['ipaddress']);
 // define the class properties
 
 
-public function createcategory(){
-    $this->insert("INSERT INTO userd(id,name,description , created, updated,ipaddress)
-    VALUES(:id,:name,:description , :created, :updated,:ipaddress)",["id"=>$this->id,"name"=>$this->name,
+public function createcategory($data = []){
+    if(isset($data['name'])&& isset($data['description']) && isset($data['created'])){
+   $result =  $this->insert("INSERT INTO category(name,description , created, updated,ipaddress)
+    VALUES(:name,:description , :created, :updated,:ipaddress)",["name"=>$this->name,
     "description"=>$this->description,"created"=>$this->created,"updated"=>$this->updated,"ipaddress"=>$this->ipaddress]),
     
-        }
+    }
+    if($result)return $result;
+    else{return false;}
+    }
    
 
 public function readCategories(){
-$this->select("SELECT * FROM category");
+$result = $this->select("SELECT * FROM category");
+if($result)return $result;
+else{return false;}
 }
 
 public function readAcategory($id){
-$this->select("SELECT* FROM category WHERE id=:1d", ["id"=>$this->id,]);
-
+    if(isset($id)){
+$result = $this->select("SELECT* FROM category WHERE id=:1d", ["id"=>$this->id,]);
+if($result)return $result;
+else{return false;}
+}
 }
 
 
 
 public function updateCategory($id,$data = []){
-$result = $this->update("UPDATE category SET name=:name, description =:description, created =:created, updated :updated, 
-ipaddress=:ipadress WHERE id =:id" ["name"=>$this->name,"description"=>$this->description,"created"=>$this->created,
-"updated"=>$this->updated,"ipaddres"=>$this->ipaddres,"id"=>$this->id,]);
+    if(isset($id) && isset($data['name']) && isset($data['description']) && isset($updated)){
+$result = $this->update("UPDATE category SET name=:name, description =:description, updated :updated, 
+ipaddress=:ipadress WHERE id =:id" ["name"=>$this->name,"description"=>$this->description,
+"updated"=>$this->updated,"ipaddres"=>$this->ipaddress,"id"=>$this->id,]);
+}
+if($result)return $result;
+else{return false;}
 }
 
  public function deleteCategory($id){
-$this->delete("DELETE* FROM category WHERE id=:id",["id"=>$this->id]);
-       
+    if(isset($id)){
+$result = $this->delete("DELETE* FROM category WHERE id=:id",["id"=>$this->id]);
+    }
+    if($result) return $result;
+    else{return false;}
        }
 }        

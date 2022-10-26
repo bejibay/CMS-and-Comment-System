@@ -1,6 +1,7 @@
 
 <?php 
-require ("model/crudmodel.php");
+require_once("config/bootstrap.php");
+require_once(WORKING_PATH."src/model/crudmode.php");
 class Media extends Crudmodel{
     // define the class properties
 
@@ -63,23 +64,34 @@ $this->insert("INSERT INTO media(id,url,ext)VALUES(:id,:url,:ext)",["id"=>$this-
    
 
 public function readAllMedia(){
-$this->select("SELECT * FROM media");
+$result = $this->select("SELECT * FROM media");
+if($result) return $result;
+else{return false;}
 }
 
 public function readAMedia($url){
-$this->select("SELECT* FROM media WHERE url=:url",["url"=>$this->url]);
+$this->url = $url;
+$result = $this->select("SELECT* FROM media WHERE url=:url",["url"=>$this->url]);
+if($result) return $result;
+else{return false;}
 
 }
 
 
 
 public function updateAMedia($id,$data){
- $this->update("UPDATE media SET url=:url WHERE id =:id",["id"=>$this->id],"url"=>$this->url);
-
+$result1 = $this->readAMedia($url);
+$this->id = $result1['id'];
+$result2 = $this->update("UPDATE media SET url=:url WHERE id =:id",["id"=>$this->id],"url"=>$this->url);
+if($result2) return $result2;
+else{return false;}
 }
 
 public function deleteMedia($url){
- $this->delete("DELETE* FROM media WHERE url=:url",["url"=>$this->url]);
+$this->url = $url;
+$result =  $this->delete("DELETE* FROM media WHERE url=:url",["url"=>$this->url]);
+if($result) return $result;
+else{return false;}
 }
        
        

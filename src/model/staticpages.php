@@ -1,6 +1,7 @@
 
 <?php 
-require ("model/crudmodel.php");
+require_once("config/bootstrap.php");
+require_once(WORKING_PATH."src/model/crudmode.php");
 class Staticpages extends Crudmodel{
     // define the class properties
     public $id = null;
@@ -26,40 +27,62 @@ class Staticpages extends Crudmodel{
     
 // define the class properties
 
-public function createStaticPage(){
-    $this->insert("INSERT INTO  staticpage(id,url,,title,description ,content, created, updated,ipaddress)
+public function createStaticPage($data = []){
+    $this->url = $this->getSEOurl($data['title']);
+    if(isset($data['title']) && isset($data['description']) && isset($data['content'])){
+   $result = $this->insert("INSERT INTO  staticpage(id,url,,title,description ,content, created, updated,ipaddress)
     VALUES(:id,:url,:title,:description , :content,:created, :updated,:ipaddress)",["id"=>$this->id,"url"=>$this->url,
     "title"=>$this->title,"description"=>$this->description,"content"=>$this->content,"created"=>$this->created,
-    "updated"=>$this->updated,"ipaddress"=>$this->ipaddress]),
-    
-        }
+    "updated"=>$this->updated,"ipaddress"=>$this->ipaddress]);
+    }
+if($result) return $result;
+else{return false;}       
+}
 
         public function readStaticPages(){
-            $this->select("SELECT * FROM staticpage");
+           $result =  $this->select("SELECT * FROM staticpage");
+           if($result)return $result;
+           else{return false;}
         }
             
-            public gunction readAStaticPage($id){
+            public function readAStaticPage($id){
+                $this->id =$id;
+            if(isset($id)){
             $this->select("SELECT* FROM staticpage WHERE id=:id",["id"=>$this->id]);
-            
-            }
+}
+            if(isset($result)) return $result;
+            else{return false;}
+}
             
             
                
-    public function updateCategory($id,%data){
-     $this->update("UPDATE staticpage SET id=:id,title=:titlde,description=:description,content=:content,
+    public function updateStsaticPage($id,$data =[]){
+        $this->url = $this->getSEOurl($data['title']); 
+        $this->id = $id ;
+        if(isset($data['title']) && isset($data['description']) && isset($data['content'])){
+     $result = $this->update("UPDATE staticpage SET id=:id,title=:titlde,description=:description,content=:content,
      created:created,updated=:updated, ipaddress=:ipaddres WHERE id =:id",["id"=>$this->id,"url"=>$this->url,
     "title"=>$this->title,"description"=>$this->description,"content"=>$this->content,"created"=>$this->created,
     "updated"=>$this->updated,"ipaddress"=>$this->ipaddress]);
         }
+        }
                 
                 
-        public function displaystaticpage($url){
-            $this=>select("SELECT* FROM staticpage WHERE url=:url",["url"=>$this->url]);  
+        public function displayStaticPage($url){
+            $this->url = $url;
+        $result = $this=>select("SELECT* FROM staticpage WHERE url=:url",["url"=>$this->url]); 
+        if($result)return $result;
+        else{return false;} 
            }          
 
 
 public function deleteStaticPage($id){
+    $this->id = $id;
+    if(isset($id)){
  $this->delete("DELETE* FROM staticpage WHERE id=:id",["id"=>$this->id]);
+}
+ if($result) return $result;
+ else{return false;}
 }
 }
     

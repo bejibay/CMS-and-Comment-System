@@ -1,5 +1,7 @@
 <?php 
-require "controller/functions.php";
+require_once("config/bootstrap.php");
+require_once(WORKING_PATH."src/controller/functions.php");
+
 $url = $_SERVER['REQUEST_URI'];
 $path = explode('/',$url);
 $path1 = $path[0];

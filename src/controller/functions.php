@@ -1,5 +1,8 @@
 
 <?php 
+
+require_once("config/bootstrap.php");
+
 //function codes to be called in admin.php, index.php, dashboard.pho
 function login(){
 $results=array();
