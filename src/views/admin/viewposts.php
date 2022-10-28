@@ -1,5 +1,5 @@
 
-<html><?php include "templates/include/header.php";?>
+<html><?php include "src/views/include/header.php";?>
 <div class="row">
 <div class="col-3">
 <a href="/dashboard">dashboard</a>
@@ -12,6 +12,6 @@
 </div>
 <?php echo $lists;?></div>
 </div>
-<div class="footer"><?php include "templates/include/footer.php";?></div>
+<div class="footer"><?php include  "src/views/include/footer.php";?></div>
 </body>
 </html>

@@ -1,5 +1,5 @@
 
-<?php include "templates/include/header.php";?>
+<?php include "src/views/include/header.php";?>
 <div class="row">
 <div class="col-3">
 <a href="/dashboard">dashboard</a>
@@ -25,6 +25,6 @@ content: <textarea name="content"><?php echo $results['content'];?></textarea>
 </form>
 </div>
 </div>
-<div class="footer"><?php include "templates/include/footer.php";?></div>
+<div class="footer"><?php include "src/views/include/footer.php";?></div>
 </body>
 </html>

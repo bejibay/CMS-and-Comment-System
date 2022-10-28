@@ -1,13 +1,13 @@
 <?php 
 require_once("config/bootstrap.php");
-require_once(WORKING_PATH."src/controller/functions.php");
+require_once(WORKING_PATH."/src/controller/functions.php");
 
 $url = $_SERVER['REQUEST_URI'];
 $path = explode('/',$url);
 $path1 = $path[0];
 $path2 = $path[1];
 $path3 =$path[2];
-if(!empty($path1)){
+if(!empty($path1) && empty($path2) && empty($path3)){
 switch ($path1){
     case 'login' :
         login();
@@ -24,10 +24,18 @@ switch ($path1){
    case 'activate-user':
     acivateUser();
    case 'dashboiard':
-    if(!empty($path1)) && !emoty($path2){
+      dashboard();
+   case 'logout':
+   logout();
+   default:
+   otherUrls();
+   }
+}
+
+    if(!empty($path1) && !empty($path2) & empty($path3)){
       switch ($path2){
       case 'newpage':
-        newPage() 
+        newPage();
         break;
      case 'newpost':
         newPost();
@@ -50,35 +58,18 @@ switch ($path1){
      case 'view-pages':
       viewPages();
       break;
-      case 'view-categories':
-         viewCategories();
-         break; 
       default:
-      dashboard();
+      viewCategories();
 }
     }
- default:
- logout();
 
-}
-}
- 
-if(empty($path2 && empty($path3))){
-   switch($_GET) {
- case 'post':
-    post();
-    break;
-case 'page':
-    page();
-    break;
-case 'notfound':
-    notFound();
-default:
-homepage();
+    
+if(empty($path1) && empty($path2) && empty($path3)){
+   homepage();
 
    }
 
-}
+
 
 ?>
 

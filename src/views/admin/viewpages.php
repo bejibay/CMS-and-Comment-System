@@ -1,5 +1,4 @@
-
-<html><?php include "templates/include/header.php";?>
+<?php include "src/views/include/header.php";?>
 <div class="row">
 <div class="col-3">
 <a href="/dashboard">dashboard</a>

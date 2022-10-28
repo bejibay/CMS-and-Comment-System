@@ -1,4 +1,4 @@
-<?php include "templates/admin/header.php":?>
+<?php include "src/views/include/header.php";?>
 <div class="row">
 <div class="col-12">
 <form action="admin.php" method="post">

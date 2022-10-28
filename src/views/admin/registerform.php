@@ -1,4 +1,4 @@
-<?php include "templates/admin/header.php":?>
+<?php include "src/views/include/header.php";?>
 <div class="row">
 <div class="column leftside">
 <form action="admin.php" method="post">
@@ -19,6 +19,6 @@
 </div>
 </div class="column rightside"></div>
 </div>
-<div class="footet"><?php include "templates/include/footer.php";?></div>
+<div class="footet"><?php include "src/views/include/footer.php";?></div>
 </body>
 </html>

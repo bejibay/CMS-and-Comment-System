@@ -57,7 +57,7 @@ public function readAUser($data= []){
 if(isset($data['email'])){
 $result1 = $this->select("SELECT* FROM userd WHERE email=:email",["email"=>$this->email]);}
 if($result1){$verifiedpasword = password_verify($password, $result1['password']);
-$result2 = $this->select("SELECT* FROM userd WHERE email=:email AND password=:password",
+$result2 = $this->select("SELECT* FROM user WHERE email=:email AND password=:password",
 ["email"=>$this->email, "password"=>$verifiedpasword]);}
 if($result2) return $result2;
 else{return false;}
