@@ -1,8 +1,10 @@
 
 <?php 
-require_once("config/bootstrap.php");
-require_once(WORKING_PATH."src/model/crudmode.php");
-class Staticpages extends Crudmodel{
+require_once $_SERVER['DOCUMENT_ROOT']."/Contentgo/config/bootstrap.php";
+
+require_once WORKING_DIR_PATH."/src/model/crudmodel.php";
+
+class Staticpage extends Crudmodel{
     // define the class properties
     public $id = null;
     public $url = "";
@@ -70,7 +72,7 @@ else{return false;}
                 
         public function displayStaticPage($url){
             $this->url = $url;
-        $result = $this=>select("SELECT* FROM staticpage WHERE url=:url",["url"=>$this->url]); 
+        $result = $this->select("SELECT* FROM staticpage WHERE url=:url",["url"=>$this->url]); 
         if($result)return $result;
         else{return false;} 
            }          

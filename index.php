@@ -1,6 +1,7 @@
 <?php 
-require_once("config/bootstrap.php");
-require_once(WORKING_PATH."/src/controller/functions.php");
+
+require "src/controller/functions.php";
+
 
 $url = $_SERVER['REQUEST_URI'];
 $path = explode('/',$url);
@@ -65,7 +66,7 @@ switch ($path1){
 
     
 if(empty($path1) && empty($path2) && empty($path3)){
-   homepage();
+   homePage();
 
    }
 

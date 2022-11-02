@@ -1,7 +1,9 @@
 
 <?php 
-require_once("config/bootstrap.php");
-require_once(WORKING_PATH."src/model/crudmode.php");
+require_once $_SERVER['DOCUMENT_ROOT']."/Contentgo/config/bootstrap.php";
+
+require_once WORKING_DIR_PATH."/src/model/crudmodel.php";
+
 class Media extends Crudmodel{
     // define the class properties
 
@@ -28,7 +30,7 @@ public function creatMedia($image,$seourl){
 
     //check if it is an image
     $check = getimagesize($image['tmp_name']);
-    if($check[2]){echo "it is an image"-."check['mime]";$uoloadok = 1;}
+    if($check[2]){echo "it is an image-"."check['mime]";$uploadok = 1;}
     else {echo "it is not an image"; $uploadok =0;}
 
     
@@ -38,8 +40,8 @@ public function creatMedia($image,$seourl){
      else{$uploadok = 1;}
 
      //check if image type exists
-     $imgtype= ['gif','pnd','tmp']
-     if(in_array($imagetype,$ext)){
+     $imgtype= ['gif','pnd','tmp'];
+     if(in_array($imgtype,$ext)){
         $uploadok = 1;}
     else{$uploadok = 0;}
 
@@ -51,14 +53,14 @@ public function creatMedia($image,$seourl){
      //check if directory exists;
      $date = date_format($_POST['date'],'Y-m-d');
      $uploaddate = explode('-',$date);
-     $list($year, $month, $date) = $uploaddate;
+     list($year, $month, $date) = $uploaddate;
      $targetdir = 'uploads'.'/'.$year.'/'.$month;
      if(!file_exists($targetdir)){mkdir($targetdir);
     if($upoladok = 1 && is_uploaded_file($targetname)){move_uploaded_file($image['tmp_name'],$targetname);}
     }
     else{if($upoladok = 1 && is_uploaded_file($targetname)){move_uploaded_file($image['tmp_name'],$targetname);}}
 
-$this->insert("INSERT INTO media(id,url,ext)VALUES(:id,:url,:ext)",["id"=>$this->id,"url"=>$this->url,'ext'=>$ext]),
+$this->insert("INSERT INTO media(id,url,ext)VALUES(:id,:url,:ext)",["id"=>$this->id,"url"=>$this->url,'ext'=>$ext]);
     
         }
    
@@ -82,7 +84,7 @@ else{return false;}
 public function updateAMedia($id,$data){
 $result1 = $this->readAMedia($url);
 $this->id = $result1['id'];
-$result2 = $this->update("UPDATE media SET url=:url WHERE id =:id",["id"=>$this->id],"url"=>$this->url);
+$result2 = $this->update("UPDATE media SET url=:url WHERE id =:id",["id"=>$this->id,"url"=>$this->url]);
 if($result2) return $result2;
 else{return false;}
 }

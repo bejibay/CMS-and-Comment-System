@@ -1,4 +1,7 @@
-<?php include "src/views/include/header.php";?>
+<?php require_once $_SERVER['DOCUMENT_ROOT']."/Contentgo/config/bootstrap.php";?>
+ 
+ <?php include  WORKING_DIR_PATH."/src/views/include/header.php";?>
+
 <div class="row">
 <div class="column leftside">
 <form action="admin.php" method="post">
@@ -19,6 +22,6 @@
 </div>
 </div class="column rightside"></div>
 </div>
-<div class="footet"><?php include "src/views/include/footer.php";?></div>
+<div class="footet"><?php include WORKING_DIR_PATH."/src/views/include/footer.php";?></div>
 </body>
 </html>

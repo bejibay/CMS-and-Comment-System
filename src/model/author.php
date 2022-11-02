@@ -1,7 +1,8 @@
 
-<?php 
-require_once("config/bootstrap.php");
-require_once(WORKING_PATH."src/model/crudmode.php");
+<?php
+require_once $_SERVER['DOCUMENT_ROOT']."/Contentgo/config/bootstrap.php";
+
+require_once WORKING_DIR_PATH."/src/model/crudmodel.php";
 
 class Author extends Crudmodel{
     // define the class properties
@@ -25,7 +26,7 @@ if(isset($data['ipaddress']))$this->ipaddress=int($data['ipaddress']);
 
 // define the class properties
 public function createAuthor($data= []){
-    $this->user_id =$_SESSION['user_id']
+    $this->user_id =$_SESSION['user_id'];
     if(isset($data['biography']) && isset($data['created'])){
 $result = $this->insert("INSERT INTO author(`biography`,`user_id`,`created`,`updated`,`ipaddress`)VALUES(:biography,:user_id,
 :created, :updated,:ipaddress)",["biography"=>$this->biography,"user_id"=>$this->user_id,"created"=>$this->created,
@@ -39,7 +40,7 @@ $result = $this->insert("INSERT INTO author(`biography`,`user_id`,`created`,`upd
 public function readALLAuthors(){
  $result = $this->select("SELECT* FROM author");
  if($result)return $result;
- else(return false;)
+ else{return false;}
 }
 
 public function readAuthor($id){
@@ -48,7 +49,7 @@ public function readAuthor($id){
    if(isset($id)){
    $result = $this->select("SELECT* FROM author WHERE id=:id",["id"=>$this->id]);
    }
-   if($result) restun $result;
+   if($result) return  $result;
    else{return false;}
 }
    
@@ -58,8 +59,8 @@ public function readAuthor($id){
 public function updateAuthor($id,$data=[]){
     $this->id = $id;
 
-if(isset($id) $ isset($data['biography']) && isset($data['updated'])){
- $result = $this->update("UPDATE author SET biography=:biography, updated=:updated WHERE id=:id*"[
+if(isset($id) && isset($data['biography']) && isset($data['updated'])){
+ $result = $this->update("UPDATE author SET biography=:biography, updated=:updated WHERE id=:id*",[
     "biography"=>$this->biography,"update"=>$this->updated, "id"=>$this->id]);
  }
  if($result)return $result;

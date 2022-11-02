@@ -1,6 +1,6 @@
 
 <?php 
-define("WORKING_PATH", __DIR__."/../");
+define("WORKING_DIR_PATH",__DIR__."/../");
 
 ?>
 

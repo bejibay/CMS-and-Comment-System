@@ -1,12 +1,12 @@
 
 <?php 
-require_once("config/bootstrap.php");
-require_once(WORKING_PATH."src/model/crudmode.php");
+require_once $_SERVER['DOCUMENT_ROOT']."/Contentgo/config/bootstrap.php";
+
+require_once WORKING_DIR_PATH."/src/model/crudmodel.php";
 
 class Comment extends Crudmodel{
     // define the class properties
 
-public $id = null;
 public $email = "";
 public $dynamicpages_id = null;
 public $comments= "";
@@ -16,6 +16,8 @@ if(isset($data['id']))$this->id=int($data['id']);
 if(isset($data['email']))$this->email=filter_var($data['email'],FILTER_VALIDATE_EMAIL);
 if(isset($data['dynamicpages_id']))$this->dynamicpagea_id=int($data['dynamicpages_id']);
 if(isset($data['comments']))$this->content=trim(stripslashes(htmlspecialchars(['comments'])));
+
+}
 
 // define the class properties
 public function createComment($data=[]){
@@ -36,11 +38,11 @@ public function createComment($data=[]){
 public function readComments(){
 $result = $this->select("SELECT * FROM comment");
 if($result)return $result;
-else(return false;)
+else{return false;}
 }
 
 public function readAComment($id){
-$thids->id = $id
+$this->id = $id;
 if(isset($id)){
 $result = $this->select("SELECT* FROM comment WHERE id = :id", ["id"=>$this->id]);
 }
@@ -58,7 +60,7 @@ $result = $this->update("UPDATE comment SET dynamicpages_id =:dynamicpages_id, e
 
     }
     if($result)return $result;
-    else(return false;)
+    else{return false;}
 }
 
 public function deleteComment($id){
@@ -66,8 +68,8 @@ public function deleteComment($id){
     if(isset($id)){
      $this->delete("DELETE* FROM comment WHERE id=:id",["id"=>$this->id]);
     }
-      if($result)return $result:
-        else(return false;) 
+      if($result)return $result;
+        else{return false;} 
        }
        
     }   

@@ -1,7 +1,8 @@
 
 <?php 
-require_once("config/bootstrap.php");
-require_once(WORKING_PATH."src/model/crudmode.php");
+require_once $_SERVER['DOCUMENT_ROOT']."/Contentgo/config/bootstrap.php";
+
+require_once WORKING_DIR_PATH."/src/model/crudmodel.php";
 
 class Dynamicpage extends Crudmodel{
     // define the class properties
@@ -35,7 +36,7 @@ public function getSEOUrl($title){
     $title = $this->title;
     $title = explode(" ",$title);
     $title = array_slice($title,0,9);
-    $title = implode("-" $title);
+    $title = implode("-", $title);
     return $title;
     }
 
@@ -46,8 +47,9 @@ public function createADynamicPage($data=[]){
     $result =  $this->insert("INSERT INTO dynamicpage(id,url,title , description, content,category_id,media_id,author_id,
     created,updated,ipaddress)VALUES(:id,:url,:title , :description, :content,:category_id,:media_id,:author_id,
     :created,:updated,:ipaddress)",["id"=>$this->id,"url"=>$this->url,"title"=>$this->title,
-    "description"=>$this->description,"content"=>$this->content,"category_id"=>$this->category_id,"media_id"=>$this->media_id,
-    "author_id"=>$this->author_id",created"=>$this->created,"updated"=>$this->updated,"ipaddress"=>$this->ipaddress]),
+    "description"=>$this->description,"content"=>$this->content,"category_id"=>$this->category_id,
+    "media_id"=>$this->media_id,"author_id"=>$this->author_id ,"created"=>$this->created,"updated"=>$this->updated,
+    "ipaddress"=>$this->ipaddress]);
     }
     if($result)return $result;
     else{return false;}
@@ -67,19 +69,20 @@ public function readADynamicPage($id){
 $result = $this->select("SELECT* FROM dynamicpage WHERE id=:id",["id"=>$this->id]);
 }
     if($result) return $result;
-    else(return false;)
+    else{return false;}
 }
 
 
 
 public function updateDynamicPage($id,$data = []){
-    if(isset($id) $ isset($data['title'])  && isset($data['decription']) && isset($data['content'])){
+    if(isset($id)  && isset($data['title'])  && isset($data['decription']) && isset($data['content'])){
         $$this->url = $this->getSEOUrl($data['title']);
 $result = $this->update("UPDATE dynamicpage SET url=:url,title=:title,description=:description,content=:content,
-category_id=:category_id,media_id=:media_id,author_id=:author_id,created=:created,updated=:updated,ipaddress=:ipaddress",
-["id"=>$this->id,"url"=>$this->url,"title"=>$this->title,
-"description"=>$this->description,"content"=>$this->content,"category_id"=>$this->category_id,"media_id"=>$this->media_id,
-"author_id"=>$this->author_id",created"=>$this->created,"updated"=>$this->updated,"ipaddress"=>$this->ipaddress]);
+category_id=:category_id,media_id=:media_id,author_id=:author_id,created=:created,updated=:updated,
+ipaddress=:ipaddress",["id"=>$this->id,"url"=>$this->url,"title"=>$this->title,
+"description"=>$this->description,"content"=>$this->content,"category_id"=>$this->category_id,
+"media_id"=>$this->media_id,"author_id"=>$this->author_id,"created"=>$this->created,"updated"=>$this->updated,
+"ipaddress"=>$this->ipaddress]);
     }
     if($result) return $result;
     else{return false;}
@@ -88,7 +91,7 @@ category_id=:category_id,media_id=:media_id,author_id=:author_id,created=:create
 public function displayADynamicpage($url){
     if(isset($url)){
         $this->url = $url;
- $result = $this=>select("SELECT* FROM dynamicpage WHERE url=:url",["url"=>$this->url]);  
+ $result = $this->select("SELECT* FROM dynamicpage WHERE url=:url",["url"=>$this->url]);  
     }
     if($result)return $result;
     else{return false;}

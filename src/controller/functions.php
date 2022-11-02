@@ -1,7 +1,14 @@
 
 <?php 
 
-require_once("config/bootstrap.php");
+require_once $_SERVER["DOCUMENT_ROOT"]."/Contentgo/config/bootstrap.php";
+require_once WORKING_DIR_PATH."/src/model/author.php";
+require_once WORKING_DIR_PATH."/src/model/category.php";
+require_once WORKING_DIR_PATH."/src/model/comments.php";
+require_once WORKING_DIR_PATH."/src/model/dynamicpages.php";
+require_once WORKING_DIR_PATH."/src/model/staticpages.php";
+require_once WORKING_DIR_PATH."/src/model/media.php";
+require_once WORKING_DIR_PATH."/src/model/user.php";
 
 //function codes to be called in admin.php, index.php, dashboard.pho
 function login(){
@@ -12,6 +19,7 @@ if(isset($_POST['login'])){
 //user has clicked the login form, login successful
 $user = new User($_POST);
 $results['success'] = $user->readAUser($_POST['email']);
+
 if($result['success']){
     $_SESSION['firstname'] = $result['firstname'];
     $_SESSION['lastname'] = $result['lastname'];
@@ -20,7 +28,7 @@ if($result['success']){
 
 else{//login failed display error message
 $results['errormessage']="Incorrect Username or Password Try Again";
-require(WORKING_PATH."src/views/admin/loginform.php");
+require(WORKING_DIR_PATH."/src/views/admin/loginform.php");
 }
 }
 }
@@ -45,7 +53,7 @@ $results['registerSuccess']= "check your email to complete your registeration";
 }
 else{//Form not filled properly
 $results['errormessage']="Forms not filled properly";
-require(WORKING_PATH."src/views/admin/registerform.php");
+require(WORKING_DIR_PATH."/src/views/admin/registerform.php");
 }
 }
 
@@ -60,7 +68,7 @@ $results = array();
 $results['title'] = "Administration Dashboard";
 $results['description'] = "Administration Dashboard";
 $results['content']="Dashboard area, carry out your transactions";
-require(WORKING_PATH."src/views/admin/dashboard.php");
+require(WORKING_DIR_PATH."/src/views/admin/dashboard.php");
 }
 
 function requireReset(){
@@ -72,9 +80,9 @@ $user = new User($_POST);
 $result['checkemail'] = $user->select($_POST['email']);
 if($result['checkemai']){emailToreset();
 $reset['Success'] = "Check your email to reset account";
-require(WORKING_PATH."src/views/admin/resetform.php");}
+require(WORKING_DIR_PATH."/src/views/admin/resetform.php");}
 else{$result['succes'] = 'email does not exist'; 
-require(WORKING_PATH."src/views/admin/resetform.php");}
+require(WORKING_DIR_PATH."/src/views/admin/resetform.php");}
 }
 }
 
@@ -87,7 +95,7 @@ $update = ['reseturl'=>"", 'status'=>1];
 $result = $user->updateUser($reseturl,$update);
 if($result){$success ="Account correctly activated";}
 else{$success = "Account does not exist";}
-require(WORKING_PATH."src/views/admin/activationform.php");
+require(WORKING_DIR_PATH."/src/views/admin/activationform.php");
 }
 }
 
@@ -100,7 +108,7 @@ $update = ['reseturl'=>"", 'pasword'=>$_POST['password']];
 $result = $user->updateUser($reseturl,$update);
 if($result){$success ="Account correctly activated";}
 else{$success = "Account does not exist";}
-require(WORKING_PATH."src/views/admin/activationform.php");
+require(WORKING_DIR_PATH."/src/views/admin/activationform.php");
 }
 }
 
@@ -116,8 +124,8 @@ $newdata = ['url'=>$_POST['url'],'title'=>$_POST['title'] ,
 'media_id'=>$_POST[['media_id']],'author_id'=>$_POST['author_id'],'created'=>$_POST['created'],
 'updated'=>$_POST['updated'],'ipaddress'=>$_POS['ipaddress']];
 $result['success'] = $dynamicpage->createAdynamicpage($newdata); 
-if($result['success']) require(WORKING_PATH."src/views/newpost.php");
-else{require(WORKING_PATH."src/views/newpost.php");}
+if($result['success']) require(WORKING_DIR_PATH."/src/views/newpost.php");
+else{require(WORKING_DIR_PATH."/src/views/newpost.php");}
 }
 }
 
@@ -125,7 +133,7 @@ function updatePost(){
     $result = array();
 $update =new DynamicPage($_POST);
 $dataedited = $update->readADynamicpage($_GET['id']);
-if($dataedited) require(WORKING_PATH."src/views/admin/updatepost.php");
+if($dataedited) require(WORKING_DIR_PATH."/src/views/admin/updatepost.php");
 if(isset($_POST['updatepage'])){
 $updatepost = $update->updateADynamicpage($_GET['id'],$updateddata);
 $updateddata = ['url'=>$_POST['url'],'title'=>$_POST['title'] , 
@@ -133,7 +141,7 @@ $updateddata = ['url'=>$_POST['url'],'title'=>$_POST['title'] ,
 'media_id'=>$_POST[['media_id']],'author_id'=>$_POST['author_id'],'created'=>$_POST['created'],
 'updated'=>$_POST['updated'],'ipaddress'=>$_POS['ipaddress']];
 if($updatepage) $result = "page succesfully updated";
-else{require(WORKING_PATH."src/views/admin/updatepost.php");}
+else{require(WORKING_DIR_PATH."/src/views/admin/updatepost.php");}
 }
 }
 
@@ -149,8 +157,8 @@ function newPage(){
     'author_id'=>$_POST['author_id'],'created'=>$_POST['created'],
     'updated'=>$_POST['updated'],'ipaddress'=>$_POS['ipaddress']];
     $result['success'] = $dynamicpage->createAStaticpage($newdata); 
-    if($result['success']) require(WORKING_PATH."src/views/admin/newppage.php");
-    else{require(WORKING_PATH."src/views/admin/newppage.php");}
+    if($result['success']) require(WORKING_DIR_PATH."/src/views/admin/newppage.php");
+    else{require(WORKING_DIR_PATH."/src/views/admin/newppage.php");}
     }
     }
     
@@ -159,7 +167,7 @@ function newPage(){
     $result = array();
     $update =new StaticPage($_POST);
     $dataedited = $update->readAStaticpage($_GET['id']);
-    if($dataedited) require(WORKING_PATH."src/views/admin//updatepage.php");
+    if($dataedited) require(WORKING_DIR_PATH."/src/views/admin//updatepage.php");
     if(isset($_POST['updatepage'])){
     $updatepage = $update->updateAStaticpage($_GET['id'],$updateddata);
     $updateddata = ['url'=>$_POST['url'],'title'=>$_POST['title'] , 
@@ -167,7 +175,7 @@ function newPage(){
     'author_id'=>$_POST['author_id'],'created'=>$_POST['created'],
     'updated'=>$_POST['updated'],'ipaddress'=>$_POS['ipaddress']];
     if($updatepage) $result = "page succesfully updated";
-    else{require(WORKING_PATH."src/views/admin/updatepage.php");}
+    else{require(WORKING_DIR_PATH."/src/views/admin/updatepage.php");}
     }
     }
     
@@ -181,8 +189,8 @@ if(isset($_POST['newcategory'])){
  $newdata = ['name'=>$_POST['name'],'description'=>$_POST['description'], 
 'created'=>$_POST['created'],'updated'=>$_POST['updated'],'ipaddress'=>$_POS['ipaddress']];
  $result['success'] = $category->createACategory($newdata); 
- if($result['success']) require(WORKING_PATH."src/views/admin/newcategory.php");
-else{require(WORKING_PATH."src/views/admin/newcategory.php");}
+ if($result['success']) require(WORKING_DIR_PATH."/src/views/admin/newcategory.php");
+else{require(WORKING_DIR_PATH."/src/views/admin/newcategory.php");}
 }
 }
     
@@ -191,13 +199,13 @@ function updateCategory(){
 $result = array();
 $update =new Category($_POST);
 $dataedited = $update->readAcategory($_GET['id']);
-if($dataedited) require(WORKING_PATH."src/views/admin/updatecategory.php");
+if($dataedited) require(WORKING_DIR_PATH."/src/views/admin/updatecategory.php");
 if(isset($_POST['updatecategory'])){
 $updatecategory = $update->updateACategory($_GET['id'],$updateddata);
 $updateddata = ['name'=>$_POST['name'] , 'description'=>$_POST['description'], 
 'created'=>$_POST['created'],'updated'=>$_POST['updated'],'ipaddress'=>$_POS['ipaddress']];
  if($updatecategory) $result = "category succesfully updated";
-else{require(WORKING_PATH."src/views/admin/updatecategory.php");}
+else{require(WORKING_DIR_PATH."/src/views/admin/updatecategory.php");}
 }
 }
 
@@ -211,7 +219,7 @@ $list = "<ul>";
 $list.= "<li><a href=".$value['url'].">".$value['title']."</a></li>";
 $list .="</ul>";
 return $list;
-require(WORKING_PATH."src/views/admin/viewposts.php");
+require(WORKING_DIR_PATH."/src/views/admin/viewposts.php");
 
 }
 }
@@ -224,7 +232,7 @@ foreach($viewpages as $key=>$value){
     $list.= "<li><a href=".$value['url'].">".$value['title']."</a></li>";
     $list .="</ul>";
     return $list;
-    require(WORKING_PATH."src/views/admin/viewpages.php");
+    require(WORKING_DIR_PATH."/src/views/admin/viewpages.php");
 }
 }
 
@@ -236,7 +244,7 @@ foreach($viewcategories as $key =>$value){
     $list.= "<li><a href=".$value['url'].">".$value['title']."</a></li>";
     $list .="</ul>";
     return $list;
-    require(WORKING_PATH."src/views/admin/viewcategorioes.php");
+    require(WORKING_DIR_PATH."/src/views/admin/viewcategorioes.php");
 }
 }
 
@@ -250,7 +258,7 @@ foreach($viewmedia as $key =>$value){
     $list.= "<li><a href=".$link.">".$link."</a></li>";
     $list .="</ul>";
     return $list;
-    require(WORKING_PATH."src/views/admin/viewcategorioes.php");
+    require(WORKING_DIR_PATH."/src/views/admin/viewcategorioes.php");
 }
 }
 
@@ -259,23 +267,24 @@ $result1 = array();
 $url = $_SERVER['REQUEST_URI'];
 $page = new Staticpage($url);
 $result1 = $page->displalyStaticPage($url);
-if($result1){require(WORKING_PATH."src/views/page.php");}
+if($result1){require(WORKING_DIR_PATH."/src/views/page.php");}
 return $result1;
+if(!$result){
 $result2 = array();
 $post = new Dynamicpage($url);
 $result2 = $post->displayDynamicPage($url);
-if($result2){require(WORKING_PATH."src/views/post.php");}
+if($result2){require(WORKING_DIR_PATH."/src/views/post.php");}
 return $result2;
-if(!$result1 && !$result2){require(WORKING_PATH."src/views/notfound.php");}
+}
+if(!$result1 && !$result2){require(WORKING_DIR_PATH."/src/views/notfound.php");}
 return false;
 }
 
 function homePage(){
-if(!isset($_GET['page']) && !isset($_GET['post'])
-&& !isset($_GET['notfound'])){
-require(WORKING_PATH."src/views/homepage.php");
+
+require(WORKING_DIR_PATH."/src/views/homepage.php");
 }
-}
+
 
 
 function emailToActivate(){

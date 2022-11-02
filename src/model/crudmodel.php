@@ -1,11 +1,10 @@
 <?php 
-class Crudmodel{
+require_once $_SERVER['DOCUMENT_ROOT']."/Contentgo/config/config.php";
 
-require("config/config.php");
+class Crudmodel{
+    
 // define the class properties
 protected $conn ="";
-
-
 
 
 public function __construct(){
@@ -19,7 +18,7 @@ catch(PDOException $e){echo $e->getMessage();}
 
 public function executestatement($query="",$params=[]){
    $this->conn = $this->connect();
-    $stmt-= $this->conn-?prepare($query);
+    $stmt-= $this->conn->prepare($query);
     if($params) $stmt->execute($params);
     else{$stmt->execute();}
     return $stmt;
@@ -50,11 +49,11 @@ public function update($query="",$params=[] ){
 
 }
 
-public function delete($query="",$params=[])(
+public function delete($query="",$params=[]){
    $stmt =  $this->executestatement($query,$params);
     $result = $stmt-> rowCount();
     return $result;
-)
+}
 
 }
 ?>

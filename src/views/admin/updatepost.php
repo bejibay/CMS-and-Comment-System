@@ -1,5 +1,8 @@
 
-<?php include "src/views/include/header.php";?>
+<?php require_once $_SERVER['DOCUMENT_ROOT']."/Contentgo/config/bootstrap.php";?>
+ 
+ <?php include  WORKING_DIR_PATH."/src/views/include/header.php";?>
+
 <div class="row">
 <div class="col-3">
 <a href="/dashboard">dashboard</a>
@@ -16,7 +19,8 @@
 <input type="text" name="title" value ="<?php echo $results['title'];?>">
 <label>Description:</label>
 <input type="text" name="description" value ="<?php echo $results['description'];?>"  >
-content: <textarea name="content"><?php echo $results['content'];?></textarea>
+<label>Content:</label>
+<textarea name="content"><?php echo $results['content'];?></textarea>
 <label>Date:</label>
 <input type="date" name="date" value ="<?php echo $results['date'];?>" >
 <label>Ip Address:</label>
@@ -25,6 +29,6 @@ content: <textarea name="content"><?php echo $results['content'];?></textarea>
 </form>
 </div>
 </div>
-<div class="footer"><?php include "src/views/include/footer.php";?></div>
+<div class="footer"><?php include WORKING_DIR_PATH."/src/views/include/footer.php";?></div>
 </body>
 </html>
