@@ -1,76 +1,66 @@
 <?php 
+session_start();
+// session for testing only
+$_SESSION['firstnamne'] = 'ttt';
+$_SESSION['lastname'] = 'yyy';
 
 require "src/controller/functions.php";
 
-
-$url = $_SERVER['REQUEST_URI'];
-$path = explode('/',$url);
-$path1 = $path[0];
-$path2 = $path[1];
-$path3 =$path[2];
-if(!empty($path1) && empty($path2) && empty($path3)){
-switch ($path1){
-    case 'login' :
+$requestUrl = $_SERVER['REQUEST_URI'];
+$currentPageUrl = "http://"."locahost".$_SERVER['REQUEST_URI'];
+if(isset($requestUrl)){
+switch ($requestUrl){
+    case   "/Contentgo/":
+    case   "/Contentgo/home":
+      homePage();
+      break;
+    case '/Contentgo/login' :
         login();
         break;
-    case 'register':
+    case '/Contentgo/register':
         register();
         break;
-    case 'require-request':
+    case '/Contentgo/require-request':
     requireReset();
        break;
-    case 'reset':
+    case '/Contentgo/reset':
     resetUser();
         break;
-   case 'activate-user':
+   case 'Contentgo/activate-user':
     acivateUser();
-   case 'dashboiard':
+   case '/Contentgo/dashboard':
       dashboard();
-   case 'logout':
+   case '/logout':
    logout();
-   default:
-   otherUrls();
+   case '/Contentgo/dashboard/newpage':
+      newPage();
+      break;
+   case '/Contentgo/dashboard/newpost':
+      newPost();
+      break;
+   case '/Contentgo/dashboard/newcategory':
+      newCategory();
+       break;
+   case '/Contentgo/dashboad/update-page':
+      updatePage();
+      break;
+   case '/Contentgo/dashboard/update-post':
+      updatePost();
+      break;
+   case '/Contentgo/dashboard/update-category':
+     updateCategory();
+     break;
+   case '/Contentgo/dashboard/view-posts':
+     viewPosts();
+     break;
+   case '/Contentgo/dashboard/view-pages':
+    viewPages();
+    break;
+   case '/Contentgo/dashborad/view-categories':
+    viewCategories();
+    
    }
 }
-
-    if(!empty($path1) && !empty($path2) & empty($path3)){
-      switch ($path2){
-      case 'newpage':
-        newPage();
-        break;
-     case 'newpost':
-        newPost();
-        break;
-     case 'newcategory':
-        newCategory();
-         break;
-     case 'update-page':
-        updatePage();
-        break;
-     case 'update-post':
-        updatePost();
-        break;
-     case 'update-category':
-       updateCategory();
-       break;
-     case 'view-posts':
-       viewPosts();
-       break;
-     case 'view-pages':
-      viewPages();
-      break;
-      default:
-      viewCategories();
-}
-    }
 
     
-if(empty($path1) && empty($path2) && empty($path3)){
-   homePage();
-
-   }
-
-
-
-?>
 

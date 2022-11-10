@@ -4,16 +4,18 @@
 
 <div class="row">
 <div class="col-3">
-<a href="/dashboard">dashboard</a>
-<a href="/newpage">new page</a>
-<a href="/newpost">new post</a>
-<a href="/viewpages">all pages</a>
-<a href="/viewposts">all posts</a>
-<a href="/media">media</a>
-<a href="/templates">templates</a>
+<a href="dashboard">dashboard</a>
+<a href="newpage">new page</a>
+<a href="newpost">new post</a>
+<a href="newpost">new category</a>
+<a href="view-pages">all pages</a>
+<a href="view-posts">all posts</a>
+<a href="view-categories">all categories</a>
+<a href="media">media</a>
+
 </div>
 <div class = "col-9">
-<form action=!"dashboard.php"  method="post">
+<form action="dashboard.php"  method="post">
 <label>title:</label>
 <input type="text" name="title" >
 <label>Description:</label>

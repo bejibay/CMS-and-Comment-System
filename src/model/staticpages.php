@@ -1,8 +1,6 @@
 
 <?php 
-require_once $_SERVER['DOCUMENT_ROOT']."/Contentgo/config/bootstrap.php";
-
-require_once WORKING_DIR_PATH."/src/model/crudmodel.php";
+require_once __DIR__."/crudmodel.php";
 
 class Staticpage extends Crudmodel{
     // define the class properties
@@ -69,19 +67,18 @@ else{return false;}
         }
         }
                 
-                
-        public function displayStaticPage($url){
-            $this->url = $url;
-        $result = $this->select("SELECT* FROM staticpage WHERE url=:url",["url"=>$this->url]); 
-        if($result)return $result;
-        else{return false;} 
-           }          
+ public function displayStaticPage($urlpage){
+$this->url = $urlpage;
+$result = $this->select("SELECT * FROM staticpage WHERE url=:url",["url"=>$this->url]); 
+if($result)return $result;
+else{return false;} 
+}          
 
 
 public function deleteStaticPage($id){
     $this->id = $id;
     if(isset($id)){
- $this->delete("DELETE* FROM staticpage WHERE id=:id",["id"=>$this->id]);
+ $this->delete("DELETE FROM staticpage WHERE id=:id",["id"=>$this->id]);
 }
  if($result) return $result;
  else{return false;}

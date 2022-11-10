@@ -1,8 +1,6 @@
 
 <?php 
-require_once $_SERVER['DOCUMENT_ROOT']."/Contentgo/config/bootstrap.php";
-
-require_once WORKING_DIR_PATH."/src/model/crudmodel.php";
+require_once __DIR__."/crudmodel.php";
 
 class Dynamicpage extends Crudmodel{
     // define the class properties
@@ -64,12 +62,10 @@ else{return $false;}
 }
 
 public function readADynamicPage($id){
-    $this->id = $id;
-    if($id){
+$this->id = $id;
 $result = $this->select("SELECT* FROM dynamicpage WHERE id=:id",["id"=>$this->id]);
-}
-    if($result) return $result;
-    else{return false;}
+if($result) return $result;
+else{return false;}
 }
 
 
@@ -88,7 +84,7 @@ ipaddress=:ipaddress",["id"=>$this->id,"url"=>$this->url,"title"=>$this->title,
     else{return false;}
 }
 
-public function displayADynamicpage($url){
+public function displayDynamicpage($url){
     if(isset($url)){
         $this->url = $url;
  $result = $this->select("SELECT* FROM dynamicpage WHERE url=:url",["url"=>$this->url]);  

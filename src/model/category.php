@@ -1,8 +1,7 @@
 
 <?php 
-require_once $_SERVER['DOCUMENT_ROOT']."/Contentgo/config/bootstrap.php";
+require_once __DIR__."/crudmodel.php";
 
-require_once WORKING_DIR_PATH."/src/model/crudmodel.php";
 class Category extends Crudmodel{
     // define the class properties
 
