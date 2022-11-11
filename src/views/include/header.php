@@ -10,12 +10,12 @@
 <body>
 <div class="header">
 <div class="topnav">
-<a href="home">home</a>
-<a href="about">About Us</a>
-<a href="contact">Contact Us</a>
-<a href="privacy">Privacy</a>
-<a href="register">Register</a>
-<a href="login">login</a>
+<a href="/Contentgo/home">home</a>
+<a href="/Contentgo/about">About Us</a>
+<a href="/Contentgo/contact">Contact Us</a>
+<a href="/Contentgo/privacy">Privacy</a>
+<a href="/Contentgo/register">Register</a>
+<a href="/Contentgo/login">login</a>
 <a href="javascript:void();"><i  class ="fa fa-bars" ></i></a>
 </div>
 </div>

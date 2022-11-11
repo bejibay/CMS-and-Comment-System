@@ -1,8 +1,7 @@
 <?php 
 session_start();
 // session for testing only
-$_SESSION['firstnamne'] = 'ttt';
-$_SESSION['lastname'] = 'yyy';
+
 
 require "src/controller/functions.php";
 
@@ -20,7 +19,7 @@ switch ($requestUrl){
     case '/Contentgo/register':
         register();
         break;
-    case '/Contentgo/require-request':
+    case '/Contentgo/require-reset':
     requireReset();
        break;
     case '/Contentgo/reset':
@@ -30,8 +29,6 @@ switch ($requestUrl){
     acivateUser();
    case '/Contentgo/dashboard':
       dashboard();
-   case '/logout':
-   logout();
    case '/Contentgo/dashboard/newpage':
       newPage();
       break;
@@ -58,6 +55,8 @@ switch ($requestUrl){
     break;
    case '/Contentgo/dashborad/view-categories':
     viewCategories();
+    case '/Contentgo/logout':
+      logout();
     
    }
 }

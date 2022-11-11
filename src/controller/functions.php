@@ -1,6 +1,7 @@
 
 <?php 
-
+$_SESSION['firstnamne'] = 'ayo';
+$_SESSION['lastname'] = 'tolu';
 require_once $_SERVER["DOCUMENT_ROOT"]."/Contentgo/config/bootstrap.php";
 require_once WORKING_DIR_PATH."/src/model/author.php";
 require_once WORKING_DIR_PATH."/src/model/category.php";
@@ -20,14 +21,11 @@ if(isset($_POST['login'])){
 $user = new User($_POST);
 $results['success'] = $user->readAUser($_POST['email']);
 
-if($result['success']){
-    $_SESSION['firstname'] = $result['firstname'];
-    $_SESSION['lastname'] = $result['lastname'];
-    header("Location:dashboard");
-}
 
-else{//login failed display error message
-$results['errormessage']="Incorrect Username or Password Try Again";}
+    
+
+
+
 }
 require(WORKING_DIR_PATH."/src/views/admin/loginform.php");
 }
@@ -63,11 +61,17 @@ header("location: /Contentgo/login");
 
 function dashboard(){
 $results = array();
+$results['firstname'] =$_SESSION['firstname'];
+$results['lastname'] =$_SESSION['lastname'];
 $results['title'] = "Administration Dashboard";
 $results['description'] = "Administration Dashboard";
 $results['content']="Dashboard area, carry out your transactions";
-require(WORKING_DIR_PATH."/src/views/dashboard.php");
+if(isset($_SESION['firstname']) && isset($_SESSION['lastname'])){
+require(WORKING_DIR_PATH."/src/views/dashboard.php");}
+else{header("location:/Contentgo/login");}
 }
+
+
 
 function requireReset(){
 $results = array();
@@ -76,10 +80,10 @@ $results['description'] = "Reset Login";
 if(isset($_POST['resetpassword'])){
 $user = new User($_POST);
 $result['checkemail'] = $user->select($_POST['email']);
-if($result['checkemai']){emailToreset();
-$reset['Success'] = "Check your email to reset account";
+if($result['checkemail']){emailToreset();
+$results['Success'] = "Check your email to reset account";
 }
-else{$result['succes'] = 'email does not exist'; }
+else{$results['succes'] = 'email does not exist'; }
 }
 require(WORKING_DIR_PATH."/src/views/admin/resetform.php");
 }
@@ -111,6 +115,8 @@ require(WORKING_DIR_PATH."/src/views/admin/activationform.php");
 
 function newPost(){
 $results= array();
+$results['firstname'] =$_SESSION['firstname'];
+$results['lastname'] =$_SESSION['lastname'];
 $results['title'] = "Create A New Post";
 $results['description'] = "Create A new Post";
 $results['pageheading']="Create A Post";
@@ -122,7 +128,9 @@ $newdata = ['url'=>$_POST['url'],'title'=>$_POST['title'] ,
 'updated'=>$_POST['updated'],'ipaddress'=>$_POS['ipaddress']];
 $result['success'] = $dynamicpage->createAdynamicpage($newdata); 
 }
-require(WORKING_DIR_PATH."/src/views/admin/newpost.php");
+if(Isset($results['firstname']) && isset($results['lastname'])){
+require(WORKING_DIR_PATH."/src/views/admin/newpost.php");}
+else{header("location:/Contentgo/login");}
 }
 
 function updatePost(){
@@ -144,6 +152,8 @@ require(WORKING_DIR_PATH."/src/views/admin/updatepost.php");
 
 function newPage(){
     $results= array();
+    $results['firstname'] =$_SESSION['firstname'];
+    $results['lastname'] =$_SESSION['lastname'];
     $results['title'] = "Create A New Page";
     $results['description'] = "Create A new Page";
     $results['pageheading']="Create A Page";
@@ -155,7 +165,9 @@ function newPage(){
     'updated'=>$_POST['updated'],'ipaddress'=>$_POS['ipaddress']];
     $result['success'] = $staticpage->createAStaticpage($newdata); 
     }
-    require(WORKING_DIR_PATH."/src/views/admin/newpage.php");
+    if(Isset($results['firstname']) && isset($results['lastname'])){
+        require(WORKING_DIR_PATH."/src/views/admin/newpage.php");}
+        else{header("location:/Contentgo/login");}
     }
     
 
@@ -177,6 +189,8 @@ function newPage(){
     
 function newCategory(){
 $results= array();
+$results['firstname'] =$_SESSION['firstname'];
+$results['lastname'] =$_SESSION['lastname'];
 $results['title'] = "Create A New Category";
 $results['description'] = "Create A new Category";
 $results['pageheading']="Create A Category";
@@ -186,7 +200,9 @@ if(isset($_POST['newcategory'])){
 'created'=>$_POST['created'],'updated'=>$_POST['updated'],'ipaddress'=>$_POS['ipaddress']];
  $result['success'] = $category->createACategory($newdata); 
 }
-require(WORKING_DIR_PATH."/src/views/admin/newcategory.php");
+if(Isset($results['firstname']) && isset($results['lastname'])){
+    require(WORKING_DIR_PATH."/src/views/admin/newcategory.php");}
+    else{header("location:/Contentgo/login");}
 }
     
 
