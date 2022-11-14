@@ -17,6 +17,7 @@ public $updated = null;
 public $ipaddress = null;
 
 public function __construct($data=array()){
+parent::__construct();
 if(isset($data['id']))$this->id=int($data['id']);
 if(isset($data['title']))$this->title=preg_replace("/[^\,\.\"\'\:\;\@\$\()a-Z0-9]/","",$data['title']);
 if(isset($data['description']))$this->description=preg_replace("/[^\,\.\"\'\:\;\@\$\()a-Z0-9]/","",$data['description']);
@@ -58,7 +59,7 @@ public function createADynamicPage($data=[]){
 public function readDynamicPages(){
 $result = $this->select("SELECT * FROM dynamicpage");
 if($result)return $result;
-else{return $false;}
+else{return false;}
 }
 
 public function readADynamicPage($id){

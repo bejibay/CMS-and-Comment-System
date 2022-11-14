@@ -10,6 +10,7 @@ public $dynamicpages_id = null;
 public $comments= "";
 
 public function __construct($data=array()){
+parent::__construct();
 if(isset($data['id']))$this->id=int($data['id']);
 if(isset($data['email']))$this->email=filter_var($data['email'],FILTER_VALIDATE_EMAIL);
 if(isset($data['dynamicpages_id']))$this->dynamicpagea_id=int($data['dynamicpages_id']);

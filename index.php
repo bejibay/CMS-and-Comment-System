@@ -1,9 +1,10 @@
 <?php 
 session_start();
 // session for testing only
+$_SESSION['firstnamne'] = "ayo";
+$_SESSION['lastname'] = "tolu";
 
-
-require "src/controller/functions.php";
+require "controller/functions.php";
 
 $requestUrl = $_SERVER['REQUEST_URI'];
 $currentPageUrl = "http://"."locahost".$_SERVER['REQUEST_URI'];
@@ -38,7 +39,7 @@ switch ($requestUrl){
    case '/Contentgo/dashboard/newcategory':
       newCategory();
        break;
-   case '/Contentgo/dashboad/update-page':
+   case '/Contentgo/dashboard/update-page':
       updatePage();
       break;
    case '/Contentgo/dashboard/update-post':
@@ -53,10 +54,17 @@ switch ($requestUrl){
    case '/Contentgo/dashboard/view-pages':
     viewPages();
     break;
-   case '/Contentgo/dashborad/view-categories':
+   case '/Contentgo/dashboard/view-categories':
     viewCategories();
+    break;
+    case '/Contentgo/dashboard/view-media':
+      viewMedia();
+      break;
     case '/Contentgo/logout':
       logout();
+   break;
+    default:
+    otherUrls();
     
    }
 }

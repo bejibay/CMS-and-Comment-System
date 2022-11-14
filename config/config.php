@@ -1,8 +1,8 @@
 
 <?php 
-define("DB_DSN", "mysql:host=localhost;dbname=soowecco");
-define("DB_USERNAME", "contentgo");
-define("DB_PASSWORD", " ");
+define("DB_DSN", "mysql:host=localhost;dbname=contentgo");
+define("DB_USERNAME", "root");
+define("DB_PASSWORD", "contentgo");
 function handle_execption($exception){
 echo "there is an error, try again";
 error_log($exeption->getMessage);

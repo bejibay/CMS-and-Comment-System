@@ -14,6 +14,7 @@ class Staticpage extends Crudmodel{
     public $ipaddress = null;
     
     public function __construct($data=array()){
+    parent::__construct();
     if(isset($data['id']))$this->id=int($data['id']);
     if(isset($data['url']))$this->url=filter_var($data['url'],FILTER_VALIDATE_URL);
     if(isset($data['title']))$this->title=preg_replace("/[^\,\.\"\'\:\;\@\$\()a-Z0-9]/","",$data['title']);

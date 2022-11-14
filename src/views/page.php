@@ -4,7 +4,7 @@
 
 <div class="row">
 <div class="column leftside">
- <?php echo $result['article']->content;?>
+ <?php if(isset($result['content'])){echo $result['content'];}?>
 </div>
 </div class="column rightside">put this column content here</div>
 </div>

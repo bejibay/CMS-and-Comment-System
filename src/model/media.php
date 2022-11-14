@@ -9,6 +9,7 @@ public $id = null;
 public $url = "";
 
 public function __construct($data=array()){
+parent::__construct();
 if(isset($data['id']))$this->id=int($data['id']);
 if(isset($data['url']))$this->url=filter_var($data['url'],FILTER_VALIDATE_URL);
 }

@@ -11,10 +11,10 @@
 <a href="newpost">new category</a>
 <a href="view-pages">all pages</a>
 <a href="view-posts">all posts</a>
-<a href="view-categories">all categories/a>
+<a href="view-categories">all categories</a>
 <a href="media">media</a>
 </div>
-<?php echo $lists;?></div>
+<?php if(isset($lists)){echo $lists;}?>
 </div>
 <div class="footer"><?php include  WORKING_DIR_PATH."/src/views/include/footer.php";?></div>
 </body>

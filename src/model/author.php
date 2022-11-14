@@ -15,12 +15,14 @@ public $updated = null;
 public $ipaddress = null;
 
 public function __construct($data=array()){
+parent::__construct();
 if(isset($data['id']))$this->id=int($data['id']);
 if(isset($data['biography']))$this->biography=trim(stripslashes(htmlspecialchars(['biography'])));
 if(isset($data['user_id']))$this->user_id=int($data['user_id']);
 if(isset($data['created']))$this->created=date($data['created'],"Y-m-d");
 if(isset($data['updated']))$this->created=date($data['created'],"Y-m-d");
 if(isset($data['ipaddress']))$this->ipaddress=int($data['ipaddress']);
+
 }
 
 

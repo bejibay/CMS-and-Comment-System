@@ -14,6 +14,7 @@ public $ipaddress = null;
 
 
 public function __construct($data=array()){
+parent::__construct();
 if(isset($data['id']))$this->id=int($data['id']);
 if(isset($data['name']))$this->name=preg_match("/[a-Z]{3}/",$data['name']);
 if(isset($data['description']))$this->description=preg_replace("/[^\,\.\"\'\:\;\@\$\()a-Z0-9]/","",$data['description']);

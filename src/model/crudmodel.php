@@ -1,6 +1,7 @@
 <?php 
 require_once __DIR__."/../../config/config.php";
 
+
 class Crudmodel{
     
 // define the class properties
@@ -31,31 +32,41 @@ public function executestatement($query="",$params=[]){
 
 
 public function insert($query="",$params=[]){
+    try{
  $this->executestatement($query,$params);
  $result = $this->conn->$LastInsertId;
  return $result;
+    }
+    catch(Exception $e){echo $e->getMessage();} 
 }
 
 
 
 public function select($query="",$params=[]){
+    try{
  $stmt = $this->executestatement($query,$params);
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $result;
-
+    }
+    catch(Exception $e){echo $e->getMessage();}
 }
 
 public function update($query="",$params=[] ){
+    try{
    $stmt =  $this->executestatement($query,$params);
     $result = $stmt->rowCount();
     return $result;
-
+    }
+    catch(Exception $e){echo $e->getMessage();}
 }
 
 public function delete($query="",$params=[]){
+    try{
    $stmt =  $this->executestatement($query,$params);
     $result = $stmt-> rowCount();
     return $result;
+    }
+    catch(Exception $e){echo $e->getMessage();} 
 }
 
 }

@@ -21,6 +21,7 @@ public $newemail = "";
 
 
 public function __construct($data=array()){
+parent::__construct();
 if(isset($data['id']))$this->id=int($data['id']);
 if(isset($data['firstname']))$this->firstname=preg_match("/[a-Z]{2}/",$data['firstname']);
 if(isset($data['lastname']))$this->lastname=preg_match("/[a-Z]{2}/",$data['lastname']);
