@@ -14,7 +14,7 @@ require_once WORKING_DIR_PATH."/src/model/staticpages.php";
 require_once WORKING_DIR_PATH."/src/model/media.php";
 require_once WORKING_DIR_PATH."/src/model/user.php";
 
-//function codes to be called in admin.php, index.php, dashboard.pho
+//function codes to be called in index.php
 function login(){
 $results=array();
 $results['title']="Admin Login Form";
@@ -79,14 +79,14 @@ $results = array();
 $results['title'] =" Reset Login";
 $results['description'] = "Reset Login"; 
 if(isset($_POST['resetpassword'])){
-$user = new User($_POST);
+$user = new Userdata($_POST);
 $result['checkemail'] = $user->select($_POST['email']);
 if($result['checkemail']){emailToreset();
 $results['Success'] = "Check your email to reset account";
 }
 else{$results['succes'] = 'email does not exist'; }
 }
-require(WORKING_DIR_PATH."/src/views/admin/resetform.php");
+require(WORKING_DIR_PATH."/src/views/admin/requireresetform.php");
 }
 
 function activateUser(){
@@ -96,7 +96,7 @@ if(isset($path1)){
 $user = new Userdata($_POST);
 $reseturl = $path1;
 $update = ['reseturl'=>"", 'status'=>1];
-$result = $user->updateUser($reseturl,$update);
+$result = $user->modifyAccountStatus($reseturl,$update);
 if($result){$success ="Account correctly activated";}
 else{$success = "Account does not exist";}
 require(WORKING_DIR_PATH."/src/views/admin/activationform.php");
@@ -113,7 +113,7 @@ $update = ['reseturl'=>"", 'password'=>$_POST['password']];
 $result = $user->modifyAccountStatus($reseturl,$update);
 if($result){$success ="Account correctly activated";}
 else{$success = "Account does not exist";}
-require(WORKING_DIR_PATH."/src/views/admin/activationform.php");
+require(WORKING_DIR_PATH."/src/views/admin/resetform.php");
 }
 }
 

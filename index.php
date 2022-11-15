@@ -4,7 +4,7 @@ session_start();
 $_SESSION['firstnamne'] = "ayo";
 $_SESSION['lastname'] = "tolu";
 
-require "controller/functions.php";
+require (__DIR__."/src/controller/functions.php");
 
 $requestUrl = $_SERVER['REQUEST_URI'];
 $currentPageUrl = "http://"."locahost".$_SERVER['REQUEST_URI'];

@@ -46,7 +46,7 @@ public function select($query="",$params=[]){
     try{
  $stmt = $this->executestatement($query,$params);
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    return $result;
+    if($result)return $result;
     }
     catch(Exception $e){echo $e->getMessage();}
 }

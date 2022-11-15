@@ -45,8 +45,8 @@ else{return false;}
 }
 
 public function readAcategory($id){
-    if(isset($id)){
-$result = $this->select("SELECT* FROM category WHERE id=:1d", ["id"=>$this->id,]);
+if(isset($id)){
+$result = $this->select("SELECT* FROM category WHERE id=:1d", ["id"=>$this->id]);
 if($result)return $result;
 else{return false;}
 }

@@ -85,7 +85,7 @@ public function modifyAccountStatus($reseturl ,  $data=[]){
     if($result1){
     $this->status =1;
     $this->reseturl = $reseturl; 
-    $result2 = $this->update("UPDATE userdata SET status=:status, reseturl: reseturl WHERE email=:email
+    $result2 = $this->update("UPDATE userdata SET status=:status, reseturl: reseturl,password =:password WHERE email=:email
     AND reseturl =:reseturl",["email"=>$this->email,"email"=>$this->email,"updated"=>$this->updated,
     "reseturl"=>$this->reseturl,"ipaddress"=>$this->ipaddress]);
     if($result2) return $result2;
@@ -94,7 +94,7 @@ public function modifyAccountStatus($reseturl ,  $data=[]){
     }
 
     public function modifyResetUrl($data=[]){
-        $result1 = $this->select("SELECT* FROM userdata WHERE email=:email",["email"=>$this->newemail]); 
+        $result1 = $this->select("SELECT* FROM userdata WHERE email=:email",["email"=>$this->mail]); 
         if($result1){$this->reseturl  =md5(rand(0,999).time());}
         $result2 = $this->update("UPDATE userdata SET reseturl  =: reseturl WHERE email=:email",
         ["email"=>$this->email,"email"=>$this->email,"updated"=>$this->updated,
