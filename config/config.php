@@ -2,7 +2,7 @@
 <?php 
 define("DB_DSN", "mysql:host=localhost;dbname=contentgo");
 define("DB_USERNAME", "root");
-define("DB_PASSWORD", "contentgo");
+define("DB_PASSWORD", "");
 function handle_execption($exception){
 echo "there is an error, try again";
 error_log($exeption->getMessage);

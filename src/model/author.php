@@ -5,7 +5,7 @@ require_once __DIR__."/crudmodel.php";
 
 
 class Author extends Crudmodel{
-    // define the class properties
+// define the class properties
 
 public $id = null;
 public $user_id = null;
@@ -14,10 +14,11 @@ public $created = null;
 public $updated = null;
 public $ipaddress = null;
 
+// construct function to initialise  the properties
 public function __construct($data=array()){
 parent::__construct();
 if(isset($data['id']))$this->id=int($data['id']);
-if(isset($data['biography']))$this->biography=trim(stripslashes(htmlspecialchars(['biography'])));
+if(isset($data['biography']))$this->biography=trim(stripslashes(htmlspecialchars($data['biography'])));
 if(isset($data['user_id']))$this->user_id=int($data['user_id']);
 if(isset($data['created']))$this->created=date($data['created'],"Y-m-d");
 if(isset($data['updated']))$this->created=date($data['created'],"Y-m-d");
@@ -26,7 +27,8 @@ if(isset($data['ipaddress']))$this->ipaddress=int($data['ipaddress']);
 }
 
 
-// define the class properties
+// define the all the class methods
+
 public function createAuthor($data= []){
     $this->user_id =$_SESSION['user_id'];
     if(isset($data['biography']) && isset($data['created'])){

@@ -1,11 +1,10 @@
 <?php 
 session_start();
-// session for testing only
-$_SESSION['firstnamne'] = "ayo";
-$_SESSION['lastname'] = "tolu";
 
 require (__DIR__."/src/controller/functions.php");
-
+//seesion variables for testing only
+$results['firstname'] ="ayo";
+$results['lastname'] ="ojo";
 $requestUrl = $_SERVER['REQUEST_URI'];
 $currentPageUrl = "http://"."locahost".$_SERVER['REQUEST_URI'];
 if(isset($requestUrl)){
@@ -26,8 +25,9 @@ switch ($requestUrl){
     case '/Contentgo/reset':
     resetUser();
         break;
-   case 'Contentgo/activate-user':
-    acivateUser();
+   case '/Contentgo/activate-user':
+    activateUser();
+    break;
    case '/Contentgo/dashboard':
       dashboard();
    case '/Contentgo/dashboard/newpage':
@@ -69,5 +69,6 @@ switch ($requestUrl){
    }
 }
 
-    
+ 
 
+ 

@@ -15,7 +15,7 @@
 
 </div>
 <div class = "col-9">
-<form action="dashboard.php"  method="post">
+<form action="#"  method="post">
 <label>title:</label>
 <input type="text" name="title" >
 <label>Description:</label>
@@ -25,7 +25,7 @@ content: <textarea name="content"></textarea>
 <input type="date" name="date" >
 <label>Ip Address:</label>
 <input type="hidden" name="ip" >
-<input type="submit" name="editpost" value="Edit Post">
+<input type="submit" name="newpost" value="Create Page">
 </form>
 </div>
 </div>

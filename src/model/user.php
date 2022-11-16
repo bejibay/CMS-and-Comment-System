@@ -23,9 +23,9 @@ public $newemail = "";
 public function __construct($data=array()){
 parent::__construct();
 if(isset($data['id']))$this->id=int($data['id']);
-if(isset($data['firstname']))$this->firstname=preg_match("/[a-Z]{2}/",$data['firstname']);
-if(isset($data['lastname']))$this->lastname=preg_match("/[a-Z]{2}/",$data['lastname']);
-if(isset($data['username']))$this->username=preg_match("/[a-Z]{5}/");
+if(isset($data['firstname']))$this->firstname=preg_match("/^[a-zA-Z]{3,}$/",$data['firstname']);
+if(isset($data['lastname']))$this->lastname=preg_match("/^[a-zA-Z]{3,}$/",$data['lastname']);
+if(isset($data['username']))$this->username=preg_match("/^[a-zA-Z]{3,}$/",$data['username']);
 if(isset($data['email']))$this->email=filter_var($data['email'],FILTER_VALIDATE_EMAIL);
 if(isset($data['password']))$this->password=password_hash($data['password'],PASSWORD_BCRYPT);
 if(isset($data['status']))$this->status=int($data['status']);
@@ -38,16 +38,18 @@ if(isset($data['newemail']))$this->newemail=filter_var($data['newemail'],FILTER_
 
 // define the class properties
 public function createUser($data =[]){
-
     if(isset($data['firstname']) && isset($data['lastname']) && isset($data['email']) && isset($data['password'])){
-    $result = $this->insert("INSERT INTO userdata(id,firstname,lastname,username,email,password,status, created, updated,ipaddress)
+    $result1 = $this->select("SELECT* FROM userdata WHERE email=:email",["email"=>$this->email]);
+    if($result1){return $emailExists = "email already exists";}
+    elseif(!$result1){
+    $result2 = $this->insert("INSERT INTO userdata(id,firstname,lastname,username,email,password,status, created, updated,ipaddress)
     VALUES(:id,:firstname,:lastname,:username,:email,:password,:status,:created, :updated,:ipaddress)",["id"=>$this->id,
     "firstname"=>$this->firstname,"lastname"=>$this->lastname,"username"=>$this->username,"email"=>$this->email,
-    "pasword"=>$this->pasword,"status"=>$this->status,"created"=>$this->created,"updated"=>$this->updated,
+    "password"=>$this->password,"status"=>$this->status,"created"=>$this->created,"updated"=>$this->updated,
     "ipaddress"=>$this->ipaddress]);
-    
+    }
     } 
-    if($result)return $result;
+    if($result2)return $result;
     else{return false;}
     }
    
@@ -57,6 +59,8 @@ $result = $this->select("SELECT * FROM userdata");
 if($result)return $result;
 else{return false;}
 }
+
+
 
 public function readAUser($data= []){
 if(isset($data['email'])){

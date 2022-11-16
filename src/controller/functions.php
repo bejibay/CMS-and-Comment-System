@@ -21,11 +21,13 @@ $results['title']="Admin Login Form";
 $results['description']="Admin Login Form";
 if(isset($_POST['login'])){
 //user has clicked the login form, login successful
-$user = new User($_POST);
+$user = new Userdata($_POST);
 $results['success'] = $user->readAUser($_POST['email']);
 if($results['success']){
-$_SESSION['firstname'] = $results['success']['firstname'] ;
-$_SESSION['lastname'] =  $results['success']['lastname'];
+$_SESSION['firstname'] = $results['firstname'] ;
+$_SESSION['lastname'] =  $results['lastname'];
+$_SESSION['user_id']  = $results['user_id'];
+header("location:/Contentgo/dashboard");
 }
 }
 require(WORKING_DIR_PATH."/src/views/admin/loginform.php");
@@ -37,10 +39,10 @@ $results['title']="Account Creation Form";
 $results['description']="Account Creation Form";
 if(isset($_POST['register'])){
 //user has posted the register form attempt to register
-$user = new User($_POST);
-$result['checkemail'] = $user->select($_POST['email']);
+$user = new Userdata($_POST);
+$result['checkemail'] = $user->readAuser($_POST['email']);
 if($result['checkemail'])$result['emailError'] = 'email already exists';
-else{$result['success'] = $user->createUser($userdata);
+else{$result['success'] = $user->createUser($_POST);
 $userdata =['firstname'=>$_POST['firstname'],'lastname'=>$_POST['lastname'],'email'=>$_POST['email'],
 'password'=>$_POST['pasword']];
 if($result['success']){emailToActivate();
@@ -59,6 +61,8 @@ session_unset();
 session_destroy();
 header("location: /Contentgo/login");
 }
+
+
 
 function dashboard(){
 $results = array();
@@ -124,6 +128,9 @@ $results['lastname'] =$_SESSION['lastname'];
 $results['title'] = "Create A New Post";
 $results['description'] = "Create A new Post";
 $results['pageheading']="Create A Post";
+if(isset($results['firstname']) && isset($results['lastname'])){
+require(WORKING_DIR_PATH."/src/views/admin/newpost.php");}
+else{header("location:/Contentgo/login");}
 $dynamicpage  =new Dynamicpage($_POST);
 if(isset($_POST['newpost'])){
 $newdata = ['url'=>$_POST['url'],'title'=>$_POST['title'] , 
@@ -132,9 +139,6 @@ $newdata = ['url'=>$_POST['url'],'title'=>$_POST['title'] ,
 'updated'=>$_POST['updated'],'ipaddress'=>$_POS['ipaddress']];
 $result['success'] = $dynamicpage->createAdynamicpage($newdata); 
 }
-if(Isset($results['firstname']) && isset($results['lastname'])){
-require(WORKING_DIR_PATH."/src/views/admin/newpost.php");}
-else{header("location:/Contentgo/login");}
 }
 
 function updatePost(){
@@ -143,6 +147,9 @@ $id = $path2;
 $result = array();
 $results['firstname'] =$_SESSION['firstname'];
 $results['lastname'] =$_SESSION['lastname'];
+if(isset($results['firstname']) && isset($results['lastname'])){
+require(WORKING_DIR_PATH."/src/views/admin/updatepost.php");}
+else{header("location:/Contentgo/login");}
 $update = new DynamicPage($_POST);
 $dataedited = $update->readADynamicpage($id);
 if($dataedited) {require(WORKING_DIR_PATH."/src/views/admin/updatepost.php");}
@@ -154,7 +161,6 @@ $updateddata = ['url'=>$_POST['url'],'title'=>$_POST['title'] ,
 'updated'=>$_POST['updated'],'ipaddress'=>$_POS['ipaddress']];
 if($updatepage) $result = "page succesfully updated";
 }
-require(WORKING_DIR_PATH."/src/views/admin/updatepost.php");
 }
 
 function newPage(){
@@ -164,6 +170,9 @@ function newPage(){
     $results['title'] = "Create A New Page";
     $results['description'] = "Create A new Page";
     $results['pageheading']="Create A Page";
+    if(isset($results['firstname']) && isset($results['lastname'])){
+    require(WORKING_DIR_PATH."/src/views/admin/newpage.php");}
+    else{header("location:/Contentgo/login");}
     $staticpage  =new Staticpage($_POST);
     if(isset($_POST['newpage'])){
     $newdata = ['url'=>$_POST['url'],'title'=>$_POST['title'] , 
@@ -172,9 +181,7 @@ function newPage(){
     'updated'=>$_POST['updated'],'ipaddress'=>$_POS['ipaddress']];
     $result['success'] = $staticpage->createAStaticpage($newdata); 
     }
-    if(Isset($results['firstname']) && isset($results['lastname'])){
-        require(WORKING_DIR_PATH."/src/views/admin/newpage.php");}
-        else{header("location:/Contentgo/login");}
+    
     }
     
 
@@ -182,9 +189,13 @@ function newPage(){
     global $path2;
     $id = $path2;
     $result = array();
+    $results['firstname'] =$_SESSION['firstname'];
+    $results['lastname'] =$_SESSION['lastname'];
     $update = new StaticPage($_POST);
+    if(isset($results['firstname']) && isset($results['lastname'])){
+    require(WORKING_DIR_PATH."/src/views/admin/updatepage.php");}
+    else{header("location:/Contentgo/login");}
     $dataedited = $update->readAStaticpage($id);
-    if($dataedited) require(WORKING_DIR_PATH."/src/views/admin//updatepage.php");
     if(isset($_POST['updatepage'])){
     $updatepage = $update->updateAStaticpage($id,$updateddata);
     $updateddata = ['url'=>$_POST['url'],'title'=>$_POST['title'] , 
@@ -193,7 +204,7 @@ function newPage(){
     'updated'=>$_POST['updated'],'ipaddress'=>$_POS['ipaddress']];
     if($updatepage) $result = "page succesfully updated";
     }
-    require(WORKING_DIR_PATH."/src/views/admin/updatepage.php"); 
+    
     }
     
 function newCategory(){
@@ -203,34 +214,35 @@ $results['lastname'] =$_SESSION['lastname'];
 $results['title'] = "Create A New Category";
 $results['description'] = "Create A new Category";
 $results['pageheading']="Create A Category";
+if(isset($results['firstname']) && isset($results['lastname'])){
+require(WORKING_DIR_PATH."/src/views/admin/newcategory.php");}
+else{header("location:/Contentgo/login");}
 $category  =new Category($_POST);
 if(isset($_POST['newcategory'])){
  $newdata = ['name'=>$_POST['name'],'description'=>$_POST['description'], 
 'created'=>$_POST['created'],'updated'=>$_POST['updated'],'ipaddress'=>$_POS['ipaddress']];
  $result['success'] = $category->createACategory($newdata); 
 }
-if(Isset($results['firstname']) && isset($results['lastname'])){
-    require(WORKING_DIR_PATH."/src/views/admin/newcategory.php");}
-    else{header("location:/Contentgo/login");}
 }
     
 
 function updateCategory(){
 global $path2;
 $id = $path2;
-$result = array();
+$results = array();
 $results['firstname'] =$_SESSION['firstname'];
 $results['lastname'] =$_SESSION['lastname'];
-$update =new Category($_POST);
+if(isset($results['firstname']) && isset($results['lastname'])){
+require(WORKING_DIR_PATH."/src/views/admin/updatecategory.php");}
+ else{header("location:/Contentgo/login");}
+$update = new Category($_POST);
 $dataedited = $update->readAcategory($id);
-if($dataedited) require(WORKING_DIR_PATH."/src/views/admin/updatecategory.php");
 if(isset($_POST['updatecategory'])){
 $updatecategory = $update->updateACategory($id,$updateddata);
 $updateddata = ['name'=>$_POST['name'] , 'description'=>$_POST['description'], 
 'created'=>$_POST['created'],'updated'=>$_POST['updated'],'ipaddress'=>$_POS['ipaddress']];
  if($updatecategory) $result = "category succesfully updated";
 }
-require(WORKING_DIR_PATH."/src/views/admin/updatecategory.php");
 }
 
 
@@ -252,23 +264,27 @@ require(WORKING_DIR_PATH."/src/views/admin/viewposts.php");
 function viewPages(){
 $staticpage = new Staticpage($_POST);
 $viewpages = $staticpage->readStaticPages();
+if($viewpages){
 foreach($viewpages as $key=>$value){
     $list = "<ul>";
     $list.= "<li><a href=".$value['url'].">".$value['title']."</a></li>";
     $list .="</ul>";
     return $list;
     }
+}
 require(WORKING_DIR_PATH."/src/views/admin/viewpages.php");
 }
 
 function viewCategories(){
 $categories = new Category($_POST);
 $viewcategories = $categories->readCategories();
+if($viewcategories){
 foreach($viewcategories as $key =>$value){
     $list = "<ul>";
     $list.= "<li><a href=".$value['url'].">".$value['title']."</a></li>";
     $list .="</ul>";
     return $lists;
+}
 }
 require(WORKING_DIR_PATH."/src/views/admin/viewpages.php");
 }
@@ -291,10 +307,12 @@ function otherUrls(){
 global $path1;
 $url = $path1;
 $result1 = array();
+if(isset($url)){
 $page = new Staticpage($url);
 $result1 = $page->displayStaticPage($url);
 if($result1){require(WORKING_DIR_PATH."/src/views/page.php");}
 return $result1;
+
 if(!$result1){
 $result2 = array();
 $post = new Dynamicpage($url);
@@ -304,6 +322,7 @@ return $result2;
 }
 if(!$result1 && !$result2){require(WORKING_DIR_PATH."/src/views/notfound.php");}
 return false;
+}
 }
 
 function homePage(){

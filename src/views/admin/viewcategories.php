@@ -3,7 +3,7 @@
 
 <div class="row">
 <div class="col-3">
-<a href="dashboard">dashboard</a>
+<a href="/Contentgo/dashboard">dashboard</a>
 <a href="newpage">new page</a>
 <a href="newpost">new post</a>
 <a href="newpost">new category</a>

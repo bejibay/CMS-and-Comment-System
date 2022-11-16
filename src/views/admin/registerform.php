@@ -4,7 +4,7 @@
 
 <div class="row">
 <div class="column leftside">
-<form action="admin.php" method="post">
+<form action="#" method="post">
 <label for ="username">Username:</label>
 <input type="text" name="username" placeholder="should be minimum of five characters" id="username">
 <label for ="firstname">Firstname:</label>

@@ -15,7 +15,7 @@
 <a href="media">media</a>
 </div>
 <div class =" col-9>
-<form action="dashboard.php" method="post">
+<form action="#" method="post">
 <lable>Name:</label>
 <input type="text" name="name" >
 <label>Description:</label> 
@@ -24,7 +24,7 @@
 <input type="date" name="date" >
 <lable>Date:</label>
 <input type="hidden" name="ip" >
-<input type="submit" name="submit" value="Submit">
+<input type="submit" name="newcategory" value="Create Category">
 </form>
 </div>
 </div>

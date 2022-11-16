@@ -34,7 +34,7 @@ public function executestatement($query="",$params=[]){
 public function insert($query="",$params=[]){
     try{
  $this->executestatement($query,$params);
- $result = $this->conn->$LastInsertId;
+ $result = $this->conn->lastInsertId();
  return $result;
     }
     catch(Exception $e){echo $e->getMessage();} 
@@ -45,7 +45,7 @@ public function insert($query="",$params=[]){
 public function select($query="",$params=[]){
     try{
  $stmt = $this->executestatement($query,$params);
-    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $result = $stmt->fetchAll();
     if($result)return $result;
     }
     catch(Exception $e){echo $e->getMessage();}

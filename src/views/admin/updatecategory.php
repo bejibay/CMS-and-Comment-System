@@ -15,7 +15,7 @@
 <a href="media">media</a>
 </div>
 <div class =" col-9">
-<form action="dashboard.php" method="post">
+<form action="" method="post">
 <label>Name:</label>
 <input type="text" name="title" value ="<?php echo $results['name'];?>">
 <label>Description:</label>
@@ -24,7 +24,7 @@
 <input type="date" name="date" value ="<?php echo $results['date'];?>">
 <label>IP Address</label>
 <input type="hidden" name="ip" value= "<?php echo $_SERVER['REMOTE_ADDR'];?>">
-<input type="submit" name="editpage" value="Edit Page">
+<input type="submit" name="updatecategory" value="Update Page">
 </form>
 </div>
 </div>
