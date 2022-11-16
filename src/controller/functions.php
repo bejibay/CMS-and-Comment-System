@@ -37,14 +37,15 @@ function register(){
 $results=array();
 $results['title']="Account Creation Form";
 $results['description']="Account Creation Form";
+$userdata =['username'=>$_POST['username'],'firstname'=>$_POST['firstname'],'lastname'=>$_POST['lastname'],'email'=>$_POST['email'],
+'password'=>$_POST['password']];
 if(isset($_POST['register'])){
 //user has posted the register form attempt to register
 $user = new Userdata($_POST);
 $result['checkemail'] = $user->readAuser($_POST['email']);
 if($result['checkemail'])$result['emailError'] = 'email already exists';
-else{$result['success'] = $user->createUser($_POST);
-$userdata =['firstname'=>$_POST['firstname'],'lastname'=>$_POST['lastname'],'email'=>$_POST['email'],
-'password'=>$_POST['pasword']];
+else{$result['success'] = $user->createUser($userdata);
+
 if($result['success']){emailToActivate();
 $results['registerSuccess']= "check your email to complete your registeration";
 }
@@ -335,10 +336,9 @@ require(WORKING_DIR_PATH."/src/views/homepage.php");
 function emailToActivate(){
 //generate activation URL
 $reseturl =md5(rand(0,999).time());
-
-$user = new User($_POST);
-$reset = $user->updateUser($_POST['email'],$update);
-$update = ['reseturl'=>$reseturl];
+$update = ['email'=>$_POST['email'], 'password'=>$_POST['password'], 'reseturl'=>$reseturl];
+$user = new Userdata($_POST);
+$reset = $user->modifyAccountStatus($reseturl,$update);
 //send activation email
 if($reset){
 $to = $_POST['email'];

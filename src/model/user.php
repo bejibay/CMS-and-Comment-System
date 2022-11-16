@@ -28,7 +28,6 @@ if(isset($data['lastname']))$this->lastname=preg_match("/^[a-zA-Z]{3,}$/",$data[
 if(isset($data['username']))$this->username=preg_match("/^[a-zA-Z]{3,}$/",$data['username']);
 if(isset($data['email']))$this->email=filter_var($data['email'],FILTER_VALIDATE_EMAIL);
 if(isset($data['password']))$this->password=password_hash($data['password'],PASSWORD_BCRYPT);
-if(isset($data['status']))$this->status=int($data['status']);
 if(isset($data['reseturl']))$this->reseturl = $data['reseturl'];
 if(isset($data['created']))$this->created=date($data['created'],"Y-m-d");
 if(isset($data['updated']))$this->created=date($data['created'],"Y-m-d");
@@ -38,6 +37,7 @@ if(isset($data['newemail']))$this->newemail=filter_var($data['newemail'],FILTER_
 
 // define the class properties
 public function createUser($data =[]){
+    $this->status =0;
     if(isset($data['firstname']) && isset($data['lastname']) && isset($data['email']) && isset($data['password'])){
     $result1 = $this->select("SELECT* FROM userdata WHERE email=:email",["email"=>$this->email]);
     if($result1){return $emailExists = "email already exists";}
@@ -49,7 +49,7 @@ public function createUser($data =[]){
     "ipaddress"=>$this->ipaddress]);
     }
     } 
-    if($result2)return $result;
+    if($result2)return $result2;
     else{return false;}
     }
    
@@ -63,6 +63,8 @@ else{return false;}
 
 
 public function readAUser($data= []){
+$result1 ="";
+$result2 ="";
 if(isset($data['email'])){
 $result1 = $this->select("SELECT* FROM userdata WHERE email=:email",["email"=>$this->email]);}
 if($result1){$verifiedpasword = password_verify($password, $result1['password']);
@@ -84,14 +86,13 @@ if($result2) return $result2;
 }
 }
 
-public function modifyAccountStatus($reseturl ,  $data=[]){
+public function modifyAccountStatus($reseturl,$data=[]){
+    $this->reseturl =$reseturl;
+    $this->status =1;
     $result1 = $this->select("SELECT* FROM userdata WHERE email=:email",["email"=>$this->email]); 
     if($result1){
-    $this->status =1;
-    $this->reseturl = $reseturl; 
-    $result2 = $this->update("UPDATE userdata SET status=:status, reseturl: reseturl,password =:password WHERE email=:email
-    AND reseturl =:reseturl",["email"=>$this->email,"email"=>$this->email,"updated"=>$this->updated,
-    "reseturl"=>$this->reseturl,"ipaddress"=>$this->ipaddress]);
+    $result2 = $this->update("UPDATE userdata SET status =:status,password =:password WHERE email=:email
+    AND reseturl =:reseturl",["status"=>$this->status,"email"=>$this->email,"password"=>$this->password,"reseturl"=>$this->reseturl]);
     if($result2) return $result2;
     else{return false;}
     }
@@ -100,9 +101,8 @@ public function modifyAccountStatus($reseturl ,  $data=[]){
     public function modifyResetUrl($data=[]){
         $result1 = $this->select("SELECT* FROM userdata WHERE email=:email",["email"=>$this->mail]); 
         if($result1){$this->reseturl  =md5(rand(0,999).time());}
-        $result2 = $this->update("UPDATE userdata SET reseturl  =: reseturl WHERE email=:email",
-        ["email"=>$this->email,"email"=>$this->email,"updated"=>$this->updated,
-        "reseturl"=>$this->reseturl,"ipaddress"=>$this->ipaddress]);
+        $result2 = $this->update("UPDATE userdata SET reseturl=:reseturl WHERE email=:email",
+        ["email"=>$this->email,"reseturl"=>$this->reseturl]);
         if($result2) return $result2;
     else{return false;}
         }
