@@ -22,16 +22,16 @@ public $newemail = "";
 
 public function __construct($data=array()){
 parent::__construct();
-if(isset($data['id']))$this->id=int($data['id']);
-if(isset($data['firstname']))$this->firstname=preg_match("/^[a-zA-Z]{3,}$/",$data['firstname']);
-if(isset($data['lastname']))$this->lastname=preg_match("/^[a-zA-Z]{3,}$/",$data['lastname']);
-if(isset($data['username']))$this->username=preg_match("/^[a-zA-Z]{3,}$/",$data['username']);
+if(isset($data['id']) && is_int($data['id']))$this->id=$data['id'];
+if(isset($data['firstname']) && preg_match("/^[a-zA-Z]{3,}$/",$data['firstname'])){$this->firstname =$data['firstname'];}
+if(isset($data['lastname']) && preg_match("/^[a-zA-Z]{3,}$/",$data['lastname'])){$this->lastname =$data['lastname'];}
+if(isset($data['username']) && preg_match("/^[a-zA-Z]{3,}$/",$data['username'])){$this->username =$data['username'];}
 if(isset($data['email']))$this->email=filter_var($data['email'],FILTER_VALIDATE_EMAIL);
 if(isset($data['password']))$this->password=password_hash($data['password'],PASSWORD_BCRYPT);
 if(isset($data['reseturl']))$this->reseturl = $data['reseturl'];
-if(isset($data['created']))$this->created=date($data['created'],"Y-m-d");
-if(isset($data['updated']))$this->created=date($data['created'],"Y-m-d");
-if(isset($data['ipaddress']))$this->ipaddress=int($data['ipaddress']);
+if(isset($data['created']))$this->created = $data['created'];
+if(isset($data['updated']))$this->created = $data['created'];
+if(isset($data['ipaddress']))$this->ipaddress=$data['ipaddress'];
 if(isset($data['newemail']))$this->newemail=filter_var($data['newemail'],FILTER_VALIDATE_EMAIL);
 }
 
@@ -65,14 +65,14 @@ else{return false;}
 public function readAUser($data= []){
 $result1 ="";
 $result2 ="";
-if(isset($data['email'])){
-$result1 = $this->select("SELECT* FROM userdata WHERE email=:email",["email"=>$this->email]);}
-if($result1){$verifiedpasword = password_verify($password, $result1['password']);
-$result2 = $this->select("SELECT* FROM userdata WHERE email=:email AND password=:password",
-["email"=>$this->email, "password"=>$verifiedpasword]);}
-if($result2) return $result2;
-else{return false;}
-
+$data['email'] = isset($data['email'])?$data['email']:"";
+$data['password'] = isset($data['password'])?$data['password']:"";
+$result1 = $this->select("SELECT* FROM userdata WHERE email=:email",["email"=>$this->email]);
+if($result1){$verifiedpasword = password_verify($data['password'], $result1['password']);
+    if($verifiedpasword)return $result1;
+     else{return $result2 = "incorrect pasword details";}
+}
+else{return $result2 ="incorrect email details";}
 }
 
 

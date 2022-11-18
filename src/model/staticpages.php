@@ -15,26 +15,27 @@ class Staticpage extends Crudmodel{
     
     public function __construct($data=array()){
     parent::__construct();
-    if(isset($data['id']))$this->id=int($data['id']);
+    if(isset($data['id']) && is_int($data['id']))$this->id=$data['id'];
     if(isset($data['url']))$this->url=filter_var($data['url'],FILTER_VALIDATE_URL);
-    if(isset($data['title']))$this->title=preg_replace("/[^\,\.\"\'\:\;\@\$\()a-Z0-9]/","",$data['title']);
-    if(isset($data['description']))$this->description=preg_replace("/[^\,\.\"\'\:\;\@\$\()a-Z0-9]/","",$data['description']);
-    if(isset($data['content']))$this->content=trim(stripslashes(htmlspecialchars(['content'])));
-    if(isset($data['created']))$this->created=date($data['created'],"Y-m-d");
-    if(isset($data['updated']))$this->created=date($data['created'],"Y-m-d");
-    if(isset($data['ipaddress']))$this->ipaddress=int($data['ipaddress']);
+    if(isset($data['title']))$this->title=preg_replace("/[^\,\.\"\'\:\;\@\$\()a-zA-Z0-9]/","",$data['title']);
+    if(isset($data['description']))$this->description=preg_replace("/[^\,\.\"\'\:\;\@\$\()a-zA-Z0-9]/","",$data['description']);
+    if(isset($data['content']))$this->content=trim(stripslashes(htmlspecialchars($data['content'])));
+    if(isset($data['created']))$this->created=$data['created'];
+    if(isset($data['updated']))$this->created=$data['created'];
+    if(isset($data['ipaddress']))$this->ipaddress=$data['ipaddress'];
     }
     
     
 // define the class properties
 
 public function createStaticPage($data = []){
-    $this->url = $this->getSEOurl($data['title']);
-    if(isset($data['title']) && isset($data['description']) && isset($data['content'])){
-   $result = $this->insert("INSERT INTO  staticpage(id,url,,title,description ,content, created, updated,ipaddress)
-    VALUES(:id,:url,:title,:description , :content,:created, :updated,:ipaddress)",["id"=>$this->id,"url"=>$this->url,
-    "title"=>$this->title,"description"=>$this->description,"content"=>$this->content,"created"=>$this->created,
-    "updated"=>$this->updated,"ipaddress"=>$this->ipaddress]);
+    $result ="";
+    $url = $this->getSEOurl($data['title']);
+    if(isset($data['title']) && isset($data['description']) && isset($data['content']) && isset($data['created'])
+    && isset($data['ipaddress'])){
+   $result = $this->insert("INSERT INTO  staticpage(url,title,description ,content, created,ipaddress)
+    VALUES(:url,:title,:description,:content,:created,:ipaddress)",["url"=>$url,"title"=>$this->title,
+    "description"=>$this->description,"content"=>$this->content,"created"=>$this->created,"ipaddress"=>$this->ipaddress]);
     }
 if($result) return $result;
 else{return false;}       
@@ -69,11 +70,13 @@ else{return false;}
         }
                 
  public function displayStaticPage($urlpage){
-$this->url = $urlpage;
+$urlpage = $this->url;
+if(isset($urlpage)){
 $result = $this->select("SELECT * FROM staticpage WHERE url=:url",["url"=>$this->url]); 
 if($result)return $result;
 else{return false;} 
-}          
+} 
+ }        
 
 
 public function deleteStaticPage($id){

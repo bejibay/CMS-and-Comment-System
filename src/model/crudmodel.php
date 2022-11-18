@@ -69,6 +69,13 @@ public function delete($query="",$params=[]){
     catch(Exception $e){echo $e->getMessage();} 
 }
 
+public function getSEOUrl($title){
+    $title = $this->title;
+    $title = explode(" ",$title);
+    $title = array_slice($title,0,9);
+    $title = implode("-", $title);
+    return $title;
+    }
 }
 ?>
 

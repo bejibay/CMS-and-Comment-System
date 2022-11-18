@@ -11,7 +11,7 @@
 <a href="newpost">new category</a>
 <a href="view-pages">all pages</a>
 <a href="view-posts">all posts</a>
-<a href="view-categories">all categories/a>
+<a href="view-categories">all categories</a>
 <a href="media">media</a>
 </div>
 <div class =" col-9">
@@ -24,7 +24,7 @@
 <input type="date" name="date" value ="<?php echo $results['date'];?>">
 <label>IP Address</label>
 <input type="hidden" name="ip" value= "<?php echo $_SERVER['REMOTE_ADDR'];?>">
-<input type="submit" name="updatecategory" value="Update Page">
+<input type="submit" name="updatecategory" value="Update Category">
 </form>
 </div>
 </div>

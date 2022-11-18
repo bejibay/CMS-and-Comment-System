@@ -22,10 +22,11 @@
 <input type="text" name="description"   >
 content: <textarea name="content"></textarea>
 <label>Date:</label>
-<input type="date" name="date" >
+<input type="date" name="created">
+<input type="number" name="category_id" value ="1">
 <label>Ip Address:</label>
-<input type="hidden" name="ip" >
-<input type="submit" name="newpost" value="Create Page">
+<input type="hidden" name="ipaddress" value ="1">
+<input type="submit" name="newpost" value="Create Post">
 </form>
 </div>
 </div>

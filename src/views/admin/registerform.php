@@ -22,6 +22,6 @@
 </div>
 </div class="column rightside"></div>
 </div>
-<div class="footet"><?php include WORKING_DIR_PATH."/src/views/include/footer.php";?></div>
+<div class="footer"><?php include WORKING_DIR_PATH."/src/views/include/footer.php";?></div>
 </body>
 </html>

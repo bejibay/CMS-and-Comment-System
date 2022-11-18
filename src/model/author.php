@@ -17,12 +17,12 @@ public $ipaddress = null;
 // construct function to initialise  the properties
 public function __construct($data=array()){
 parent::__construct();
-if(isset($data['id']))$this->id=int($data['id']);
+if(isset($data['id']) && is_int($data['id']))$this->id=$data['id'];
 if(isset($data['biography']))$this->biography=trim(stripslashes(htmlspecialchars($data['biography'])));
 if(isset($data['user_id']))$this->user_id=int($data['user_id']);
-if(isset($data['created']))$this->created=date($data['created'],"Y-m-d");
-if(isset($data['updated']))$this->created=date($data['created'],"Y-m-d");
-if(isset($data['ipaddress']))$this->ipaddress=int($data['ipaddress']);
+if(isset($data['created']))$this->created=$data['created'];
+if(isset($data['updated']))$this->created=$data['created'];
+if(isset($data['ipaddress']))$this->ipaddress = $data['ipaddress'];
 
 }
 

@@ -18,34 +18,27 @@ public $ipaddress = null;
 
 public function __construct($data=array()){
 parent::__construct();
-if(isset($data['id']))$this->id=int($data['id']);
-if(isset($data['title']))$this->title=preg_replace("/[^\,\.\"\'\:\;\@\$\()a-Z0-9]/","",$data['title']);
-if(isset($data['description']))$this->description=preg_replace("/[^\,\.\"\'\:\;\@\$\()a-Z0-9]/","",$data['description']);
-if(isset($data['content']))$this->content=trim(stripslashes(htmlspecialchars(['content'])));
-if(isset($data['category_id']))$this->category_id=int($data['category_id']);
-if(isset($data['media_id']))$this->media_id=int($data['media-id']);
-if(isset($data['author_id']))$this->author_id=int($data['author_id']);
-if(isset($data['created']))$this->created=date($data['created'],"Y-m-d");
-if(isset($data['updated']))$this->created=date($data['created'],"Y-m-d");
-if(isset($data['ipaddress']))$this->ipaddress=int($data['ipaddress']);
+if(isset($data['id']) && is_int($data['id']))$this->id=$data['id'];
+if(isset($data['title']))$this->title=preg_replace("/[^\,\.\"\'\:\;\@\$\()a-zA-Z0-9]/","",$data['title']);
+if(isset($data['description']))$this->description=preg_replace("/[^\,\.\"\'\:\;\@\$\()a-zA-Z0-9]/","",$data['description']);
+if(isset($data['content']))$this->content=trim(stripslashes(htmlspecialchars($data['content'])));
+if(isset($data['category_id']) && is_int($data['category_id']))$this->category_id = $data['category_id'];
+if(isset($data['media_id']) && is_int($data['media_id']))$this->media_id= $data['media-id'];
+if(isset($data['author_id']) && is_int($data['author_id']))$this->author_id =$data['author_id'];
+if(isset($data['created']))$this->created = $data['created'];
+if(isset($data['updated']))$this->created = $data['created'];
+if(isset($data['ipaddress']))$this->ipaddress = $data['ipaddress'];
 }
 
 
-public function getSEOUrl($title){
-    $title = $this->title;
-    $title = explode(" ",$title);
-    $title = array_slice($title,0,9);
-    $title = implode("-", $title);
-    return $title;
-    }
 
 // define the class properties
 public function createADynamicPage($data=[]){
     $this->url = $this->getSEOurl($data['title']);
-    if(isset($data['title']) && isset($data['description']) && isset($data['content'])){
-    $result =  $this->insert("INSERT INTO dynamicpage(id,url,title , description, content,category_id,media_id,author_id,
-    created,updated,ipaddress)VALUES(:id,:url,:title , :description, :content,:category_id,:media_id,:author_id,
-    :created,:updated,:ipaddress)",["id"=>$this->id,"url"=>$this->url,"title"=>$this->title,
+    if(isset($data['title']) && isset($data['description']) && isset($data['content'])&& isset($data['category_id'])){
+    $result =  $this->insert("INSERT INTO dynamicpage(url,title , description, content,category_id,media_id,author_id,
+    created,updated,ipaddress)VALUES(:url,:title , :description, :content,:category_id,:media_id,:author_id,
+    :created,:updated,:ipaddress)",["url"=>$this->url,"title"=>$this->title,
     "description"=>$this->description,"content"=>$this->content,"category_id"=>$this->category_id,
     "media_id"=>$this->media_id,"author_id"=>$this->author_id ,"created"=>$this->created,"updated"=>$this->updated,
     "ipaddress"=>$this->ipaddress]);
@@ -86,9 +79,9 @@ ipaddress=:ipaddress",["id"=>$this->id,"url"=>$this->url,"title"=>$this->title,
 }
 
 public function displayDynamicpage($url){
+    $url = $this->url;
     if(isset($url)){
-        $this->url = $url;
- $result = $this->select("SELECT* FROM dynamicpage WHERE url=:url",["url"=>$this->url]);  
+$result = $this->select("SELECT* FROM dynamicpage WHERE url=:url",["url"=>$this->url]);  
     }
     if($result)return $result;
     else{return false;}

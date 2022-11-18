@@ -18,5 +18,6 @@
 </div class="column rightside"></div>
 </div>
 <div class="footer"><?php include WORKING_DIR_PATH."/src/views/include/footer.php";?></div>
+<?php if(isset($_SESSION['firstname'])) echo $_SESSION['firstname'];?>
 </body>
 </html>

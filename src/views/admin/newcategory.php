@@ -14,16 +14,13 @@
 <a href="view-categories">all categories</a>
 <a href="media">media</a>
 </div>
-<div class =" col-9>
+<div class =" col-9">
 <form action="#" method="post">
 <lable>Name:</label>
 <input type="text" name="name" >
 <label>Description:</label> 
- <textarea name="content"></textarea>
- <label>Date:</label> 
-<input type="date" name="date" >
-<lable>Date:</label>
-<input type="hidden" name="ip" >
+<textarea name="description"></textarea>
+<input type="hidden" value = "2" name="ipaddress" >
 <input type="submit" name="newcategory" value="Create Category">
 </form>
 </div>
