@@ -14,7 +14,7 @@
 <a href="view-categories">all categories</a>
 <a href="media">media</a>
 </div>
-<?php if(isset($lists)){echo $lists;}?>
+<?php if(isset($list)){echo $list;}?>
 </div>
 <div class="footer"><?php include  WORKING_DIR_PATH."/src/views/include/footer.php";?></div>
 </body>

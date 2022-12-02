@@ -25,7 +25,7 @@ if(isset($data['content']))$this->content=trim(stripslashes(htmlspecialchars($da
 if(isset($data['category_id']) && is_int($data['category_id']))$this->category_id = $data['category_id'];
 if(isset($data['author_id']) && is_int($data['author_id']))$this->author_id =$data['author_id'];
 if(isset($data['created']))$this->created = $data['created'];
-if(isset($data['updated']))$this->created = $data['created'];
+if(isset($data['updated']))$this->updated = $data['created'];
 if(isset($data['ipaddress']))$this->ipaddress = $data['ipaddress'];
 }
 
@@ -34,8 +34,9 @@ if(isset($data['ipaddress']))$this->ipaddress = $data['ipaddress'];
 // define the class properties
 public function createDynamicPage($data=[]){
 
-if(isset($url) && isset($data['title']) && isset($data['description']) && isset($data['content'])&& isset($data['category_id'])
-&& isset($data['author_id']) && isset($data['created']) & isset($data['ipaddress'])){$url = $this->getSEOurl($data['title']);
+if(isset($data['title']) && isset($data['description']) && isset($data['content']) && 
+isset($data['category_id']) && isset($data['author_id']) && isset($data['created']) & isset($data['ipaddress'])){
+$url = $this->getSEOurl($data['title']);
 $result =  $this->insert("INSERT INTO dynamicpage(url,title, description, content,category_id,author_id,
 created,ipaddress)VALUES(:url,:title,:description,:content,:category_id,:author_id,
 :created,:ipaddress)",["url"=>$url,"title"=>$this->title,
@@ -76,10 +77,10 @@ ipaddress=:ipaddress",["id"=>$this->id,"url"=>$this->url,"title"=>$this->title,
     else{return false;}
 }
 
-public function displayDynamicpage($url){
-    $url = $this->url;
-    if(isset($url)){
-$result = $this->select("SELECT* FROM dynamicpage WHERE url=:url",["url"=>$this->url]);  
+public function displayDynamicPage($urlpage){
+    $url = $urlpage;
+    if(isset($urlpage)){
+$result = $this->select("SELECT* FROM dynamicpage WHERE url=:url",["url"=>$url]);  
     }
     if($result)return $result;
     else{return false;}

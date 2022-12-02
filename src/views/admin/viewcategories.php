@@ -1,5 +1,8 @@
 
-<?php include  WORKING_DIR_PATH."/src/views/include/header.php";?>
+<?php require_once $_SERVER['DOCUMENT_ROOT']."/Contentgo/config/bootstrap.php";?>
+ 
+ <?php include  WORKING_DIR_PATH."/src/views/include/header.php";?>
+
 
 <div class="row">
 <div class="col-3">
@@ -12,7 +15,7 @@
 <a href="view-categories">all categories</a>
 <a href="media">media</a>
 </div>
-<?php if(isset($lists)){echo $lists}?>
+<?php if(isset($list)){echo $list;}?>
 </div>
 </div>
 <div class="footer"><?php include WORKING_DIR_PATH."/src/views/include/footer.php";?></div>

@@ -23,15 +23,13 @@ if(isset($data['userdata_id']) && is_int($data['userdata_id']))$this->userdata_i
 if(isset($data['created']))$this->created=$data['created'];
 if(isset($data['updated']))$this->created=$data['created'];
 if(isset($data['ipaddress']))$this->ipaddress = $data['ipaddress'];
-
 }
 
 
 // define the all the class methods
 
 public function createAuthor($data= []){
-if(isset($data['biography']) && isset($data['ipaddress']))
-{
+if(isset($data['biography']) && isset($data['ipaddress'])){
 $result = $this->insert("INSERT INTO author(`biography`,`userdata_id`,`ipaddress`)VALUES(:biography,:userdata_id,
 :ipaddress)",["biography"=>$this->biography,"userdata_id"=>$this->userdata_id,"ipaddress"=>$this->ipaddress]);
 }

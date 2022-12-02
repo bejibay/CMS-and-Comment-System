@@ -1,12 +1,18 @@
 <?php 
 session_start();
-$requestUrl = $_SERVER['REQUEST_URI'];
-$currentPageUrl = "http://"."locahost".$_SERVER['REQUEST_URI'];
+
 require (__DIR__."/src/controller/functions.php");
 //seesion variables for testing only
+
+$requestUrl = $_SERVER['REQUEST_URI'];
+
+$uri = explode("/",$requestUrl);
+$path = $uri['0'];
+$path1 = $uri['1'];
+$path2 = $uri['2'];
+$currentPageUrl = "http://"."locahost".$_SERVER['REQUEST_URI'];
 if(isset($requestUrl)){
-   if($requestUrl === "/Contentgo"){homePage();}
-   switch ($requestUrl){
+switch ($requestUrl){
     case   "/Contentgo/":
     case   "/Contentgo/home":
       homePage();
@@ -64,11 +70,11 @@ if(isset($requestUrl)){
       break;
     case '/Contentgo/logout':
       logout();
-      break;
+   break;
     default:
-     otherUrls();
-      
-    }
+    otherUrls();
+    
+   }
 }
 
  

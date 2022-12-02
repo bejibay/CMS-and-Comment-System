@@ -36,8 +36,9 @@ echo "<option value =".$value['id'].">".$value['id']."</option>";
 <label>Author Id:</label>
 <select name ="author_id">
 <option value ="3">Select An Author</option>  
-<?php if(isset($results['author'])){foreach($results['author'] as $key=>$value){
-echo "<option value =".$value['id'].">".$value['id']."</option>";
+<?php if(isset($results['author'])){foreach($results['author'] as $key=>$value){?>
+ <option value ="<?php echo $value['id'];?>"><?php echo $value['id'];?></option>;
+<?php
 }
 }
 ?>

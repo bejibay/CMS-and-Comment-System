@@ -69,9 +69,8 @@ created:created,updated=:updated, ipaddress=:ipaddres WHERE id =:id",["id"=>$thi
 }
                 
 public function displayStaticPage($urlpage){
-$url = $urlpage;
 if(isset($urlpage)){
-$result = $this->select("SELECT * FROM staticpage WHERE url=:url",["url"=>$url]); 
+$result = $this->select("SELECT * FROM staticpage WHERE url=:url",["url"=>$this->url]); 
 if($result)return $result;
 else{return false;} 
 } 

@@ -14,7 +14,7 @@
 <a href="media">media</a>
 </div>
 <div class =" col-9">
-<?php if(isset($lists)){echo $lists;}?>
+<?php if(isset($list)){echo $list;}?>
 </div>
 <div class="footer"><?php include WORKING_DIR_PATH."/src/views/include/footer.php";?></div>
 </body>
