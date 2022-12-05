@@ -7,7 +7,6 @@
 <form action="#" method="post">
 <h2>Login</h2>
 <p><?php  if(isset($results['errormessage'])) echo $results['errormessage'];?></p>
-<p><?php  if(isset($_SESSION['firstname'])) echo $_SESSION['firstname'];?></p>
 <label for ="email">Email:</label>
 <input type="text" name="email" placeholder="Type In Your email" id="email">
 <label for ="password">Password:</label>

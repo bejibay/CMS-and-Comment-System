@@ -46,9 +46,8 @@ if($result) return $result;
 }
 
 public function readAuthor($id){
- $this->id= $id;
 if(isset($id)){
-$result = $this->select("SELECT* FROM author WHERE id=:id",["id"=>$this->id]);
+$result = $this->select("SELECT* FROM author WHERE id=:id",["id"=>$id]);
 }
 if(!empty($result)) return  $result;
 else{return false;}
@@ -58,10 +57,9 @@ else{return false;}
 
 
 public function updateAuthor($id,$data=[]){
-$this->id = $id;
 if(isset($id) && isset($data['biography']) && isset($data['updated'])){
  $result = $this->update("UPDATE author SET biography=:biography, updated=:updated WHERE id=:id",[
-    "biography"=>$this->biography,"update"=>$this->updated, "id"=>$this->id]);
+"biography"=>$this->biography,"update"=>$this->updated, "id"=>$id]);
  }
  if(!empty($result))return $result;
  else{return false;}
@@ -69,9 +67,8 @@ if(isset($id) && isset($data['biography']) && isset($data['updated'])){
 
     
 public function deleteAuthor($id){
-$this->id = $id;
 if(isset($id)){
-$result = $this->delete("DELETE* FROM author WHERE id =:id",["id"=>$this->id]);}
+$result = $this->delete("DELETE* FROM author WHERE id =:id",["id"=>$id]);}
 if(!empty($result))return $result;
 else{return false;}
 }

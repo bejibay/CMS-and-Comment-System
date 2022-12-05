@@ -18,7 +18,7 @@
 <label>Biography:</label> 
 <textarea name="biography"></textarea>
 <input type="hidden" value = "2" name="userdata_id" >
-<input type="hidden" value = "2" name="ipaddress" >
+<input type="hidden" value = "<?php echo $_SERVER['REMOTE_ADDR'];?>" name="ipaddress" >
 <input type="submit" name="newauthor" value="Create Author">
 </form>
 </div>

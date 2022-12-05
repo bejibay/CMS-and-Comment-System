@@ -5,13 +5,12 @@
 
 <div class="row">
 <div class="column leftside">
-<?php if(isset($results['content'])){echo $results['content'];}?>
-  
- <?php if(isset($_SESSION['firstname'])){var_dump($_SESSION['firstname']);}?>
- <?php if(isset($_SESSION['lastname'])){echo $_SESSION['lastname'];}?>
- <?php if(isset($_SESSION['userid'])){var_dump($_SESSION['userid']);}?>
 </div>
-</div class="column rightside">put this column content here</div>
+</div class="column rightside">
+<?php if(isset($_SESSION['firstname']) && isset($_SESSION['lastname']))
+{echo "Welcome ".$_SESSION['firstname']." ".$_SESSION['lastname'];}?>
+<p><?php if(isset($results['content']))echo $results['content'];?></p>
+ 
 </div>
 <div class="footer"><?php include WORKING_DIR_PATH."/src/views/include/footer.php";;?></div>
 </body>

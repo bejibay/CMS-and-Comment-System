@@ -63,13 +63,22 @@ else{return false;}
 
 public function verifyUserEmail($data= []){
 if(isset($data['email'])){
-$result1 = $this->select("SELECT* FROM userdata WHERE email=:email",["email"=>$data['email']]);
-if($result1) return $result1;
+$result = $this->select("SELECT* FROM userdata WHERE email=:email",["email"=>$data['email']]);
+if($result) return $result;
 }
 else{return false;}
 }
 
 public function verifyUserPassword($data=[]){
+$result1 = array();
+if(isset($data['email']) && isset($data['password'])){
+$result = $this->verifyUserEmail($data['email']);
+var_dump($result);
+if(is_array($result)){$result1 = password_verify($data['password'], $result['password']);}
+if($result1)return $result1;
+else{return false;}
+var_dump($result1);
+}
 }
 
 public function modifyEmail($data=[]){
@@ -104,9 +113,10 @@ else{return false;}
 }
         
  public function deleteUser($id){
-$this->id = $id;
-$result = $this->delete("DELETE* FROM userdata WHERE id=:id",["id"=>$this->id]);
+if(isset($id)){
+$result = $this->delete("DELETE* FROM userdata WHERE id=:id",["id"=>$id]);
 if($result)return $result;
 else{return false;}
+}
 }
     }

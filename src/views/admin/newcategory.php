@@ -22,7 +22,7 @@
 <textarea name="description"></textarea>
 <label>Date:</label> 
 <input type="date" name="created" >
-<input type="hidden" value = "2" name="ipaddress" >
+<input type="hidden" value = "<?php echo $_SERVER['REMOTE_ADDR'];?>" name="ipaddress" >
 <input type="submit" name="newcategory" value="Create Category">
 </form>
 </div>

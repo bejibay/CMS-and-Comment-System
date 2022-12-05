@@ -11,19 +11,19 @@
 <a href="newpost">new category</a>
 <a href="view-pages">all pages</a>
 <a href="view-posts">all posts</a>
-<a href="view-categories">all categories/a>
+<a href="view-categories">all categories</a>
 <a href="media">media</a>
 </div>
 <div class = "col-9">
 <form action="#" method="post">
 <label>title:</label>
-<input type="text" name="title" value ="<?php echo $results['title'];?>">
+<input type="text" name="title" value ="<?php if(isset($results['title']))echo $results['title'];?>">
 <label>Description:</label>
-<input type="text" name="description" value ="<?php echo $results['description'];?>"  >
+<input type="text" name="description" value ="<?php if(isset($results['description']))echo $results['description'];?>"  >
 <label>Content:</label>
-<textarea name="content"><?php echo $results['content'];?></textarea>
+<textarea name="content"><?php if(isset($results['content']))echo $results['content'];?></textarea>
 <label>Date:</label>
-<input type="date" name="date" value ="<?php echo $results['date'];?>" >
+<input type="date" name="updated">
 <label>Ip Address:</label>
 <input type="hidden" name="ip" value= "<?php echo $_SERVER['REMOTE_ADDR'];?>">
 <input type="submit" name="updatepost" value="Update Post">

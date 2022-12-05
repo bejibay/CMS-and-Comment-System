@@ -46,29 +46,20 @@ if($result)return $result;
 else{return false;}
 }
             
-public function readStaticPage($id){
-$this->id =$id;
-if(isset($id)){
- $this->select("SELECT* FROM staticpage WHERE id=:id",["id"=>$this->id]);
+
+public function updateStsaticPage($id,$data =[]){
+
+if(isset($data['title']) && isset($data['description']) && isset($data['content'])){
+$result = $this->update("UPDATE staticpage SET title=:titlde,description=:description,content=:content,
+updated=:updated, ipaddress=:ipaddres WHERE id =:id",["id"=>$id,"title"=>$this->title,
+"description"=>$this->description,"content"=>$this->content,"updated"=>$this->updated,
+"ipaddress"=>$this->ipaddress]);
 }
-if(isset($result)) return $result;
+if($result)return $result;
 else{return false;}
 }
-            
-            
-               
-public function updateStsaticPage($id,$data =[]){
-$this->url = $this->getSEOurl($data['title']); 
-$this->id = $id ;
-if(isset($data['title']) && isset($data['description']) && isset($data['content'])){
-$result = $this->update("UPDATE staticpage SET id=:id,title=:titlde,description=:description,content=:content,
-created:created,updated=:updated, ipaddress=:ipaddres WHERE id =:id",["id"=>$this->id,"url"=>$this->url,
-"title"=>$this->title,"description"=>$this->description,"content"=>$this->content,"created"=>$this->created,
-"updated"=>$this->updated,"ipaddress"=>$this->ipaddress]);
-}
-}
                 
-public function displayStaticPage($urlpage){
+public function readStaticPage($urlpage){
 $url = $urlpage;
 if(isset($urlpage)){
 $result = $this->select("SELECT * FROM staticpage WHERE url=:url",["url"=>$url]); 
@@ -79,9 +70,8 @@ else{return false;}
 
 
 public function deleteStaticPage($id){
-$this->id = $id;
 if(isset($id)){
-$this->delete("DELETE FROM staticpage WHERE id=:id",["id"=>$this->id]);
+$this->delete("DELETE FROM staticpage WHERE id=:id",["id"=>$id]);
 }
 if($result) return $result;
 else{return false;}

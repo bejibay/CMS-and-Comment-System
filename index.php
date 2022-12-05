@@ -1,6 +1,7 @@
 <?php 
 session_start();
 $requestUrl = $_SERVER['REQUEST_URI'];
+$uri = explode("/",$requestUrl);
 $currentPageUrl = "http://"."locahost".$_SERVER['REQUEST_URI'];
 require (__DIR__."/src/controller/functions.php");
 //seesion variables for testing only
@@ -41,15 +42,6 @@ if(isset($requestUrl)){
    case '/Contentgo/dashboard/newauthor':
       newAuthor();
       break;
-   case '/Contentgo/dashboard/update-page':
-      updatePage();
-      break;
-   case '/Contentgo/dashboard/update-post':
-      updatePost();
-      break;
-   case '/Contentgo/dashboard/update-category':
-     updateCategory();
-     break;
    case '/Contentgo/dashboard/view-posts':
      viewPosts();
      break;

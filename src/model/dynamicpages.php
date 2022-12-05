@@ -54,18 +54,10 @@ if($result)return $result;
 else{return false;}
 }
 
-public function readDynamicPage($id){
-$this->id = $id;
-$result = $this->select("SELECT* FROM dynamicpage WHERE id=:id",["id"=>$this->id]);
-if($result) return $result;
-else{return false;}
-}
-
-
 
 public function updateDynamicPage($id,$data = []){
-    if(isset($id)  && isset($data['title'])  && isset($data['decription']) && isset($data['content'])){
-        $$this->url = $this->getSEOUrl($data['title']);
+if(isset($id)  && isset($data['title'])  && isset($data['decription']) && isset($data['content'])){
+$$this->url = $this->getSEOUrl($data['title']);
 $result = $this->update("UPDATE dynamicpage SET url=:url,title=:title,description=:description,content=:content,
 category_id=:category_id,media_id=:media_id,author_id=:author_id,created=:created,updated=:updated,
 ipaddress=:ipaddress",["id"=>$this->id,"url"=>$this->url,"title"=>$this->title,
@@ -77,22 +69,21 @@ ipaddress=:ipaddress",["id"=>$this->id,"url"=>$this->url,"title"=>$this->title,
     else{return false;}
 }
 
-public function displayDynamicPage($urlpage){
-    $url = $urlpage;
-    if(isset($urlpage)){
+public function readDynamicPage($urlpage){
+$url = $urlpage;
+if(isset($urlpage)){
 $result = $this->select("SELECT* FROM dynamicpage WHERE url=:url",["url"=>$url]);  
-    }
-    if($result)return $result;
-    else{return false;}
+}
+if($result)return $result;
+else{return false;}
 }
 
 public function deleteADynamicPage($id){
-    $this->id = $id;
-    if(isset($id)){
-$result = $this->delete("DELETE* FROM dynamicpage WHERE id=:id",["id"=>$this->id]);
-        }
-        if($result)return $result;
-        else{return false;}
-    }
-       }
+if(isset($id)){
+$result = $this->delete("DELETE* FROM dynamicpage WHERE id=:id",["id"=>$id]);
+}
+if($result)return $result;
+else{return false;}
+}
+ }
            

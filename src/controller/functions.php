@@ -16,18 +16,20 @@ $results['title']="Admin Login Form";
 $results['description']="Admin Login Form";
 $results['errormessage'] = " ";
 if(isset($_POST['login'])){
-//user has clicked the login form, login successful
 $userdata = array();
 if(isset($_POST['email']) && isset($_POST['password'])){
 $userdata = ['email'=>$_POST['email'], 'password'=>$_POST['password']];}
 $user = new Userdata($userdata);
-$results['successEmail'] = $user->verifyUserEmail($userdata);
-foreach($results['successEmail'] as $key=>$value){
+$verifiedemail = $user->verifyUserEmail($userdata);
+if(is_array($verifiedemail)){
+foreach($verifiedemail as $key=>$value){
  $_SESSION['firstname'] = $value['firstname'];
  $_SESSION['lastname'] = $value['lastname'];
  $_SESSION['userid']  =$value['id'];
 }
-$results['successPassword'] = $user->verifyUserPassword($userdata);
+}
+else{$results['errormessage'] = "Email does not exist";}
+$verifiedpassword = $user->verifyUserPassword($userdata);
 
 if(isset($_SESSION['firstname']) && isset($_SESSION['lastname'])){
     header("location:/Contentgo/dashboard");}
@@ -85,6 +87,7 @@ else{require(WORKING_DIR_PATH."/src/views/dashboard.php");}
 
 
 
+
 function requireReset(){
 $results = array();
 $results['title'] =" Reset Login";
@@ -130,8 +133,6 @@ require(WORKING_DIR_PATH."/src/views/admin/resetform.php");
 
 function newPost(){
 $results= array();
-$results['firstname'] =$_SESSION['firstname'];
-$results['lastname'] =$_SESSION['lastname'];
 $results['title'] = "Create A New Post";
 $results['description'] = "Create A new Post";
 $results['pageheading']="Create A Post";
@@ -141,13 +142,11 @@ if(isset($_POST['title']) && isset($_POST['description']) && isset($_POST['conte
 {$newdata = ['title'=>$_POST['title'],'description'=>$_POST['description'],
 'content'=>$_POST['content'],'category_id'=>intval($_POST['category_id']),'author_id'=>intval($_POST['author_id']),
 'created'=>$_POST['created'],'ipaddress'=>$_POST['ipaddress']];}
-var_dump($newdata);
-
 $author = new Author($newdata);
 $category = new Category($newdata);
 $results['author'] = $author->readAuthors();
 $results['category'] =$category->readCategories();
-if(isset($results['firstname']) && isset($results['lastname'])){
+if(isset($_SESSION['firstname']) && isset($_SESSION['lastname'])){
 require(WORKING_DIR_PATH."/src/views/admin/newpost.php");}
 else{header("location:/Contentgo/login");}
 $dynamicpage = new Dynamicpage($newdata);
@@ -166,10 +165,10 @@ if(isset($results['firstname']) && isset($results['lastname'])){
 require(WORKING_DIR_PATH."/src/views/admin/updatepost.php");}
 else{header("location:/Contentgo/login");}
 $update = new DynamicPage($_POST);
-$dataedited = $update->readADynamicpage($id);
+$dataedited = $update->readDynamicpage($id);
 if($dataedited) {require(WORKING_DIR_PATH."/src/views/admin/updatepost.php");}
-if(isset($_POST['updatepage'])){
-$updatepost = $update->updateADynamicpage($id,$updateddata);
+if(isset($_POST['updatepost'])){
+$updatepost = $update->updateDynamicpage($id,$updateddata);
 $updateddata = ['url'=>$_POST['url'],'title'=>$_POST['title'] , 
 'description'=>$_POST['description'], 'content'=>$_POST['content'],'category_id'=>$_POST['category_id'],
 'media_id'=>$_POST[['media_id']],'author_id'=>$_POST['author_id'],'created'=>$_POST['created'],
@@ -189,8 +188,6 @@ if(isset($_POST['title']) && isset($_POST['description']) && isset($_POST['conte
 $newdata = ['title'=>$_POST['title'],'description'=>$_POST['description'],'content'=>$_POST['content'],
 'created'=>$_POST['created'],'ipaddress'=>$_POST['ipaddress']];
 }
-var_dump($newdata);
-
 if(isset($_SESSION['firstname']) && isset($_SESSION['lastname'])){
 require(WORKING_DIR_PATH."/src/views/admin/newpage.php");}
 else{header("location:/Contentgo/login");}
@@ -202,18 +199,19 @@ $results['success'] = $staticpage->createStaticPage($newdata);
     
 
 function updatePage(){
-global $path2;
-$id = $path2;
-$result = array();
-$results['firstname'] =$_SESSION['firstname'];
-$results['lastname'] =$_SESSION['lastname'];
-$update = new StaticPage($_POST);
-if(isset($results['firstname']) && isset($results['lastname'])){
+$requestUrl = $_SERVER['REQUEST_URI'];
+$uri = explode("/",$requestUrl);
+$path1 = $uri['2'];
+$path2 = $uri['3'];
+$results = array();
+$newdata = array();
+$staticpage = new StaticPage($newdata);
+if(isset($_SESSION['firstname']) && isset($_SESSION['lastname'])){
 require(WORKING_DIR_PATH."/src/views/admin/updatepage.php");}
 else{header("location:/Contentgo/login");}
-$dataedited = $update->readAStaticpage($id);
+$dataupdate = $staticpage->readStaticPage($id);
 if(isset($_POST['updatepage'])){
-$updatepage = $update->updateAStaticpage($id,$updateddata);
+$updatepage = $update->updateStaticpage($id,$updateddata);
 $updateddata = ['url'=>$_POST['url'],'title'=>$_POST['title'] , 
 'description'=>$_POST['description'], 'content'=>$_POST['content'],
 'author_id'=>$_POST['author_id'],'created'=>$_POST['created'],
@@ -361,9 +359,11 @@ require(WORKING_DIR_PATH."/src/views/admin/viewmedia.php");
 
 
 function otherUrls(){
+$results['title'] ="";
 $requestUrl = $_SERVER['REQUEST_URI'];
 $uri = explode("/",$requestUrl);
-$path = $uri['2'];
+if(isset($uri['2'])) $path2  =$uri['2'];
+if(isset($uri['4'])) $path4  =$uri['4'];
 $newdata = array();
 $results = array();
 if(isset($_POST['title']) && isset($_POST['description']) && isset($_POST['content']) && isset($_POST['created'])
@@ -373,24 +373,67 @@ $newdata = ['title'=>$_POST['title'],'description'=>$_POST['description'],'conte
 }
 $page = new Staticpage($newdata);
 $post = new Dynamicpage($newdata);
-if(isset($path)){
-$result1 = $page->displayStaticPage($path);
-$result2 = $post->displayDynamicPage($path);
-if($result1) require(WORKING_DIR_PATH."/src/views/page.php");
-elseif($result2) require(WORKING_DIR_PATH."/src/views/post.php");
-else 
+if(isset($path2)){
+$result1 = $page->readStaticPage($path2);
+$result2 = $post->readDynamicPage($path2);
+if($result1){ 
+    if(is_array($result1)){
+    foreach($result1 as $key=>$value){
+    $results['title'] = $value['title'];
+    $results['description']  = $value['description'];
+    $results['content'] = $value['content'];
+    }
+}
+require(WORKING_DIR_PATH."/src/views/page.php");
+}
+elseif($result2){
+    if(is_array($result2)){
+        foreach($result2 as $key=>$value){
+        $results['title']  = $value['title'];
+        $results['description']  = $value['description'];
+        $results['content'] = $value['content'];
+        }
+        }
+    require(WORKING_DIR_PATH."/src/views/post.php");
+}
+}
+else{
+    require(WORKING_DIR_PATH."/src/views/notfound.php");  
+}
+
+if(isset($path4)){
+$result3 = $page->readStaticPage($path4);
+$result4 = $post->readDynamicPage($path4);
+
+if(isset($_SESSION['firstname']) && isset($_SESSION['lastname']) && $result3){
+    
+    if(is_array($result3)){
+        foreach($result3 as $key=>$value){
+        $results['title'] = $value['title'];
+        $results['description']  = $value['description'];
+        $results['content'] = $value['content'];
+        
+    }
+}
+    require(WORKING_DIR_PATH."/src/views/admin/updatepage.php");}
+
+if(isset($_SESSION['firstname']) && isset($_SESSION['lastname']) && $result4){
+     if(is_array($result4)){
+         foreach($result4 as $key=>$value){
+         $results['title'] = $value['title'];
+         $results['description']  = $value['description'];
+         $results['content'] = $value['content'];
+        }
+        }
+    require(WORKING_DIR_PATH."/src/views/admin/updatepost.php");}
+}
+else{
 require(WORKING_DIR_PATH."/src/views/notfound.php");
 }
-var_dump($result1);
-var_dump($result2);
-if(is_array($result1)){
-foreach($result1 as $key=>$value){
-$results['title']  = $value['content'];
-$results['content'] = $value['content'];
 
 }
-}
-}
+
+
 
 function homePage(){
 

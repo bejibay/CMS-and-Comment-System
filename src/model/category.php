@@ -27,14 +27,14 @@ if(isset($data['ipaddress']))$this->ipaddress = $data['ipaddress'];
 
 
 public function createCategory($data = []){
-    if(isset($data['name'])&& isset($data['description']) && isset($data['ipaddress'])){
-   $result =  $this->insert("INSERT INTO category(name,description,created,ipaddress)
-    VALUES(:name,:description,:created,:ipaddress)",["name"=>$this->name,
-    "description"=>$this->description,"created"=>$this->created,"ipaddress"=>$this->ipaddress]);
-    }
-    if($result)return $result;
-    else{return false;}
-    }
+if(isset($data['name'])&& isset($data['description']) && isset($data['ipaddress'])){
+$result =  $this->insert("INSERT INTO category(name,description,created,ipaddress)
+VALUES(:name,:description,:created,:ipaddress)",["name"=>$this->name,
+"description"=>$this->description,"created"=>$this->created,"ipaddress"=>$this->ipaddress]);
+}
+if($result)return $result;
+else{return false;}
+}
    
 
 public function readCategories(){
@@ -43,34 +43,30 @@ if($result)return $result;
 else{return false;}
 }
 
-public function readAcategory($id){
-$id = $this->id;
+public function readCategory($id){
 if(isset($id)){
-$result = $this->select("SELECT* FROM category WHERE id=:1d", ["id"=>$this->id]);
+$result = $this->select("SELECT* FROM category WHERE id=:1d", ["id"=>$id]);
 if($result)return $result;
 else{return false;}
 }
 }
 
 
-
 public function updateCategory($id,$data = []){
-    $id = $this->id;
-    if(isset($id) && isset($data['name']) && isset($data['description']) && isset($data['updated'])){
+if(isset($id) && isset($data['name']) && isset($data['description']) && isset($data['updated'])){
 $result = $this->update("UPDATE category SET name=:name, description =:description, updated = :updated, 
 ipaddress=:ipadress WHERE id =:id", ["name"=>$this->name,"description"=>$this->description,
-"updated"=>$this->updated,"ipaddres"=>$this->ipaddress,"id"=>$this->id,]);
+"updated"=>$this->updated,"ipaddres"=>$this->ipaddress,"id"=>$id,]);
 }
 if($result)return $result;
 else{return false;}
 }
 
  public function deleteCategory($id){
-    $id = $this->id;
-    if(isset($id)){
-$result = $this->delete("DELETE* FROM category WHERE id=:id",["id"=>$this->id]);
-    }
-    if($result) return $result;
-    else{return false;}
-       }
+if(isset($id)){
+$result = $this->delete("DELETE* FROM category WHERE id=:id",["id"=>$id]);
+}
+if($result) return $result;
+else{return false;}
+}
 }        

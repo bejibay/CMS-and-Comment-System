@@ -20,10 +20,10 @@
 <lable>Description:</label>
 <input type="text" name="description" placeholder ="enter descripotion">
 <lable>Content:</label> 
- <textarea name="content" placeholder ="enter content"></textarea>
+<textarea name="content" placeholder ="enter content"></textarea>
 <label>Date:</label>
 <input type="date" name="created" >
-<input type="hidden" name="ipaddress" value ="2">
+<input type="hidden" name="ipaddress" value ="<?php echo $_SERVER['REMOTE_ADDR'];?>">
 <input type="submit" name="newpage" value="Create Page">
 </form>
 </div>
