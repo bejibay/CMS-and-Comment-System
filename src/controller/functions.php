@@ -156,25 +156,15 @@ $result['success'] = $dynamicpage->createDynamicPage($newdata);
 }
 
 function updatePost(){
-global $path2;
-$id = $path2;
-$result = array();
-$results['firstname'] =$_SESSION['firstname'];
-$results['lastname'] =$_SESSION['lastname'];
-if(isset($results['firstname']) && isset($results['lastname'])){
-require(WORKING_DIR_PATH."/src/views/admin/updatepost.php");}
-else{header("location:/Contentgo/login");}
-$update = new DynamicPage($_POST);
-$dataedited = $update->readDynamicpage($id);
-if($dataedited) {require(WORKING_DIR_PATH."/src/views/admin/updatepost.php");}
-if(isset($_POST['updatepost'])){
-$updatepost = $update->updateDynamicpage($id,$updateddata);
-$updateddata = ['url'=>$_POST['url'],'title'=>$_POST['title'] , 
-'description'=>$_POST['description'], 'content'=>$_POST['content'],'category_id'=>$_POST['category_id'],
-'media_id'=>$_POST[['media_id']],'author_id'=>$_POST['author_id'],'created'=>$_POST['created'],
-'updated'=>$_POST['updated'],'ipaddress'=>$_POS['ipaddress']];
-if($updatepage) $result = "page succesfully updated";
+$updateddata = array();
+if(isset($_POST['title']) && isset($_POST['description']) && isset($_POST['content']) 
+&& isset($_POST['category_id']) && isset($_POST['author_id']) && isset($_POS['ipaddress'])
+&& isset($_POST['updated'])){
+$updateddata = ['title'=>$_POST['title'],'description'=>$_POST['description'], 'content'=>$_POST['content'],
+'category_id'=>$_POST['category_id'],'author_id'=>$_POST['author_id'],'updated'=>$_POST['updated'],
+'ipaddress'=>$_POS['ipaddress']];  
 }
+return $updateddata;
 }
 
 function newPage(){
@@ -292,7 +282,7 @@ if(isset($_SESSION['firstname']) && isset($_SESSION['lastname'])){
 if(count($viewposts)>0){
 foreach($viewposts as $key=>$value){
 $list.= "<ul>";
-$list.= "<li><a href=".$value['url'].">".$value['title']."</a></li>";
+$list.= "<li><a href=updatepost/".$value['url'].">".$value['title']."</a></li>";
 $list.="</ul>";
 
 }
@@ -312,7 +302,7 @@ $viewpages = $staticpage->readStaticPages();
 if(count($viewpages)>0){
 foreach($viewpages as $key=>$value){
     $list.= "<ul>";
-    $list.= "<li><a href=view-pages/".$value['url'].">".$value['title']."</a></li>";
+    $list.= "<li><a href=updatepage/".$value['url'].">".$value['title']."</a></li>";
     $list .="</ul>";
     
     }
@@ -334,7 +324,7 @@ if(isset($_SESSION['firstname']) && isset($_SESSION['lastname'])){
 if(count($viewcategories)>0){
 foreach($viewcategories as $key =>$value){
     $list .= "<ul>";
-    $list.= "<li><a href=view-categories/".$value['id'].">".$value['name']."</a></li>";
+    $list.= "<li><a href=updatecategory/".$value['id'].">".$value['name']."</a></li>";
     $list .="</ul>";
     }
 }
@@ -360,19 +350,32 @@ require(WORKING_DIR_PATH."/src/views/admin/viewmedia.php");
 
 function otherUrls(){
 $results['title'] ="";
+$updatedSuccess = "";
 $requestUrl = $_SERVER['REQUEST_URI'];
 $uri = explode("/",$requestUrl);
 if(isset($uri['2'])) $path2  =$uri['2'];
 if(isset($uri['4'])) $path4  =$uri['4'];
-$newdata = array();
+$dynamicpagedata = array();
+$staticpagedata = array();
+$categorydata = array();
 $results = array();
-if(isset($_POST['title']) && isset($_POST['description']) && isset($_POST['content']) && isset($_POST['created'])
+if(isset($_POST['title']) && isset($_POST['description']) && isset($_POST['content']) && isset($_POST['updated'])
 && isset($_POST['ipaddress'])){
-$newdata = ['title'=>$_POST['title'],'description'=>$_POST['description'],'content'=>$_POST['content'],
-'created'=>$_POST['created'],'ipaddress'=>$_POST['ipaddress']];
+$staticpagedata = ['title'=>$_POST['title'],'description'=>$_POST['description'],'content'=>$_POST['content'],
+'updated'=>$_POST['updated'],'ipaddress'=>$_POST['ipaddress']];
 }
-$page = new Staticpage($newdata);
-$post = new Dynamicpage($newdata);
+if(isset($_POST['title']) && isset($_POST['description']) && isset($_POST['content']) && isset($_POST['updated'])
+&& isset($_POST['category_id']) && isset($_POST['author_id']) && isset($_POST['ipaddress'])){
+$dynamicpagedata = ['title'=>$_POST['title'],'description'=>$_POST['description'],'content'=>$_POST['content'],
+'updated'=>$_POST['updated'],'category_id'=>$_POST['category_id'],'author_id'=>$_POST['author_id'],'ipaddress'=>$_POST['ipaddress']];
+}
+if(isset($_POST['name']) && isset($_POST['description']) && isset($_POST['updated']) && isset($_POST['ipaddress'])){
+$categorydata = ['name'=>$_POST['name'],'description'=>$_POST['description'],'updated'=>$_POST['updated'],
+'ipaddress'=>$_POST['ipaddress']];
+}
+$page = new Staticpage($staticpagedata);
+$post = new Dynamicpage($dynamicpagedata);
+$category = new Category($categorydata);
 if(isset($path2)){
 $result1 = $page->readStaticPage($path2);
 $result2 = $post->readDynamicPage($path2);
@@ -392,6 +395,8 @@ elseif($result2){
         $results['title']  = $value['title'];
         $results['description']  = $value['description'];
         $results['content'] = $value['content'];
+        $results['category_id'] = $value['category_id'];
+        $results['author_id'] = $value['author_id'];
         }
         }
     require(WORKING_DIR_PATH."/src/views/post.php");
@@ -404,6 +409,7 @@ else{
 if(isset($path4)){
 $result3 = $page->readStaticPage($path4);
 $result4 = $post->readDynamicPage($path4);
+$result5 = $category->readCategory($path4);
 
 if(isset($_SESSION['firstname']) && isset($_SESSION['lastname']) && $result3){
     
@@ -425,7 +431,20 @@ if(isset($_SESSION['firstname']) && isset($_SESSION['lastname']) && $result4){
          $results['content'] = $value['content'];
         }
         }
-    require(WORKING_DIR_PATH."/src/views/admin/updatepost.php");}
+    require(WORKING_DIR_PATH."/src/views/admin/updatepost.php");
+if(isset($_POST['updatepost'])){$updated = $post->updateDynamicPage($path4,$dynamicpagedata);}
+
+if(isset($updated) && $updated == true){$updatedSuccess = "data successfully updated";}
+var_dump($updated);
+}
+    if(isset($_SESSION['firstname']) && isset($_SESSION['lastname']) && $result5){
+        if(is_array($result5)){
+            foreach($result5 as $key=>$value){
+            $results['name'] = $value['name'];
+            $results['description']  = $value['description'];
+          }
+           }
+       require(WORKING_DIR_PATH."/src/views/admin/updatecategory.php");}
 }
 else{
 require(WORKING_DIR_PATH."/src/views/notfound.php");

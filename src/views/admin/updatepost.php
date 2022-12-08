@@ -24,7 +24,8 @@
 <textarea name="content"><?php if(isset($results['content']))echo $results['content'];?></textarea>
 <label>Date:</label>
 <input type="date" name="updated">
-<label>Ip Address:</label>
+<input type="hidden" name="category_id" value= "<?php if(isset($results['category_id']))echo $results['category_id'];?>">
+<input type="hidden" name="author_id" value= "<?php if(isset($results['author_id']))echo $results['author_id'];?>">
 <input type="hidden" name="ip" value= "<?php echo $_SERVER['REMOTE_ADDR'];?>">
 <input type="submit" name="updatepost" value="Update Post">
 </form>

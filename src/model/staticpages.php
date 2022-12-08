@@ -47,11 +47,11 @@ else{return false;}
 }
             
 
-public function updateStsaticPage($id,$data =[]){
+public function updateStsaticPage($url,$data =[]){
 
-if(isset($data['title']) && isset($data['description']) && isset($data['content'])){
+if(isset($url) && isset($data['title']) && isset($data['description']) && isset($data['content'])){
 $result = $this->update("UPDATE staticpage SET title=:titlde,description=:description,content=:content,
-updated=:updated, ipaddress=:ipaddres WHERE id =:id",["id"=>$id,"title"=>$this->title,
+updated=:updated, ipaddress=:ipaddres WHERE url =:url",["url"=>$url,"title"=>$this->title,
 "description"=>$this->description,"content"=>$this->content,"updated"=>$this->updated,
 "ipaddress"=>$this->ipaddress]);
 }

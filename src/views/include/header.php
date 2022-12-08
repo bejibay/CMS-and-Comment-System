@@ -16,6 +16,7 @@
 <a href="/Contentgo/privacy">Privacy</a>
 <a href="/Contentgo/register">Register</a>
 <a href="/Contentgo/login">Login</a>
+<a href="/Contentgo/logout">Logout</a>
 <a href="javascript:void();"><i  class ="fa fa-bars" ></i></a>
 </div>
 </div>

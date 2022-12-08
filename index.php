@@ -4,9 +4,7 @@ $requestUrl = $_SERVER['REQUEST_URI'];
 $uri = explode("/",$requestUrl);
 $currentPageUrl = "http://"."locahost".$_SERVER['REQUEST_URI'];
 require (__DIR__."/src/controller/functions.php");
-//seesion variables for testing only
 if(isset($requestUrl)){
-   if($requestUrl === "/Contentgo"){homePage();}
    switch ($requestUrl){
     case   "/Contentgo/":
     case   "/Contentgo/home":

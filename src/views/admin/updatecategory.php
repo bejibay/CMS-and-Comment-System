@@ -17,7 +17,7 @@
 <div class =" col-9">
 <form action="" method="post">
 <label>Name:</label>
-<input type="text" name="title" value ="<?php if(isset($results['nsame']))echo $results['name'];?>">
+<input type="text" name="name" value ="<?php if(isset($results['name']))echo $results['name'];?>">
 <label>Description:</label>
 <textarea name="content"><?php if(isset($results['description']))echo $results['description'];?></textarea>
 <label>Date:</label>

@@ -55,14 +55,12 @@ else{return false;}
 }
 
 
-public function updateDynamicPage($id,$data = []){
-if(isset($id)  && isset($data['title'])  && isset($data['decription']) && isset($data['content'])){
-$$this->url = $this->getSEOUrl($data['title']);
-$result = $this->update("UPDATE dynamicpage SET url=:url,title=:title,description=:description,content=:content,
-category_id=:category_id,media_id=:media_id,author_id=:author_id,created=:created,updated=:updated,
-ipaddress=:ipaddress",["id"=>$this->id,"url"=>$this->url,"title"=>$this->title,
-"description"=>$this->description,"content"=>$this->content,"category_id"=>$this->category_id,
-"media_id"=>$this->media_id,"author_id"=>$this->author_id,"created"=>$this->created,"updated"=>$this->updated,
+public function updateDynamicPage($url,$data = []){
+if(isset($url)  && isset($data['title'])  && isset($data['decription']) && isset($data['content'])){
+$result = $this->update("UPDATE dynamicpage SET title=:title,description=:description,content=:content,
+category_id=:category_id,author_id=:author_id,updated=:updated,ipaddress=:ipaddress WHERE url =:url",
+["url"=>$url,"title"=>$this->title,"description"=>$this->description,"content"=>$this->content,
+"category_id"=>$this->category_id,"author_id"=>$this->author_id,"updated"=>$this->updated,
 "ipaddress"=>$this->ipaddress]);
     }
     if($result) return $result;
@@ -78,9 +76,9 @@ if($result)return $result;
 else{return false;}
 }
 
-public function deleteADynamicPage($id){
-if(isset($id)){
-$result = $this->delete("DELETE* FROM dynamicpage WHERE id=:id",["id"=>$id]);
+public function deleteADynamicPage($url){
+if(isset($url)){
+$result = $this->delete("DELETE* FROM dynamicpage WHERE url=:url",["url"=>$url]);
 }
 if($result)return $result;
 else{return false;}
