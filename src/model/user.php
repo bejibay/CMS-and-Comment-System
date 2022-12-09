@@ -65,8 +65,8 @@ public function verifyUserEmail($data= []){
 if(isset($data['email'])){
 $result = $this->select("SELECT* FROM userdata WHERE email=:email",["email"=>$data['email']]);
 if($result) return $result;
-}
 else{return false;}
+}
 }
 
 public function verifyUserPassword($data=[]){

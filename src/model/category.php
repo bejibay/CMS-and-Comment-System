@@ -51,20 +51,21 @@ else{return false;}
 
 
 public function updateCategory($id,$data = []){
-if(isset($id) && isset($data['name']) && isset($data['description']) && isset($data['updated'])){
+if(isset($id) && isset($data['name']) && isset($data['description']) && isset($data['updated'])
+ && isset($data['ipaddress'])){
 $result = $this->update("UPDATE category SET name=:name, description =:description, updated = :updated, 
 ipaddress=:ipadress WHERE id =:id", ["name"=>$this->name,"description"=>$this->description,
-"updated"=>$this->updated,"ipaddres"=>$this->ipaddress,"id"=>$id,]);
-}
+"updated"=>$this->updated,"ipaddress"=>$this->ipaddress,"id"=>$id,]);
 if($result)return $result;
 else{return false;}
+}
 }
 
 public function deleteCategory($id){
 if(isset($id)){
 $result = $this->delete("DELETE* FROM category WHERE id=:id",["id"=>$id]);
-}
 if($result) return $result;
 else{return false;}
+}
 }
 }        

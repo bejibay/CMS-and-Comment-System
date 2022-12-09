@@ -28,9 +28,9 @@ public function createComment($data=[]){
     $result = $this->insert("INSERT INTO comments(id,dynamicpages_id,email,comments)
     VALUES(:id,:name,:dynamicpages_id ,:email, :comments)",["id"=>$this->id,"dynamicpages_id"=>$this->dynamicpages_id,
     "email"=>$this->email, "comments"=>$this->comments,"created"=>$this->created]);
-    }
     if($result) return $result;
     else{return false;}
+    }
         }
    
 
@@ -44,9 +44,9 @@ public function readAComment($id){
 $this->id = $id;
 if(isset($id)){
 $result = $this->select("SELECT* FROM comment WHERE id = :id", ["id"=>$this->id]);
-}
 if($result)return $result;
 else{return false;}
+}
 }
 
 
@@ -56,19 +56,18 @@ public function updateComment($id,$data =[]){
     if(isset($data['comments'])){
 $result = $this->update("UPDATE comment SET dynamicpages_id =:dynamicpages_id, email:email, comments = :comments WHERE id=:id",
  ["dynamicpages_id"=>$this->dynamicpages_id,"email"=>$this->email, "comments"=>$this->comments,]);
-
+if($result)return $result;
+else{return false;}
     }
-    if($result)return $result;
-    else{return false;}
 }
 
 public function deleteComment($id){
-    $this->id = $id;
-    if(isset($id)){
-     $this->delete("DELETE* FROM comment WHERE id=:id",["id"=>$this->id]);
-    }
-      if($result)return $result;
+$this->id = $id;
+if(isset($id)){
+ $result = $this->delete("DELETE* FROM comment WHERE id=:id",["id"=>$this->id]);
+if($result)return $result;
         else{return false;} 
-       }
+}
+ }
        
     }   

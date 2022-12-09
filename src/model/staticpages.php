@@ -35,9 +35,9 @@ if(isset($data['title']) && isset($data['description']) && isset($data['content'
 $result = $this->insert("INSERT INTO  staticpage(url,title,description ,content, created,ipaddress)
 VALUES(:url,:title,:description,:content,:created,:ipaddress)",["url"=>$url,"title"=>$this->title,
 "description"=>$this->description,"content"=>$this->content,"created"=>$this->created,"ipaddress"=>$this->ipaddress]);
-    }
 if($result)return $result;
-else{return false;}       
+else{return false;} 
+}      
 }
 
 public function readStaticPages(){
@@ -47,16 +47,17 @@ else{return false;}
 }
             
 
-public function updateStsaticPage($url,$data =[]){
+public function updateStaticPage($url,$data =[]){
 
 if(isset($url) && isset($data['title']) && isset($data['description']) && isset($data['content'])){
 $result = $this->update("UPDATE staticpage SET title=:titlde,description=:description,content=:content,
 updated=:updated, ipaddress=:ipaddres WHERE url =:url",["url"=>$url,"title"=>$this->title,
 "description"=>$this->description,"content"=>$this->content,"updated"=>$this->updated,
 "ipaddress"=>$this->ipaddress]);
-}
+
 if($result)return $result;
 else{return false;}
+}
 }
                 
 public function readStaticPage($urlpage){
@@ -72,9 +73,9 @@ else{return false;}
 public function deleteStaticPage($id){
 if(isset($id)){
 $this->delete("DELETE FROM staticpage WHERE id=:id",["id"=>$id]);
-}
 if($result) return $result;
 else{return false;}
+}
 }
 }
     

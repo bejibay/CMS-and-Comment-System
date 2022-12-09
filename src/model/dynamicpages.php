@@ -42,10 +42,10 @@ created,ipaddress)VALUES(:url,:title,:description,:content,:category_id,:author_
 :created,:ipaddress)",["url"=>$url,"title"=>$this->title,
 "description"=>$this->description,"content"=>$this->content,"category_id"=>$this->category_id,
 "author_id"=>$this->author_id ,"created"=>$this->created,"ipaddress"=>$this->ipaddress]);
-}
 if($result)return $result;
 else{return false;}
-        }
+}
+}
    
 
 public function readDynamicPages(){
@@ -62,26 +62,27 @@ category_id=:category_id,author_id=:author_id,updated=:updated,ipaddress=:ipaddr
 ["url"=>$url,"title"=>$this->title,"description"=>$this->description,"content"=>$this->content,
 "category_id"=>$this->category_id,"author_id"=>$this->author_id,"updated"=>$this->updated,
 "ipaddress"=>$this->ipaddress]);
-    }
+    
     if($result) return $result;
     else{return false;}
+}
 }
 
 public function readDynamicPage($urlpage){
 $url = $urlpage;
 if(isset($urlpage)){
 $result = $this->select("SELECT* FROM dynamicpage WHERE url=:url",["url"=>$url]);  
-}
 if($result)return $result;
 else{return false;}
+}
 }
 
 public function deleteADynamicPage($url){
 if(isset($url)){
 $result = $this->delete("DELETE* FROM dynamicpage WHERE url=:url",["url"=>$url]);
-}
 if($result)return $result;
 else{return false;}
+}
 }
  }
            

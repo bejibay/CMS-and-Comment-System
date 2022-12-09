@@ -32,9 +32,9 @@ public function createAuthor($data= []){
 if(isset($data['biography']) && isset($data['ipaddress'])){
 $result = $this->insert("INSERT INTO author(`biography`,`userdata_id`,`ipaddress`)VALUES(:biography,:userdata_id,
 :ipaddress)",["biography"=>$this->biography,"userdata_id"=>$this->userdata_id,"ipaddress"=>$this->ipaddress]);
-}
 if($result) return $result;
  else{return false;}
+}
 }
     
 
@@ -48,9 +48,9 @@ if($result) return $result;
 public function readAuthor($id){
 if(isset($id)){
 $result = $this->select("SELECT* FROM author WHERE id=:id",["id"=>$id]);
-}
 if(!empty($result)) return  $result;
 else{return false;}
+}
 }
    
 
@@ -60,9 +60,9 @@ public function updateAuthor($id,$data=[]){
 if(isset($id) && isset($data['biography']) && isset($data['updated'])){
  $result = $this->update("UPDATE author SET biography=:biography, updated=:updated WHERE id=:id",[
 "biography"=>$this->biography,"update"=>$this->updated, "id"=>$id]);
- }
  if(!empty($result))return $result;
  else{return false;}
+}
 }
 
     

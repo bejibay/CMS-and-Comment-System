@@ -47,6 +47,7 @@ public function select($query="",$params=[]){
  $stmt = $this->executestatement($query,$params);
     $result = $stmt->fetchAll();
     if($result)return $result;
+    else{return false;}
     }
     catch(Exception $e){echo $e->getMessage();}
 }
