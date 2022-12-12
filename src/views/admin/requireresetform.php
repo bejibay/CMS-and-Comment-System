@@ -4,7 +4,7 @@
 
 <div class="row">
 <div class="col-12">
-<form action="#" method="post">
+<form action="" method="post">
 <label for="logininfo">Login Info:</label>
 <input type="text" name="logininfo" placeholder="Type in your username or email" id="logininfo">
 <input type="submit" name="requirereset" value="Require Password Reset">

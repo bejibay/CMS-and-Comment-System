@@ -15,7 +15,7 @@
 <a href="/Contentgo/media">media</a>
 </div>
 <div class = "col-9">
-<form action="#" method="post">
+<form action="" method="post">
 <label>title:</label>
 <input type="text" name="title" value ="<?php if(isset($results['title']))echo $results['title'];?>">
 <label>Description:</label>
@@ -24,9 +24,17 @@
 <textarea name="content"><?php if(isset($results['content']))echo $results['content'];?></textarea>
 <label>Date:</label>
 <input type="date" name="updated">
-<input type="hidden" name="category_id" value= "<?php if(isset($results['category_id']))echo $results['category_id'];?>">
-<input type="hidden" name="author_id" value= "<?php if(isset($results['author_id']))echo $results['author_id'];?>">
-<input type="hidden" name="ip" value= "<?php echo $_SERVER['REMOTE_ADDR'];?>">
+<select name = "category_id">
+<option value ="">Select a category</option>
+<option value ="<?php if(isset($results['category_id']))echo $results['category_id'];?>" selected>
+
+</select>
+<select name = "author_id">
+<option value ="">Select an author</option>
+<option value ="<?php if(isset($results['author_id']))echo $results['author_id'];?>" selected>
+
+</select>
+<input type="hidden" name="ipaddress" value= "<?php echo $_SERVER['REMOTE_ADDR'];?>">
 <input type="submit" name="updatepost" value="Update Post">
 </form>
 </div>

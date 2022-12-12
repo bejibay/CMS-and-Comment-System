@@ -5,7 +5,7 @@
 
 <div class="row">
 <div class= "col-12">
-<form action="#" method="post">
+<form action="" method="post">
 <label for="email">Login Info:</label>
 <input type="text" name="email" placeholder="Type in your email" id="logininfo">
 <label for="password">Password:</label>

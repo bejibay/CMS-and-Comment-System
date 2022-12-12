@@ -44,6 +44,7 @@ $results=array();
 $results['title']="Account Creation Form";
 $results['description']="Account Creation Form";
 $userdata = array();
+$reseturl = md5(rand{0,999}.time());
 if(isset($_POST['username']) && isset($_POST['firstname']) && isset($_POST['lastname']) && 
 isset($_POST['email']) && isset($_POST['password']) && isset($_POST['ipaddress'])){
 $userdata =['username'=>$_POST['username'],'firstname'=>$_POST['firstname'],'lastname'=>$_POST['lastname'],
@@ -56,12 +57,13 @@ $results['checkemail'] = $user->verifyUserEmail($_POST['email']);
 if($results['checkemail'])$results['emailError'] = 'email already exists';
 else{$results['success'] = $user->createUser($userdata);
 
-if($results['success']){emailToActivate();
+if($results['success']){emailToActivate($reseturl);
 $results['registerSuccess']= "check your email to complete your registeration";
 }
 }
 
 }
+
 else{//Form not filled properly
 $results['errormessage']="Forms not filled properly";}
 require(WORKING_DIR_PATH."/src/views/admin/registerform.php");
@@ -85,20 +87,19 @@ if(!isset($_SESSION{'firstname'}) && !isset($_SESSION['lastname']))
 else{require(WORKING_DIR_PATH."/src/views/dashboard.php");}
 }
 
-
-
-
 function requireReset(){
 $results = array();
 $results['title'] =" Reset Login";
 $results['description'] = "Reset Login"; 
+$userdata = array();
+$reseturl = md5(rand(0,999).time());
+if(isset($_POST['email']){$userdata = ["email"=>$_POST['email']]};
 if(isset($_POST['resetpassword'])){
-$user = new Userdata($_POST);
-$result['checkemail'] = $user->select($_POST['email']);
-if($result['checkemail']){emailToreset();
-$results['Success'] = "Check your email to reset account";
-}
-else{$results['succes'] = 'email does not exist'; }
+$user = new Userdata($userdata);
+$result1 = $user->verifyUserEmail($userdata);
+if($result1){$result2 = $user->modifyResetUrl($reseturl,$userdata);emailToReset($reseturl);}
+if($reseul2){$results['Success'] = "Check your email to reset account";}
+else{$results['success'] = 'email does not exist'; }
 }
 require(WORKING_DIR_PATH."/src/views/admin/requireresetform.php");
 }
@@ -192,28 +193,7 @@ $results['success'] = $staticpage->createStaticPage($newdata);
 }
     
 
-function updatePage(){
-global $uri;
-$path1 = null;
-$path2 = null;
-if(isset($uri[1]))$path1 =$uri[1];
-if(isset($uri[2]))$path2 =$uri[2];
-$results = array();
-$newdata = array();
-$staticpage = new StaticPage($newdata);
-if(isset($_SESSION['firstname']) && isset($_SESSION['lastname'])){
-require(WORKING_DIR_PATH."/src/views/admin/updatepage.php");}
-else{header("location:/Contentgo/login");}
-$dataupdate = $staticpage->readStaticPage($id);
-if(isset($_POST['updatepage'])){
-$updatepage = $update->updateStaticpage($id,$updateddata);
-$updateddata = ['url'=>$_POST['url'],'title'=>$_POST['title'] , 
-'description'=>$_POST['description'], 'content'=>$_POST['content'],
-'author_id'=>$_POST['author_id'],'created'=>$_POST['created'],
-'updated'=>$_POST['updated'],'ipaddress'=>$_POS['ipaddress']];
-if($updatepage) $result = "page succesfully updated";
-}
-}
+
     
 function newCategory(){
 $results= array();
@@ -254,30 +234,7 @@ $result['success'] = $author->createAuthor($newdata);
 }
 }
     
-    
-
-function updateCategory(){
-global $uri;
-if(isset($uri[2]))$path2 =$uri[2];
-$id = $path2;
-$results = array();
-$results['firstname'] =$_SESSION['firstname'];
-$results['lastname'] =$_SESSION['lastname'];
-$updateddata = ['name'=>$_POST['name'] , 'description'=>$_POST['description'], 
-'created'=>$_POST['created'],'updated'=>$_POST['updated'],'ipaddress'=>$_POST['ipaddress']];
-if(isset($results['firstname']) && isset($results['lastname'])){
-require(WORKING_DIR_PATH."/src/views/admin/updatecategory.php");}
- else{header("location:/Contentgo/login");}
-$update = new Category($_POST);
-$dataedited = $update->readAcategory($id);
-if(isset($_POST['updatecategory'])){
-$updatecategory = $update->updateACategory($id,$updateddata);
-if($updatecategory) $result = "category succesfully updated";
-}
-}
-
-
-
+   
 function viewPosts(){
 $list = "";
 $results = array();
@@ -295,7 +252,7 @@ $list.="</ul>";
 }
 require(WORKING_DIR_PATH."/src/views/admin/viewposts.php");
 }
-else{header("locsation:/Contentgo/login");}
+else{header("location:/Contentgo/login");}
 }
 
 function viewPages(){
@@ -357,6 +314,7 @@ require(WORKING_DIR_PATH."/src/views/admin/viewmedia.php");
 function otherUrls(){
 $results['title'] ="";
 $updatedSuccess = "";
+$updated = 0;
 global $uri;
 $path2 = null;
 $path4 = null;
@@ -364,7 +322,6 @@ $path3 = null;
 if(isset($uri['2'])) $path2  =$uri['2'];
 if(isset($uri['3'])) $path3 = $uri['3'];
 if(isset($uri['4'])) {$path4  =$uri['4'];}
- var_dump($path4);
 $dynamicpagedata = array();
 $staticpagedata = array();
 $categorydata = array();
@@ -377,12 +334,14 @@ $staticpagedata = ['title'=>$_POST['title'],'description'=>$_POST['description']
 if(isset($_POST['title']) && isset($_POST['description']) && isset($_POST['content']) && isset($_POST['updated'])
 && isset($_POST['category_id']) && isset($_POST['author_id']) && isset($_POST['ipaddress'])){
 $dynamicpagedata = ['title'=>$_POST['title'],'description'=>$_POST['description'],'content'=>$_POST['content'],
-'updated'=>$_POST['updated'],'category_id'=>$_POST['category_id'],'author_id'=>$_POST['author_id'],'ipaddress'=>$_POST['ipaddress']];
+'updated'=>$_POST['updated'],'category_id'=>intval($_POST['category_id']),'author_id'=>intval($_POST['author_id']),
+'ipaddress'=>$_POST['ipaddress']];
 }
 if(isset($_POST['name']) && isset($_POST['description']) && isset($_POST['updated']) && isset($_POST['ipaddress'])){
 $categorydata = ['name'=>$_POST['name'],'description'=>$_POST['description'],'updated'=>$_POST['updated'],
 'ipaddress'=>$_POST['ipaddress']];
 }
+
 $page = new Staticpage($staticpagedata);
 $post = new Dynamicpage($dynamicpagedata);
 $category = new Category($categorydata);
@@ -436,7 +395,7 @@ if(isset($_SESSION['firstname']) && isset($_SESSION['lastname']) && $result3){
     require(WORKING_DIR_PATH."/src/views/admin/updatepage.php");}
     if(isset($_POST['updatepage'])){$updated = $page->updateStaticPage($path4,$staticpagedata);}
 
-    if(isset($updated) && $updated == true){$updatedSuccess = "data successfully updated";}
+    if(isset($updated) && $updated > 0){$updatedSuccess = "data successfully updated";}
 
 if(isset($_SESSION['firstname']) && isset($_SESSION['lastname']) && $result4){
      if(is_array($result4)){
@@ -444,12 +403,15 @@ if(isset($_SESSION['firstname']) && isset($_SESSION['lastname']) && $result4){
          $results['title'] = $value['title'];
          $results['description']  = $value['description'];
          $results['content'] = $value['content'];
+         $results['category_id'] = $value['category_id'];
+         $results['author_id'] = $value['author_id'];
+         $results['ipaddress'] = $value['ipaddress'];
         }
         }
     require(WORKING_DIR_PATH."/src/views/admin/updatepost.php");
 if(isset($_POST['updatepost'])){$updated = $post->updateDynamicPage($path4,$dynamicpagedata);}
 
-if(isset($updated) && $updated == true){$updatedSuccess = "data successfully updated";}
+if(isset($updated) && $updated >0){$updatedSuccess = "data successfully updated";}
 
 }
     if(isset($_SESSION['firstname']) && isset($_SESSION['lastname']) && $result5){
@@ -462,8 +424,7 @@ if(isset($updated) && $updated == true){$updatedSuccess = "data successfully upd
        require(WORKING_DIR_PATH."/src/views/admin/updatecategory.php");}
        $path4 = intval($path4);
        if(isset($_POST['updatecategory'])){$updated = $category->updateCategory($path4,$categorydata);}
-       var_dump($path4);
-       if(isset($updated) && $updated == true){$updatedSuccess = "data successfully updated";}     
+       if(isset($updated) && $updated >0){$updatedSuccess = "data successfully updated";}     
        
 }
 
@@ -471,43 +432,30 @@ if(!$result1 && !$result2 && !$result3 && !$result4 && !$result5){
  require(WORKING_DIR_PATH."/src/views/notfound.php");}
 }
 
-
-
 function homePage(){
-
 require(WORKING_DIR_PATH."/src/views/homepage.php");
 }
 
 
-
-
-function emailToActivate(){
-//generate activation URL
-$reseturl =md5(rand(0,999).time());
-$update = ['email'=>$_POST['email'], 'password'=>$_POST['password'], 'reseturl'=>$reseturl];
-$user = new Userdata($_POST);
-$reset = $user->modifyAccountStatus($reseturl,$update);
+function emailToActivate($reseturl){
 //send activation email
-if($reset){
-$to = $_POST['email'];
+$to = isset($_POST['email'])?$_POST['email']:"";
 $subject = " Activate your account";
-$msg = 'Click on email below to activate <br>
-<a href="/activation.php?reseturl='.$reseturl.'">
-Click to activate</a >';
+$msg = "Click on email below to activate <br>"
+."<a href=activation/".$reseturl.">"
+."Click to activate</a >";
 $headers = "From:bejibay@gmail.com";
 mail($to,$subject,$msg,$headers);
 }
-}
 
-function emailToreset(){
-//generate reset URL
-$reseturl =md5(rand(0,999).time());
+
+function emailToReset($reseturl){
 //send reset email
-$to = $_POST['email'];
+$to = isset($_POST['email'])?$_POST['email']:"";
 $subject = " reset your account";
-$msg = 'Click on email below to reset <br>
-<a href="/reseturl.php?reseturl='.$reseturl.'">
-Click to reset</a >';
+$msg = "Click on email below to reset <br>".
+"<a href=reseturl/".$reseturl.">".
+"Click to reset</a >";
 $headers = "From:bejibay@gmail.com";
 mail($to,$subject,$msg,$headers);
 }

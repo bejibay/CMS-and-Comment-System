@@ -14,7 +14,7 @@
 <a href="/Contentgo/media">media</a>
 </div>
 <div class =" col-9">
-<form action="#" method="post">
+<form action="" method="post">
 <label>title:</label>
 <input type="text" name="title" value ="<?php if(isset($results['title']))echo $results['title'];?>">
 <label>Description:</label>
@@ -24,7 +24,7 @@
 <label>Date:</label>
 <input type="date" name="updated">
 <label>IP Address</label>
-<input type="hidden" name="ip" value= "3">
+<input type="hidden" name="ipaddress" value= "<?php echo $_SERVER['REMOTE_ADDR'];?>">
 <input type="submit" name="updatepage" value="Update Page">
 </form>
 </div>

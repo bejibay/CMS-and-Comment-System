@@ -71,7 +71,7 @@ public function delete($query="",$params=[]){
 }
 
 public function getSEOUrl($title){
-    $title = $this->title;
+    $title = strtolower($title);
     $title = explode(" ",$title);
     $title = array_slice($title,0,9);
     $title = implode("-", $title);

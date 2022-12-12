@@ -16,7 +16,7 @@
 
 </div>
 <div class = "col-9">
-<form action="#"  method="post">
+<form action=""  method="post">
 <label>title:</label>
 <input type="text" name="title" >
 <label>Description:</label>

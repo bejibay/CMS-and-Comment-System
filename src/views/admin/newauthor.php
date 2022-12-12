@@ -14,7 +14,7 @@
 <a href="media">media</a>
 </div>
 <div class =" col-9">
-<form action="#" method="post">
+<form action="" method="post">
 <label>Biography:</label> 
 <textarea name="biography"></textarea>
 <input type="hidden" value = "2" name="userdata_id" >

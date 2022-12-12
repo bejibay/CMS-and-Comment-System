@@ -18,17 +18,16 @@
 <form action="" method="post">
 <label>Name:</label>
 <input type="text" name="name" value ="<?php if(isset($results['name']))echo $results['name'];?>">
-<?php var_dump($results['name']);?>
+
 <label>Description:</label>
-<textarea name="content"><?php if(isset($results['description']))echo $results['description'];?></textarea>
-<?php var_dump($results['description']);?>
+<textarea name="description"><?php if(isset($results['description']))echo $results['description'];?></textarea>
 
 <label>Date:</label>
 <input type="date" name="updated">
 
 <label>IP Address</label>
-<input type="hidden" name="ip" value= "3">
-<?php var_dump($_SERVER['REMOTE_ADDR']);?>
+<input type="hidden" name="ipaddress" value= "<?php echo $_SERVER['REMOTE_ADDR'];?>">
+
 <input type="submit" name="updatecategory" value="Update Category">
 </form>
 </div>

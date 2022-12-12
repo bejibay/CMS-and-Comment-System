@@ -15,7 +15,7 @@
 <a href="media">media</a>
 </div>
 <div class =" col-9">
-<form action="#" method="post">
+<form action="" method="post">
 <lable>Name:</label>
 <input type="text" name="name" >
 <label>Description:</label> 

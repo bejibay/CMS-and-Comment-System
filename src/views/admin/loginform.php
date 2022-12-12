@@ -4,7 +4,7 @@
 
 <div class="row">
 <div class="col-12">
-<form action="#" method="post">
+<form action="" method="post">
 <h2>Login</h2>
 <p><?php  if(isset($results['errormessage'])) echo $results['errormessage'];?></p>
 <label for ="email">Email:</label>

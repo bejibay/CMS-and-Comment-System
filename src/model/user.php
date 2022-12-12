@@ -30,13 +30,13 @@ if(isset($data['email']))$this->email=filter_var($data['email'],FILTER_VALIDATE_
 if(isset($data['password']))$this->password=password_hash($data['password'],PASSWORD_BCRYPT);
 if(isset($data['reseturl']))$this->reseturl = $data['reseturl'];
 if(isset($data['created']))$this->created = $data['created'];
-if(isset($data['updated']))$this->created = $data['created'];
+if(isset($data['updated']))$this->created = $data['updated'];
 if(isset($data['ipaddress']))$this->ipaddress=$data['ipaddress'];
 if(isset($data['newemail']))$this->newemail=filter_var($data['newemail'],FILTER_VALIDATE_EMAIL);
 }
 
 // define the class properties
-public function createUser($data =[]){
+public function createUser($reseturl, $data =[]){
 if(isset($data['username']) && isset($data['firstname']) && isset($data['lastname']) && isset($data['email']) 
 && isset($data['password'])){
 $result1 = $this->verifyUserEmail($data['email']);
@@ -73,11 +73,9 @@ public function verifyUserPassword($data=[]){
 $result1 = array();
 if(isset($data['email']) && isset($data['password'])){
 $result = $this->verifyUserEmail($data['email']);
-var_dump($result);
 if(is_array($result)){$result1 = password_verify($data['password'], $result['password']);}
 if($result1)return $result1;
 else{return false;}
-var_dump($result1);
 }
 }
 
@@ -103,13 +101,13 @@ else{return false;}
 }
 }
 
-public function modifyResetUrl($data=[]){
-$result1 = $this->select("SELECT* FROM userdata WHERE email=:email",["email"=>$this->mail]); 
-if($result1){$this->reseturl  =md5(rand(0,999).time());}
-$result2 = $this->update("UPDATE userdata SET reseturl=:reseturl WHERE email=:email",
-["email"=>$this->email,"reseturl"=>$this->reseturl]);
-if($result2) return $result2;
+public function modifyResetUrl($reseturl,$data=[]){
+if(isset($reseturl) && isset($data['email'])){
+$result = $this->update("UPDATE userdata SET reseturl=:reseturl WHERE email=:email",
+["email"=>$this->email,"reseturl"=>$reseturl]);
+if($result) return $result;
 else{return false;}
+}
 }
         
  public function deleteUser($id){

@@ -16,12 +16,13 @@ public $ipaddress = null;
 public function __construct($data=array()){
 parent::__construct();
 if(isset($data['id']) && is_int($data['id']))$this->id=$data['id'];
-if(isset($data['url']))$this->url=filter_var($data['url'],FILTER_VALIDATE_URL);
-if(isset($data['title']))$this->title=preg_replace("/[^\,\.\"\'\:\;\@\$\()a-zA-Z0-9]/","",$data['title']);
-if(isset($data['description']))$this->description=preg_replace("/[^\,\.\"\'\:\;\@\$\()a-zA-Z0-9]/","",$data['description']);
+if(isset($data['title']) && preg_replace("/[^\,\.\"\'\:\;\@\$\()a-zA-Z0-9]/","",$data['title']))
+$this->title= $data['title'];
+if(isset($data['description']) && preg_replace("/[^\,\.\"\'\:\;\@\$\()a-zA-Z0-9]/","",$data['description']))
+$this->description = $data['description'];
 if(isset($data['content']))$this->content=trim(stripslashes(htmlspecialchars($data['content'])));
 if(isset($data['created']))$this->created=$data['created'];
-if(isset($data['updated']))$this->created=$data['created'];
+if(isset($data['updated']))$this->updated=$data['updated'];
 if(isset($data['ipaddress']))$this->ipaddress=$data['ipaddress'];
  }
     
@@ -49,11 +50,12 @@ else{return false;}
 
 public function updateStaticPage($url,$data =[]){
 
-if(isset($url) && isset($data['title']) && isset($data['description']) && isset($data['content'])){
-$result = $this->update("UPDATE staticpage SET title=:titlde,description=:description,content=:content,
-updated=:updated, ipaddress=:ipaddres WHERE url =:url",["url"=>$url,"title"=>$this->title,
+if(isset($url) && isset($data['title']) && isset($data['description']) && isset($data['content']) && 
+isset($data['updated']) && isset($data['ipaddress'])){
+$result = $this->update("UPDATE staticpage SET title=:title,description=:description,content=:content,
+updated=:updated, ipaddress=:ipaddress WHERE url =:url",["title"=>$this->title,
 "description"=>$this->description,"content"=>$this->content,"updated"=>$this->updated,
-"ipaddress"=>$this->ipaddress]);
+"ipaddress"=>$this->ipaddress,"url"=>$url]);
 
 if($result)return $result;
 else{return false;}
