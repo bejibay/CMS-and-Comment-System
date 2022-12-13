@@ -44,18 +44,18 @@ $results=array();
 $results['title']="Account Creation Form";
 $results['description']="Account Creation Form";
 $userdata = array();
-$reseturl = md5(rand{0,999}.time());
-if(isset($_POST['username']) && isset($_POST['firstname']) && isset($_POST['lastname']) && 
-isset($_POST['email']) && isset($_POST['password']) && isset($_POST['ipaddress'])){
+$reseturl = md5(rand(0,999).time());
+if(isset($_POST['username']) && isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['email']) && 
+isset($_POST['password']) && isset($_POST['confirmpassword']) && isset($_POST['created']) && isset($_POST['ipaddress'])){
 $userdata =['username'=>$_POST['username'],'firstname'=>$_POST['firstname'],'lastname'=>$_POST['lastname'],
-'email'=>$_POST['email'],'password'=>$_POST['password'],'ipaddress'=>$_POST['ipaddress']];}
-
+'email'=>$_POST['email'],'password'=>$_POST['password'],'confirmpassword'=>$_POST['confirmpassword'],
+'created'=>$_POST['created'],'ipaddress'=>$_POST['ipaddress']];}
 if(isset($_POST['register'])){
 //user has posted the register form attempt to register
 $user = new Userdata($userdata);
 $results['checkemail'] = $user->verifyUserEmail($_POST['email']);
 if($results['checkemail'])$results['emailError'] = 'email already exists';
-else{$results['success'] = $user->createUser($userdata);
+else{$results['success'] = $user->createUser($reseturl,$userdata);
 
 if($results['success']){emailToActivate($reseturl);
 $results['registerSuccess']= "check your email to complete your registeration";
@@ -93,7 +93,7 @@ $results['title'] =" Reset Login";
 $results['description'] = "Reset Login"; 
 $userdata = array();
 $reseturl = md5(rand(0,999).time());
-if(isset($_POST['email']){$userdata = ["email"=>$_POST['email']]};
+if(isset($_POST['email'])){$userdata = ["email"=>$_POST['email']];}
 if(isset($_POST['resetpassword'])){
 $user = new Userdata($userdata);
 $result1 = $user->verifyUserEmail($userdata);
@@ -106,10 +106,10 @@ require(WORKING_DIR_PATH."/src/views/admin/requireresetform.php");
 
 function activateUser(){
 global $uri;
-$path1 = null;
-if(isset($uri[1]))$path1 =$uri[1];
+$path3 = null;
+if(isset($uri[3]))$path3 =$uri[3];
 $success = "";
-if(isset($path1)){
+if(isset($path3)){
 $user = new Userdata($_POST);
 $reseturl = $path1;
 $update = ['reseturl'=>"", 'status'=>1];
@@ -341,15 +341,18 @@ if(isset($_POST['name']) && isset($_POST['description']) && isset($_POST['update
 $categorydata = ['name'=>$_POST['name'],'description'=>$_POST['description'],'updated'=>$_POST['updated'],
 'ipaddress'=>$_POST['ipaddress']];
 }
+$userdata = array();
 
 $page = new Staticpage($staticpagedata);
 $post = new Dynamicpage($dynamicpagedata);
+$user = new Userdata($userdata);
 $category = new Category($categorydata);
 $result1 = $page->readStaticPage($path2);
 $result2 = $post->readDynamicPage($path2);
 $result3 = $page->readStaticPage($path4);
 $result4 = $post->readDynamicPage($path4);
 $result5 = $category->readCategory($path4);
+$result6 = $user->selectByResetUrl($path3);
 
 if(isset($path2)){
     if($result1){ 
@@ -428,8 +431,41 @@ if(isset($updated) && $updated >0){$updatedSuccess = "data successfully updated"
        
 }
 
-if(!$result1 && !$result2 && !$result3 && !$result4 && !$result5){ 
+if(isset($path2) && isset($path3) && $path2==="activation"){
+    $results['success'] = "";
+    $results['failure'] = "";
+ if(is_array($result6)){
+    $modifiedAccountStatus = $user->modifyAccountStatus($path3);
+    if($modifiedAccountStatus>0){
+    $results['success'] = "Account has been activated";
+    $results['failure'] = "Account failed to be activated";
+    }
+ }
+ require(WORKING_DIR_PATH."/src/views/admin/activationform.php");
+ }
+
+ if(isset($path2) && isset($path3) && $path2=="reseturl"){
+    $results['success'] = "";
+    $results['failure'] = "";
+    if(isset($_POST['password']) && isset($_POST['confirmpassword']))
+    {$userdata =["password"=>$_POST['password'],"confirmpassword"=>$_POST['confirmpassword']];}
+ if(is_array($result6)){
+    if(isset($_POST['reset'])){
+    $modifiedAccountStatus = $user->modifyPassword($path3,$userdata);
+    if($modifiedAccountStatus>0){
+    $results['success'] = "Account has been activated";
+    $results['failure'] = "Account failed to be activated";
+    }
+    }
+ }
+ require(WORKING_DIR_PATH."/src/views/admin/resetform.php");
+ var_dump($userdata);
+ }
+
+
+if(!$result1 && !$result2 && !$result3 && !$result4 && !$result5 && !$result6){ 
  require(WORKING_DIR_PATH."/src/views/notfound.php");}
+ 
 }
 
 function homePage(){
