@@ -242,7 +242,7 @@ $dynamicpage = new Dynamicpage($_POST);
 $viewposts = $dynamicpage->readDynamicPages();
 if(isset($_SESSION['firstname']) && isset($_SESSION['lastname'])){
 
-if(count($viewposts)>0){
+if(is_array($viewposts)){
 foreach($viewposts as $key=>$value){
 $list.= "<ul>";
 $list.= "<li><a href=updatepost/".$value['url'].">".$value['title']."</a></li>";
@@ -262,7 +262,7 @@ $newdata = [];
 $staticpage = new Staticpage($newdata);
 if(isset($_SESSION['firstname']) && isset($_SESSION['lastname'])){
 $viewpages = $staticpage->readStaticPages();
-if(count($viewpages)>0){
+if(is_array($viewpages)){
 foreach($viewpages as $key=>$value){
     $list.= "<ul>";
     $list.= "<li><a href=updatepage/".$value['url'].">".$value['title']."</a></li>";
@@ -284,7 +284,7 @@ $viewcategories = $categories->readCategories();
 
 if(isset($_SESSION['firstname']) && isset($_SESSION['lastname'])){
 
-if(count($viewcategories)>0){
+if(is_array($viewcategories)){
 foreach($viewcategories as $key =>$value){
     $list .= "<ul>";
     $list.= "<li><a href=updatecategory/".$value['id'].">".$value['name']."</a></li>";

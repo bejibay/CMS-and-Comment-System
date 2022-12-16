@@ -18,14 +18,14 @@
 <div class = "col-9">
 <form action=""  method="post">
 <label>title:</label>
-<input type="text" name="title" >
+<input type="text" name="title" required>
 <label>Description:</label>
-<input type="text" name="description">
+<input type="text" name="description" required>
 <label>Content:</label>
-<textarea name="content"></textarea>
+<textarea name="content" required></textarea>
 <label>Category:</label>
-<select name ="category_id">
-<option value ="12">Select A Category</option>
+<select name ="category_id" required>
+<option value ="">Select A Category</option>
 <?php if(isset($results['category'])){foreach($results['category'] as $key=>$value){
 echo "<option value =".$value['id'].">".$value['id']."</option>";
 }
@@ -34,8 +34,8 @@ echo "<option value =".$value['id'].">".$value['id']."</option>";
 
 </select>
 <label>Author Id:</label>
-<select name ="author_id">
-<option value ="3">Select An Author</option>  
+<select name ="author_id" required>
+<option value ="">Select An Author</option>  
 <?php if(isset($results['author'])){foreach($results['author'] as $key=>$value){?>
  <option value ="<?php echo $value['id'];?>"><?php echo $value['id'];?></option>;
 <?php
@@ -44,7 +44,7 @@ echo "<option value =".$value['id'].">".$value['id']."</option>";
 ?>
 </select>
 <label>Date:</label>
-<input type ="date" name ="created">
+<input type ="date" name ="created" required>
 <input type="hidden" name="ipaddress" value ="<?php echo $_SERVER['REMOTE_ADDR'];?>">
 <input type="submit" name="newpost" value="Create Post">
 </form>

@@ -17,13 +17,13 @@
 <div class =" col-9">
 <form action="" method="post">
 <label>Name:</label>
-<input type="text" name="name" value ="<?php if(isset($results['name']))echo $results['name'];?>">
+<input type="text" name="name" value ="<?php if(isset($results['name']))echo $results['name'];?>" required>
 
 <label>Description:</label>
-<textarea name="description"><?php if(isset($results['description']))echo $results['description'];?></textarea>
+<textarea name="description" required><?php if(isset($results['description']))echo $results['description'];?></textarea>
 
 <label>Date:</label>
-<input type="date" name="updated">
+<input type="date" name="updated" required>
 
 <label>IP Address</label>
 <input type="hidden" name="ipaddress" value= "<?php echo $_SERVER['REMOTE_ADDR'];?>">

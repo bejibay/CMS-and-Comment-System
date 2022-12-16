@@ -16,13 +16,14 @@
 <div class =" col-9">
 <form action="" method="post">
 <label>title:</label>
-<input type="text" name="title" value ="<?php if(isset($results['title']))echo $results['title'];?>">
+<input type="text" name="title" value ="<?php if(isset($results['title']))echo $results['title'];?>" required>
 <label>Description:</label>
-<input type="text" name="description" value ="<?php if(isset($results['description']))echo $results['description'];?>" >
+<input type="text" name="description" value ="<?php if(isset($results['description']))echo $results['description'];?>" 
+required>
 <label>Content:</label>
-<textarea name="content"><?php if(isset($results['content']))echo $results['content'];?></textarea>
+<textarea name="content" required><?php if(isset($results['content']))echo $results['content'];?></textarea>
 <label>Date:</label>
-<input type="date" name="updated">
+<input type="date" name="updated" required>
 <label>IP Address</label>
 <input type="hidden" name="ipaddress" value= "<?php echo $_SERVER['REMOTE_ADDR'];?>">
 <input type="submit" name="updatepage" value="Update Page">

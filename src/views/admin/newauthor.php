@@ -16,8 +16,7 @@
 <div class =" col-9">
 <form action="" method="post">
 <label>Biography:</label> 
-<textarea name="biography"></textarea>
-<input type="hidden" value = "2" name="userdata_id" >
+<textarea name="biography" required></textarea>
 <input type="hidden" value = "<?php echo $_SERVER['REMOTE_ADDR'];?>" name="ipaddress" >
 <input type="submit" name="newauthor" value="Create Author">
 </form>

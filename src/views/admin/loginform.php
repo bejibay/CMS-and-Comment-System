@@ -8,9 +8,9 @@
 <h2>Login</h2>
 <p><?php  if(isset($results['errormessage'])) echo $results['errormessage'];?></p>
 <label for ="email">Email:</label>
-<input type="text" name="email" placeholder="Type In Your email" id="email">
+<input type="text" name="email" placeholder="Type In Your email" id="email" required>
 <label for ="password">Password:</label>
-<input type="text" name="password" placeholder ="Type in your password" id="password">
+<input type="text" name="password" placeholder ="Type in your password" id="password" required>
 <input type="submit" name="login" value="Login">
 </form>
 <p><a href="require-reset">Forgot Password</a><a href="register">Not Yet Registered</a></p>

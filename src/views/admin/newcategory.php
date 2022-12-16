@@ -17,11 +17,11 @@
 <div class =" col-9">
 <form action="" method="post">
 <lable>Name:</label>
-<input type="text" name="name" >
+<input type="text" name="name" required>
 <label>Description:</label> 
-<textarea name="description"></textarea>
+<textarea name="description" required></textarea>
 <label>Date:</label> 
-<input type="date" name="created">
+<input type="date" name="created" required>
 <input type="hidden" value = "<?php echo $_SERVER['REMOTE_ADDR'];?>" name="ipaddress" >
 <input type="submit" name="newcategory" value="Create Category">
 </form>

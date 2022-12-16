@@ -27,11 +27,14 @@
 <select name = "category_id">
 <option value ="">Select a category</option>
 <option value ="<?php if(isset($results['category_id']))echo $results['category_id'];?>" selected>
-
+<?php if(isset($results['category_id']))echo $results['category_id'];?>
+</option>
 </select>
 <select name = "author_id">
 <option value ="">Select an author</option>
 <option value ="<?php if(isset($results['author_id']))echo $results['author_id'];?>" selected>
+<?php if(isset($results['author_id']))echo $results['author_id'];?>
+</option>
 
 </select>
 <input type="hidden" name="ipaddress" value= "<?php echo $_SERVER['REMOTE_ADDR'];?>">
