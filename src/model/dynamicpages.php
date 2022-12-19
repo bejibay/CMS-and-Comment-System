@@ -16,6 +16,7 @@ public $created = null;
 public $updated = null;
 public $ipaddress = null;
 
+// __construct function to initialise class properties
 public function __construct($data=array()){
 parent::__construct();
 if(isset($data['id']) && is_int($data['id']))$this->id=$data['id'];
@@ -33,7 +34,8 @@ if(isset($data['ipaddress']))$this->ipaddress = $data['ipaddress'];
 
 
 
-// define the class properties
+// define the class methods below
+
 public function createDynamicPage($data=[]){
 
 if(isset($data['title']) && isset($data['description']) && isset($data['content']) && 
@@ -49,7 +51,6 @@ else{return false;}
 }
 }
  
-
 
 public function readDynamicPages(){
 $result = $this->select("SELECT * FROM dynamicpage");

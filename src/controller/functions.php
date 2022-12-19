@@ -3,7 +3,7 @@
 require_once $_SERVER["DOCUMENT_ROOT"]."/Contentgo/config/bootstrap.php";
 require_once WORKING_DIR_PATH."/src/model/author.php";
 require_once WORKING_DIR_PATH."/src/model/category.php";
-require_once WORKING_DIR_PATH."/src/model/comments.php";
+require_once WORKING_DIR_PATH."/src/model/comment.php";
 require_once WORKING_DIR_PATH."/src/model/dynamicpages.php";
 require_once WORKING_DIR_PATH."/src/model/staticpages.php";
 require_once WORKING_DIR_PATH."/src/model/media.php";
@@ -233,7 +233,25 @@ if(isset($_POST['newauthor'])){
 $result['success'] = $author->createAuthor($newdata); 
 }
 }
-    
+
+function newMedia(){
+$results= array();
+$results['title'] = "Create A New Media";
+$results['description'] = "Create A new Media";
+$results['pageheading']="Upload A Mdedia(image/video)";
+$newdata = array();
+$name = isset($_POST['name'])?$_POST['name']:"";
+if(isset($_POST['name']) && isset($_POST['ipaddress']))
+{$newdata = ['name'=>$_POST['name'], 'ipaddress'=>$_POST['ipaddress']];
+}
+if(isset($_SESSION['firstname']) && isset($_SESSION['lastname'])){
+require(WORKING_DIR_PATH."/src/views/admin/newmedia.php");}
+else{header("location:/Contentgo/login");}
+$media  =new Media($newdata);
+if(isset($_POST['uploadmedia'])){
+$result['success'] = $media->uploadMedia($_FILES['filetoupload'],$name); 
+}
+}    
    
 function viewPosts(){
 $list = "";

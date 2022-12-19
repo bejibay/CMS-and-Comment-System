@@ -14,7 +14,8 @@ public $created = null;
 public $updated = null;
 public $ipaddress = null;
 
-// construct function to initialise  the properties
+// __construct function to initialise  the properties
+
 public function __construct($data=array()){
 parent::__construct();
 if(isset($data['id']) && is_int($data['id']))$this->id=$data['id'];
@@ -26,7 +27,7 @@ if(isset($data['ipaddress']))$this->ipaddress = $data['ipaddress'];
 }
 
 
-// define the all the class methods
+// define the all the class methods below
 
 public function createAuthor($data= []){
 if(isset($data['biography']) && isset($data['ipaddress'])){

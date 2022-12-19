@@ -39,6 +39,9 @@ if(isset($requestUrl)){
    case '/Contentgo/dashboard/newauthor':
       newAuthor();
       break;
+   case '/Contentgo/dashboard/newmedia':
+      newMedia();
+      break;
    case '/Contentgo/dashboard/view-posts':
      viewPosts();
      break;
