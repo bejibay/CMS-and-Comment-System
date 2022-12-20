@@ -16,7 +16,8 @@ if(isset($data['ipaddress']))$this->ipaddress=$data['ipaddress'];
 if(isset($data['url']))$this->url=filter_var($data['url'],FILTER_VALIDATE_URL);
 }
 
-// define the class properties
+// define all the class methods below
+
 public function uploadMedia($image,$seourl){
 $uploadok = 1;
 // get dynamic url
@@ -72,7 +73,7 @@ if($result1)$result2 = $this->insert("INSERT INTO media(url,ext,ipaddress)VALUES
 if($result2)$result3 = "file correctly uploaded";
 }
 }
-else{$result3 = "no upload something went wrong";}
+else{$result3 = "no file upload something went wrong";}
 }
    
 
@@ -93,7 +94,7 @@ else{return false;}
 
 public function deleteMedia($url){
 if(isset($url)){
-$result =  $this->delete("DELETE* FROM media WHERE url=:url",["url"=>$url]);
+$result =  $this->delete("DELETE FROM media WHERE url=:url LIMIT 1",["url"=>$url]);
 if($result) return $result;
 else{return false;}
 }

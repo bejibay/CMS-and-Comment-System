@@ -4,6 +4,7 @@ require_once __DIR__."/crudmodel.php";
 
 class Staticpage extends Crudmodel{
     // define the class properties
+
 public $id = null;
 public $url = "";
 public $title = "";
@@ -27,7 +28,7 @@ if(isset($data['ipaddress']))$this->ipaddress=$data['ipaddress'];
  }
     
     
-// define the class properties
+// define all the class methods below
 
 public function createStaticPage($data = []){
 
@@ -74,7 +75,7 @@ else{return false;}
 
 public function deleteStaticPage($id){
 if(isset($id)){
-$this->delete("DELETE FROM staticpage WHERE id=:id",["id"=>$id]);
+$this->delete("DELETE FROM staticpage WHERE id=:id LIMIT 1",["id"=>$id]);
 if($result) return $result;
 else{return false;}
 }

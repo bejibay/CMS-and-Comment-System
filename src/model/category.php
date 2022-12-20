@@ -24,7 +24,7 @@ if(isset($data['updated']))$this->updated = $data['updated'];
 if(isset($data['ipaddress']))$this->ipaddress = $data['ipaddress'];
 }
 
-
+// define all the class methods below
 public function createCategory($data = []){
 if(isset($data['name'])&& isset($data['description']) && isset($data['ipaddress'])){
 $result =  $this->insert("INSERT INTO category(name,description,created,ipaddress)
@@ -64,7 +64,7 @@ else{return false;}
 
 public function deleteCategory($id){
 if(isset($id)){
-$result = $this->delete("DELETE* FROM category WHERE id=:id",["id"=>$id]);
+$result = $this->delete("DELETE FROM category WHERE id=:id LIMIT 1",["id"=>$id]);
 if($result) return $result;
 else{return false;}
 }

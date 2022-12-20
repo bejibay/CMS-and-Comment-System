@@ -1,4 +1,3 @@
-
 <?php 
 require_once __DIR__."/crudmodel.php";
 
@@ -31,7 +30,6 @@ if(isset($data['created']))$this->created = $data['created'];
 if(isset($data['updated']))$this->updated = $data['updated'];
 if(isset($data['ipaddress']))$this->ipaddress = $data['ipaddress'];
 }
-
 
 
 // define the class methods below
@@ -84,7 +82,7 @@ else{return false;}
 
 public function deleteADynamicPage($url){
 if(isset($url)){
-$result = $this->delete("DELETE* FROM dynamicpage WHERE url=:url",["url"=>$url]);
+$result = $this->delete("DELETE FROM dynamicpage WHERE url=:url LIMIT 1",["url"=>$url]);
 if($result)return $result;
 else{return false;}
 }

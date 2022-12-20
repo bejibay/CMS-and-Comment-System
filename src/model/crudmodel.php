@@ -1,12 +1,11 @@
 <?php 
 require_once __DIR__."/../../config/config.php";
 
-
 class Crudmodel{
     
 // define the class properties
-protected $conn =null;
 
+protected $conn =null;
 
 public function __construct(){
     try{$this->conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
@@ -39,7 +38,6 @@ public function insert($query="",$params=[]){
     }
     catch(Exception $e){echo $e->getMessage();} 
 }
-
 
 
 public function select($query="",$params=[]){

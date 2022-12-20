@@ -4,8 +4,8 @@
 require_once __DIR__."/crudmodel.php";
 
 class Userdata extends Crudmodel{
-    // define the class properties
 
+    // define the class properties
 public $id = null;
 public $firstname = "";
 public $lastname = "";
@@ -37,7 +37,7 @@ if(isset($data['ipaddress']))$this->ipaddress=$data['ipaddress'];
 if(isset($data['newemail']))$this->newemail=filter_var($data['newemail'],FILTER_VALIDATE_EMAIL);
 }
 
-// define the class properties
+// define all the class methods below
 public function createUser($reseturl, $data =[]){
 
 if(isset($data['username']) && isset($data['firstname']) && isset($data['lastname']) && isset($data['email']) 
@@ -72,19 +72,23 @@ else{return false;}
 
 public function verifyUserEmail($data= []){
 if(isset($data['email'])){
-$result = $this->select("SELECT* FROM userdata WHERE email=:email",["email"=>$data['email']]);
+$result = $this->select("SELECT* FROM userdata WHERE email=:email LIMIT 1",["email"=>$data['email']]);
 if($result) return $result;
 else{return false;}
 }
 }
 
-public function verifyUserPassword($data=[]){
-$result1 = array();
+public function verifyUserPassword($data=[],$hash){
 if(isset($data['email']) && isset($data['password'])){
-$result = $this->verifyUserEmail($data['email']);
-if(is_array($result)){$result1 = password_verify($data['password'], $result['password']);}
-if($result1)return $result1;
+$result1 = $this->verifyUserEmail($data['email']);
+if(is_array($result1)){
+foreach($result1 as $key => $value){
+$hash = $value['password'];
+$result2 = password_verify($data['password'], $hash);
+if($result2)return true;
 else{return false;}
+}
+}
 }
 }
 
@@ -134,7 +138,7 @@ else{return false;}
         
  public function deleteUser($id){
 if(isset($id)){
-$result = $this->delete("DELETE* FROM userdata WHERE id=:id",["id"=>$id]);
+$result = $this->delete("DELETE FROM userdata WHERE id=:id LIMIT 1",["id"=>$id]);
 if($result)return $result;
 else{return false;}
 }

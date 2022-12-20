@@ -18,7 +18,7 @@ public $ipaddress = null;
 
 public function __construct($data=array()){
 parent::__construct();
-if(isset($data['id']) && is_int($data['id']))$this->id=$data['id'];
+if(isset($data['id']) && is_int($data['id']))$th2is->id=$data['id'];
 if(isset($data['biography']))$this->biography=trim(stripslashes(htmlspecialchars($data['biography'])));
 if(isset($data['userdata_id']) && is_int($data['userdata_id']))$this->userdata_id = $data['userdata_id'];
 if(isset($data['created']))$this->created=$data['created'];
@@ -26,8 +26,7 @@ if(isset($data['updated']))$this->created=$data['created'];
 if(isset($data['ipaddress']))$this->ipaddress = $data['ipaddress'];
 }
 
-
-// define the all the class methods below
+// define all the class methods below
 
 public function createAuthor($data= []){
 if(isset($data['biography']) && isset($data['ipaddress'])){
@@ -38,9 +37,7 @@ if($result) return $result;
 }
 }
     
-
-
- public function readAuthors(){
+public function readAuthors(){
  $result = $this->select("SELECT* FROM author");
  if(!empty($result))return $result;
  else{return false;}
@@ -54,9 +51,6 @@ else{return false;}
 }
 }
    
-
-
-
 public function updateAuthor($id,$data=[]){
 if(isset($id) && isset($data['biography']) && isset($data['updated'])){
  $result = $this->update("UPDATE author SET biography=:biography, updated=:updated WHERE id=:id",[
@@ -66,10 +60,9 @@ if(isset($id) && isset($data['biography']) && isset($data['updated'])){
 }
 }
 
-    
 public function deleteAuthor($id){
 if(isset($id)){
-$result = $this->delete("DELETE* FROM author WHERE id =:id",["id"=>$id]);}
+$result = $this->delete("DELETE FROM author WHERE id =:id LIMIT 1",["id"=>$id]);}
 if(!empty($result))return $result;
 else{return false;}
 }

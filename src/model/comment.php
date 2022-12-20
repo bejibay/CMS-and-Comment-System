@@ -23,7 +23,6 @@ if(isset($data['website']))$this->website=filter_var($data['website'],FILTER_VAL
 if(isset($data['comment']))$this->content=trim(stripslashes(htmlspecialchars(['comment'])));
 }
 
-
 // define the class methods below
 
 public function createPageComment($urlpage,$data=[]){
@@ -57,8 +56,6 @@ else{return false;}
 }
 }
 
-
-
 public function updateComment($id,$data =[]){
 if(isset($id) && isset($data['comment'])){
 $result = $this->update("UPDATE comment SET  comment = :comment WHERE id=:id",
@@ -70,7 +67,7 @@ else{return false;}
 
 public function deleteComment($id){
 if(isset($id)){
- $result = $this->delete("DELETE* FROM comment WHERE id=:id",["id"=>$id]);
+ $result = $this->delete("DELETE FROM comment WHERE id=:id LIMIT 1",["id"=>$id]);
 if($result)return $result;
  else{return false;} 
 }

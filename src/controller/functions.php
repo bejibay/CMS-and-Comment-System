@@ -17,6 +17,7 @@ $results['description']="Admin Login Form";
 $results['errormessage'] = " ";
 if(isset($_POST['login'])){
 $userdata = array();
+$hashpassword ="";
 if(isset($_POST['email']) && isset($_POST['password'])){
 $userdata = ['email'=>$_POST['email'], 'password'=>$_POST['password']];}
 $user = new Userdata($userdata);
@@ -26,15 +27,14 @@ foreach($verifiedemail as $key=>$value){
  $_SESSION['firstname'] = $value['firstname'];
  $_SESSION['lastname'] = $value['lastname'];
  $_SESSION['userid']  =$value['id'];
+ $hashpassword = $value['password'];
 }
+$verifiedpassword = $user->verifyUserPassword($userdata,$hashpassword);
+if(isset($_SESSION['firstname']) && isset($_SESSION['lastname'])){
+header("location:/Contentgo/dashboard");}
+else{$results['errormessage'] = "Incorrect Login details";}
 }
 else{$results['errormessage'] = "Email does not exist";}
-$verifiedpassword = $user->verifyUserPassword($userdata);
-
-if(isset($_SESSION['firstname']) && isset($_SESSION['lastname'])){
-    header("location:/Contentgo/dashboard");}
-
-else{return $results['errormessage ='] ="Account not found";}
 }
 require(WORKING_DIR_PATH."/src/views/admin/loginform.php");
 }
@@ -51,7 +51,7 @@ $userdata =['username'=>$_POST['username'],'firstname'=>$_POST['firstname'],'las
 'email'=>$_POST['email'],'password'=>$_POST['password'],'confirmpassword'=>$_POST['confirmpassword'],
 'created'=>$_POST['created'],'ipaddress'=>$_POST['ipaddress']];}
 if(isset($_POST['register'])){
-//user has posted the register form attempt to register
+
 $user = new Userdata($userdata);
 $results['checkemail'] = $user->verifyUserEmail($_POST['email']);
 if($results['checkemail'])$results['emailError'] = 'email already exists';
@@ -64,7 +64,7 @@ $results['registerSuccess']= "check your email to complete your registeration";
 
 }
 
-else{//Form not filled properly
+else{
 $results['errormessage']="Forms not filled properly";}
 require(WORKING_DIR_PATH."/src/views/admin/registerform.php");
 }
@@ -192,9 +192,6 @@ $results['success'] = $staticpage->createStaticPage($newdata);
 }
 }
     
-
-
-    
 function newCategory(){
 $results= array();
 $results['title'] = "Create A New Category";
@@ -204,7 +201,6 @@ $newdata = array();
 if(isset($_POST['name']) && isset($_POST['description']) && isset($_POST['created'])
 && isset($_POST['ipaddress'])){$newdata = ['name'=>$_POST['name'],'description'=>$_POST['description'], 
 'created'=>$_POST['created'],'ipaddress'=>$_POST['ipaddress']];}
-
 if(isset($_SESSION['firstname']) && isset($_SESSION['lastname'])){
 require(WORKING_DIR_PATH."/src/views/admin/newcategory.php");}
 else{header("location:/Contentgo/login");}
