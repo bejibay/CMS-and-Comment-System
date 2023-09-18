@@ -1,12 +1,17 @@
-<?php require_once $_SERVER['DOCUMENT_ROOT']."/Contentgo/config/bootstrap.php";?>
- 
- <?php include  WORKING_DIR_PATH."/src/views/include/header.php";?>
-
+<?php include  WORKING_DIR_PATH."/src/views/include/header.php";?>
 <div class="row">
-<div class="column leftside">
+<div class="col-8">
+<div><?php 
+$content = "";
+if(is_array($result2)){
+foreach($result2 as $key=>$value) {
+$content = $value['content'];
+}
+}
+?></div><div><?php echo  $content;?></div>
 </div>
-<div class="column rightside"><?php if(isset($results['content'])){echo $results['content'];}?></div>
+<div class="col-4">
 </div>
-<div class="footer"><?php include WORKING_DIR_PATH."/src/views/include/footer.php";;?></div>
+<div class="footer"><?php include WORKING_DIR_PATH."/src/views/include/footer.php";?></div>
 </body>
 </html>

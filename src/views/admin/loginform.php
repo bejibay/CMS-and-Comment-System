@@ -1,14 +1,11 @@
-<?php require_once $_SERVER['DOCUMENT_ROOT']."/Contentgo/config/bootstrap.php";?>
- 
- <?php include  WORKING_DIR_PATH."/src/views/include/header.php";?>
-
+<?php include  WORKING_DIR_PATH."/src/views/include/header.php";?>
 <div class="row">
 <div class="col-12">
 <form action="" method="post">
 <h2>Login</h2>
 <p><?php  if(isset($results['errormessage'])) echo $results['errormessage'];?></p>
-<label for ="email">Email:</label>
-<input type="text" name="email" placeholder="Type In Your email" id="email" required>
+<label for ="username">Username:</label>
+<input type="text" name="username" placeholder="Type username or email" id="username" required>
 <label for ="password">Password:</label>
 <input type="text" name="password" placeholder ="Type in your password" id="password" required>
 <input type="submit" name="login" value="Login">

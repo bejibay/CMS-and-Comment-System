@@ -1,7 +1,5 @@
-<?php require_once $_SERVER['DOCUMENT_ROOT']."/Contentgo/config/bootstrap.php";?>
- 
- <?php include  WORKING_DIR_PATH."/src/views/include/header.php";?>
 
+<?php include  WORKING_DIR_PATH."/src/views/include/header.php";?>
 <div class="row">
 <div class="column leftside">
 <form action="" method="post">
@@ -17,8 +15,6 @@
 <input type="text" name="password" placeholder ="Type in your password" id="password" required>
 <label for ="confirmpassword">Confirm Password:</label>
 <input type="text" name="confirmpassword" placeholder ="Re type in your password" id="confirmpassword" required>
-<label>Date:</label>
-<input type = "date" name ="created" required>
 <input type ="hidden" name ="ipaddress" value ="<?php echo $_SERVER['REMOTE_ADDR'];?>">
 <input type="submit" name="register" value="Register">
 </form>

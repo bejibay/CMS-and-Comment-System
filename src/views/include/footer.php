@@ -1,5 +1,5 @@
 ﻿<?php
-echo "copyright &copy; 2022, example.com";
+echo "copyright &copy; 2023, example.com";
 ?>
 
 

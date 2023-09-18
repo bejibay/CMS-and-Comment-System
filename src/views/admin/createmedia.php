@@ -1,18 +1,17 @@
 
-<?php require_once $_SERVER['DOCUMENT_ROOT']."/Contentgo/config/bootstrap.php";?>
- 
- <?php include  WORKING_DIR_PATH."/src/views/include/header.php";?>
-
+<?php
+?>
+<div class="header"><?php include WORKING_DIR_PATH."/src/views/include/header2.php";;?></div>
 <div class="row">
 <div class="col-3">
-<a href="/Contentgo/dashboard">dashboard</a>
-<a href="newpage">new page</a>
-<a href="newpost">new post</a>
-<a href="newpost">new category</a>
-<a href="view-pages">all pages</a>
-<a href="view-posts">all posts</a>
-<a href="view-categories">all categories</a>
-<a href="media">media</a>
+<a href="/Contentgo/dashboard/create/page">new page</a>
+<a href="/Contentgo/dashboard/create/post">new post</a>
+<a href="/Contentgo/dashboard/create/category">new category</a>
+<a href="/Contentgo/dashboard/view/pages">all pages</a>
+<a href="/Contentgo/dashboard/view/posts">all posts</a>
+<a href="/Contentgo/dashboard/view/categories">all categories</a>
+<a href="/Contentgo/dashboard/view/medias">medias</a>
+
 </div>
 <div class =" col-9">
 <form action="" method="post" enctype = "multipart/form-data">

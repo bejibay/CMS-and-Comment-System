@@ -1,6 +1,3 @@
-
-<?php require_once $_SERVER['DOCUMENT_ROOT']."/Contentgo/config/bootstrap.php";?>
- 
  <?php include  WORKING_DIR_PATH."/src/views/include/header.php";?>
 
 <div class="row">

@@ -1,13 +1,11 @@
-<?php require_once $_SERVER['DOCUMENT_ROOT']."/Contentgo/config/bootstrap.php";?>
- 
- <?php include  WORKING_DIR_PATH."/src/views/include/header.php";?>
 
+<?php include  WORKING_DIR_PATH."/src/views/include/header.php";?>
 <div class="row">
 <div class="col-12">
-<form action="" method="post">
-<label for="logininfo">Login Info:</label>
-<input type="text" name="logininfo" placeholder="Type in your username or email" id="logininfo" required>
-<input type="submit" name="requirereset" value="Require Password Reset">
+<form  method="post" action="" >
+<label for="Username">Username:</label>
+<input type="text" name="username" placeholder="Type username or email" id="username" required>
+<input type="submit" name="requireReset" value="Require Password Reset">
 </form>
 </div>
 </div>
